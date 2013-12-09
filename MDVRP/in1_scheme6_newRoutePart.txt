@@ -1,0 +1,762 @@
+Test cases (Now ignored): 1
+generation : 1 NO. of duplicates: 1
+
+
+
+generation : 2 NO. of duplicates: 6
+
+
+
+generation : 3 NO. of duplicates: 7
+
+
+
+generation : 4 NO. of duplicates: 11
+
+
+
+generation : 5 NO. of duplicates: 9
+
+
+
+generation : 6 NO. of duplicates: 5
+
+
+
+generation : 7 NO. of duplicates: 6
+
+
+
+generation : 8 NO. of duplicates: 7
+
+
+
+generation : 9 NO. of duplicates: 5
+
+
+
+generation : 10 NO. of duplicates: 13
+
+
+
+generation : 11 NO. of duplicates: 7
+
+
+
+generation : 12 NO. of duplicates: 9
+
+
+
+generation : 13 NO. of duplicates: 8
+
+
+
+generation : 14 NO. of duplicates: 6
+
+
+
+generation : 15 NO. of duplicates: 4
+
+
+
+generation : 16 NO. of duplicates: 4
+
+
+
+generation : 17 NO. of duplicates: 12
+
+
+
+generation : 18 NO. of duplicates: 6
+
+
+
+generation : 19 NO. of duplicates: 12
+
+
+
+generation : 20 NO. of duplicates: 2
+
+
+
+generation : 21 NO. of duplicates: 9
+
+
+
+generation : 22 NO. of duplicates: 12
+
+
+
+generation : 23 NO. of duplicates: 6
+
+
+
+generation : 24 NO. of duplicates: 8
+
+
+
+generation : 25 NO. of duplicates: 6
+
+
+
+generation : 26 NO. of duplicates: 13
+
+
+
+generation : 27 NO. of duplicates: 9
+
+
+
+generation : 28 NO. of duplicates: 8
+
+
+
+generation : 29 NO. of duplicates: 2
+
+
+
+generation : 30 NO. of duplicates: 3
+
+
+
+generation : 31 NO. of duplicates: 5
+
+
+
+generation : 32 NO. of duplicates: 8
+
+
+
+generation : 33 NO. of duplicates: 10
+
+
+
+generation : 34 NO. of duplicates: 5
+
+
+
+generation : 35 NO. of duplicates: 8
+
+
+
+generation : 36 NO. of duplicates: 6
+
+
+
+generation : 37 NO. of duplicates: 5
+
+
+
+generation : 38 NO. of duplicates: 3
+
+
+
+generation : 39 NO. of duplicates: 8
+
+
+
+generation : 40 NO. of duplicates: 15
+
+
+
+generation : 41 NO. of duplicates: 2
+
+
+
+generation : 42 NO. of duplicates: 4
+
+
+
+generation : 43 NO. of duplicates: 9
+
+
+
+generation : 44 NO. of duplicates: 6
+
+
+
+generation : 45 NO. of duplicates: 8
+
+
+
+generation : 46 NO. of duplicates: 8
+
+
+
+generation : 47 NO. of duplicates: 6
+
+
+
+generation : 48 NO. of duplicates: 7
+
+
+
+generation : 49 NO. of duplicates: 10
+
+
+
+generation : 50 NO. of duplicates: 11
+
+
+
+generation : 51 NO. of duplicates: 9
+
+
+
+generation : 52 NO. of duplicates: 15
+
+
+
+generation : 53 NO. of duplicates: 8
+
+
+
+generation : 54 NO. of duplicates: 8
+
+
+
+generation : 55 NO. of duplicates: 8
+
+
+
+generation : 56 NO. of duplicates: 6
+
+
+
+generation : 57 NO. of duplicates: 6
+
+
+
+generation : 58 NO. of duplicates: 7
+
+
+
+generation : 59 NO. of duplicates: 15
+
+
+
+generation : 60 NO. of duplicates: 8
+
+
+
+generation : 61 NO. of duplicates: 16
+
+
+
+generation : 62 NO. of duplicates: 9
+
+
+
+generation : 63 NO. of duplicates: 8
+
+
+
+generation : 64 NO. of duplicates: 9
+
+
+
+generation : 65 NO. of duplicates: 9
+
+
+
+generation : 66 NO. of duplicates: 8
+
+
+
+generation : 67 NO. of duplicates: 7
+
+
+
+generation : 68 NO. of duplicates: 12
+
+
+
+generation : 69 NO. of duplicates: 5
+
+
+
+generation : 70 NO. of duplicates: 12
+
+
+
+generation : 71 NO. of duplicates: 7
+
+
+
+generation : 72 NO. of duplicates: 9
+
+
+
+generation : 73 NO. of duplicates: 9
+
+
+
+generation : 74 NO. of duplicates: 3
+
+
+
+generation : 75 NO. of duplicates: 6
+
+
+
+generation : 76 NO. of duplicates: 4
+
+
+
+generation : 77 NO. of duplicates: 7
+
+
+
+generation : 78 NO. of duplicates: 4
+
+
+
+generation : 79 NO. of duplicates: 13
+
+
+
+generation : 80 NO. of duplicates: 10
+
+
+
+generation : 81 NO. of duplicates: 10
+
+
+
+generation : 82 NO. of duplicates: 4
+
+
+
+generation : 83 NO. of duplicates: 9
+
+
+
+generation : 84 NO. of duplicates: 6
+
+
+
+generation : 85 NO. of duplicates: 4
+
+
+
+generation : 86 NO. of duplicates: 5
+
+
+
+generation : 87 NO. of duplicates: 7
+
+
+
+generation : 88 NO. of duplicates: 6
+
+
+
+generation : 89 NO. of duplicates: 14
+
+
+
+generation : 90 NO. of duplicates: 9
+
+
+
+generation : 91 NO. of duplicates: 8
+
+
+
+generation : 92 NO. of duplicates: 4
+
+
+
+generation : 93 NO. of duplicates: 13
+
+
+
+generation : 94 NO. of duplicates: 5
+
+
+
+generation : 95 NO. of duplicates: 6
+
+
+
+generation : 96 NO. of duplicates: 7
+
+
+
+generation : 97 NO. of duplicates: 7
+
+
+
+generation : 98 NO. of duplicates: 3
+
+
+
+generation : 99 NO. of duplicates: 5
+
+
+
+generation : 100 NO. of duplicates: 11
+
+
+
+generation : 101 NO. of duplicates: 4
+
+
+
+generation : 102 NO. of duplicates: 4
+
+
+
+generation : 103 NO. of duplicates: 7
+
+
+
+generation : 104 NO. of duplicates: 6
+
+
+
+generation : 105 NO. of duplicates: 9
+
+
+
+generation : 106 NO. of duplicates: 5
+
+
+
+generation : 107 NO. of duplicates: 8
+
+
+
+generation : 108 NO. of duplicates: 10
+
+
+
+generation : 109 NO. of duplicates: 15
+
+
+
+generation : 110 NO. of duplicates: 6
+
+
+
+generation : 111 NO. of duplicates: 9
+
+
+
+generation : 112 NO. of duplicates: 11
+
+
+
+generation : 113 NO. of duplicates: 5
+
+
+
+generation : 114 NO. of duplicates: 12
+
+
+
+generation : 115 NO. of duplicates: 11
+
+
+
+generation : 116 NO. of duplicates: 5
+
+
+
+generation : 117 NO. of duplicates: 4
+
+
+
+generation : 118 NO. of duplicates: 14
+
+
+
+generation : 119 NO. of duplicates: 6
+
+
+
+generation : 120 NO. of duplicates: 12
+
+
+
+generation : 121 NO. of duplicates: 6
+
+
+
+generation : 122 NO. of duplicates: 9
+
+
+
+generation : 123 NO. of duplicates: 6
+
+
+
+generation : 124 NO. of duplicates: 7
+
+
+
+generation : 125 NO. of duplicates: 9
+
+
+
+generation : 126 NO. of duplicates: 9
+
+
+
+generation : 127 NO. of duplicates: 12
+
+
+
+generation : 128 NO. of duplicates: 11
+
+
+
+generation : 129 NO. of duplicates: 6
+
+
+
+generation : 130 NO. of duplicates: 8
+
+
+
+generation : 131 NO. of duplicates: 6
+
+
+
+generation : 132 NO. of duplicates: 5
+
+
+
+generation : 133 NO. of duplicates: 7
+
+
+
+generation : 134 NO. of duplicates: 16
+
+
+
+generation : 135 NO. of duplicates: 6
+
+
+
+generation : 136 NO. of duplicates: 7
+
+
+
+generation : 137 NO. of duplicates: 10
+
+
+
+generation : 138 NO. of duplicates: 9
+
+
+
+generation : 139 NO. of duplicates: 10
+
+
+
+generation : 140 NO. of duplicates: 8
+
+
+
+generation : 141 NO. of duplicates: 11
+
+
+
+generation : 142 NO. of duplicates: 11
+
+
+
+generation : 143 NO. of duplicates: 12
+
+
+
+generation : 144 NO. of duplicates: 8
+
+
+
+generation : 145 NO. of duplicates: 4
+
+
+
+generation : 146 NO. of duplicates: 5
+
+
+
+generation : 147 NO. of duplicates: 7
+
+
+
+generation : 148 NO. of duplicates: 13
+
+
+
+generation : 149 NO. of duplicates: 14
+
+
+
+generation : 150 NO. of duplicates: 12
+
+
+
+generation : 151 NO. of duplicates: 11
+
+
+
+generation : 152 NO. of duplicates: 19
+
+
+
+generation : 153 NO. of duplicates: 15
+
+
+
+generation : 154 NO. of duplicates: 11
+
+
+
+generation : 155 NO. of duplicates: 10
+
+
+
+generation : 156 NO. of duplicates: 12
+
+
+
+generation : 157 NO. of duplicates: 7
+
+
+
+generation : 158 NO. of duplicates: 4
+
+
+
+generation : 159 NO. of duplicates: 13
+
+
+
+generation : 160 NO. of duplicates: 9
+
+
+
+generation : 161 NO. of duplicates: 13
+
+
+
+generation : 162 NO. of duplicates: 14
+
+
+
+generation : 163 NO. of duplicates: 16
+
+
+
+generation : 164 NO. of duplicates: 9
+
+
+
+generation : 165 NO. of duplicates: 12
+
+
+
+generation : 166 NO. of duplicates: 16
+
+
+
+generation : 167 NO. of duplicates: 16
+
+
+
+generation : 168 NO. of duplicates: 9
+
+
+
+generation : 169 NO. of duplicates: 13
+
+
+
+generation : 170 NO. of duplicates: 15
+
+
+
+generation : 171 NO. of duplicates: 9
+
+
+
+generation : 172 NO. of duplicates: 11
+
+
+
+generation : 173 NO. of duplicates: 8
+
+
+
+generation : 174 NO. of duplicates: 16
+
+
+
+generation : 175 NO. of duplicates: 15
+
+
+
+generation : 176 NO. of duplicates: 13
+
+
+
+generation : 177 NO. of duplicates: 6
+
+
+
+generation : 178 NO. of duplicates: 9
+
+
+
+generation : 179 NO. of duplicates: 4
+
+
+
+generation : 180 NO. of duplicates: 9
+
+
+
+generation : 181 NO. of duplicates: 11
+
+
+
+generation : 182 NO. of duplicates: 14
+
+
+
+generation : 183 NO. of duplicates: 21
+
+
+
+generation : 184 NO. of duplicates: 17
+
+
+
+generation : 185 NO. of duplicates: 7
+
+
+
+generation : 186 NO. of duplicates: 12
+
+
+
+generation : 187 NO. of duplicates: 4
+
+
+
+generation : 188 NO. of duplicates: 12
+
+
+
+generation : 189 NO. of duplicates: 12
+
+
+
+generation : 190 NO. of duplicates: 14
+
+
+
+generation : 191 NO. of duplicates:
