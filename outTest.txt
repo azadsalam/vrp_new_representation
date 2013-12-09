@@ -1,0 +1,148 @@
+Test cases (Now ignored): 1
+Problem Instance : 
+Period : 2
+Depot : 2
+Vehicle Count : 4
+Vehicle per depot : 2 2
+Depot allocation per depot : 0 0 1 1
+Load capacity per vehicle : 200.0 200.0 200.0 200.0
+Time constraints per vehicle :
+500.0 500.0 500.0 500.0 
+500.0 500.0 500.0 500.0 
+Load capacity per vehicle : 200.0 200.0 200.0 200.0
+Clients : 7
+Frequency allocation : 2 1 2 2 1 1 1 
+Service Time : 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+Demand (load) : 0.0 0.0 0.0 0.0 0.0 0.0 0.0 
+Printing cost matrix : 
+0.0 5.0 1.0 1.0 1.0 1.0 0.0 0.0 0.0 
+5.0 0.0 5.0 5.0 5.0 5.0 1.0 1.0 1.0 
+1.0 5.0 0.0 1.0 5.0 5.0 5.0 5.0 5.0 
+1.0 5.0 1.0 0.0 5.0 5.0 5.0 5.0 5.0 
+1.0 5.0 5.0 5.0 0.0 1.0 5.0 5.0 5.0 
+1.0 5.0 5.0 5.0 1.0 0.0 5.0 5.0 5.0 
+5.0 1.0 5.0 5.0 5.0 5.0 0.0 1.0 5.0 
+5.0 1.0 5.0 5.0 5.0 5.0 1.0 0.0 5.0 
+5.0 1.0 5.0 5.0 5.0 5.0 5.0 5.0 0.0 
+
+Initial population : 
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 0 
+1 0 1 1 0 0 1 
+Routes : 
+< 0 1 > < 2 3 > < 4 5 > < > 
+< 0 > < 2 3 > < > < 6 > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 16.0
+Cost with penalty : 0.0
+
+PERIOD ASSIGMENT : 
+1 1 1 1 0 1 1 
+1 0 1 1 1 0 0 
+Routes : 
+< 0 1 > < 2 3 > < 5 > < 6 > 
+< 0 > < 2 3 > < 4 > < > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 17.0
+Cost with penalty : 0.0
+
+PERIOD ASSIGMENT : 
+1 0 1 1 1 1 0 
+1 1 1 1 0 0 1 
+Routes : 
+< 0 > < 2 3 > < 4 5 > < > 
+< 0 1 > < 2 3 > < > < 6 > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 16.0
+Cost with penalty : 0.0
+
+PERIOD ASSIGMENT : 
+1 1 1 1 1 0 1 
+1 0 1 1 0 1 0 
+Routes : 
+< 0 1 > < 2 3 > < 4 > < 6 > 
+< 0 > < 2 3 > < 5 > < > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 17.0
+Cost with penalty : 0.0
+
+PERIOD ASSIGMENT : 
+1 1 1 1 0 1 1 
+1 0 1 1 1 0 0 
+Routes : 
+< 0 1 > < 2 3 > < 5 > < 6 > 
+< 0 > < 2 3 > < 4 > < > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 17.0
+Cost with penalty : 0.0
+
+PERIOD ASSIGMENT : 
+1 0 1 1 1 1 0 
+1 1 1 1 0 0 1 
+Routes : 
+< 0 > < 2 3 > < 4 5 > < > 
+< 0 1 > < 2 3 > < > < 6 > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 16.0
+Cost with penalty : 0.0
+
+PERIOD ASSIGMENT : 
+1 0 1 1 1 0 1 
+1 1 1 1 0 1 0 
+Routes : 
+< 0 > < 2 3 > < 4 > < 6 > 
+< 0 1 > < 2 3 > < 5 > < > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 17.0
+Cost with penalty : 0.0
+
+PERIOD ASSIGMENT : 
+1 1 1 1 1 0 0 
+1 0 1 1 0 1 1 
+Routes : 
+< 0 1 > < 2 3 > < 4 > < > 
+< 0 > < 2 3 > < 5 > < 6 > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 17.0
+Cost with penalty : 0.0
+
+PERIOD ASSIGMENT : 
+1 1 1 1 0 0 0 
+1 0 1 1 1 1 1 
+Routes : 
+< 0 1 > < 2 3 > < > < > 
+< 0 > < 2 3 > < 4 5 > < 6 > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 16.0
+Cost with penalty : 0.0
+
+PERIOD ASSIGMENT : 
+1 1 1 1 0 0 0 
+1 0 1 1 1 1 1 
+Routes : 
+< 0 1 > < 2 3 > < > < > 
+< 0 > < 2 3 > < 4 5 > < 6 > 
+Is Feasible : true
+Total Load Violation : 0.0
+Total route time violation : 0.0
+Cost : 16.0
+Cost with penalty : 0.0
+

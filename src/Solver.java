@@ -7,8 +7,8 @@ import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
 
 public class Solver 
 {
-	String inputFileName = "MDPVRP/pr01.txt";
-	String outputFileName = "MDPVRP/out01.txt";
+	String inputFileName = "test2.txt";
+	String outputFileName = "outTest.txt";
 	int runSize=5;
 	boolean singleRun = true;
 	
@@ -70,7 +70,7 @@ public class Solver
 		
 		//problemInstance.print();
 		
-		GeneticAlgorithm ga = new Scheme6_withDuplicateRemoval(problemInstance);		
+		GeneticAlgorithm ga = new TestAlgo(problemInstance);		
 		if(writeToExcel) 
 		{
 			Solver.exportToCsv.init(ga.getNumberOfGeeration()+1);	

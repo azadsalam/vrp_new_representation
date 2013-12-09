@@ -1,16 +1,16 @@
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Vector;
 
 
 public class Individual 
 {
 	//representation
 	boolean periodAssignment[][];
-	int permutation[][];
-	int routePartition[][];
-	
+	Vector<Vector<ArrayList<Integer>>> routes;
 	
 	double cost;
 	
@@ -47,22 +47,13 @@ public class Individual
 
 		int i,j;
 		
-		for( i=0;i<problemInstance.periodCount;i++)
-		{
-			// initially every permutation is identity permutation
-			for( j=0;j<problemInstance.customerCount;j++)
-			{
-				permutation[i][j] = j;
-			}
-		}
 		
 		// NOW INITIALISE WITH VALUES
-
 		//initialize period assignment
 
 		int freq,allocated,random,tmp;
-
 		//Randomly allocate period to clients equal to their frequencies
+		
 		for(int client=0; client < problemInstance.customerCount; client++)
 		{
 			freq = problemInstance.frequencyAllocation[client];
@@ -80,434 +71,18 @@ public class Individual
 			}
 		}
 		
-		
-		//initialize permutation map - KNUTH SHUFFLE
-		for(int period=0; period < problemInstance.periodCount;period++)
-		{
-			//apply knuths shuffle
-			for( i = problemInstance.customerCount -1 ;i>0 ;i-- )
-			{
-				j = Utility.randomIntInclusive(i);
-				
-				if(i==j)continue;
-
-				tmp = permutation[period][i];
-				permutation[period][i] = permutation[period][j];
-				permutation[period][j] = tmp;
-			}
-		}
-		
-		//NEED TO GENERATE #vehicle-1 (not distinct - distinct) random numbers in increasing order from [0,#customer - 1]
-		// DEVICE some faster and smarter algorithm
-
-		// route for vehicle i is  [ routePartition[i-1]+1 , routePartition[i] ]
-		// given that routePartition[i-1]+1 <= routePartition[i]
-
-		//bool found;
-		
-		/*
+		ArrayList<Integer> route;
 		for(int period=0;period<problemInstance.periodCount;period++)
-		{
-			allocated = 0;
-			while(allocated != problemInstance.vehicleCount-1)
+		{	
+			for(int clientNo=0;clientNo<problemInstance.customerCount;clientNo++)
 			{
-				random = Utility.randomIntInclusive(problemInstance.customerCount-1);
-	
-				routePartition[period][allocated]=random;
-				sort(period,random,allocated);
-				allocated++;
+				if(periodAssignment[period][clientNo]==false)continue;
+
+				int vehicle = (int) (clientNo/ ((double)problemInstance.customerCount / problemInstance.vehicleCount));
+				if(vehicle==problemInstance.vehicleCount)vehicle--;
+				
+				routes.get(period).get(vehicle).add(clientNo);
 			}
-			routePartition[period][problemInstance.vehicleCount-1] = problemInstance.customerCount-1;
-		}
-		*/
-		
-
-		int avgStepSize = problemInstance.customerCount / problemInstance.vehicleCount;
-		int deviation = avgStepSize / 3;
-
-		//problemInstance.out.println("Step Size : "+avgStepSize+" Deviation : "+deviation);
-		
-		for(int period=0;period<problemInstance.periodCount;period++)
-		{
-			allocated = 0;
-					
-			while(allocated != problemInstance.vehicleCount-1)
-			{
-				int minus  = Utility.randomIntInclusive(1);
-				int base = avgStepSize * (allocated+1);
-				random = Utility.randomIntInclusive(deviation);
-				
-				int partition = base;
-				if(minus==1) partition = base - random;
-				else partition = base + random;
-				
-				routePartition[period][allocated]=partition;
-				sort(period,partition,allocated);
-				allocated++;
-			}
-			routePartition[period][problemInstance.vehicleCount-1] = problemInstance.customerCount-1;
-		}
-
-		
-		calculateCostAndPenalty();
-
-	}
-	
-
-	public void initialise2() 
-	{
-		// TODO Auto-generated method stub
-
-		int i,j;
-		int coin;
-		for( i=0;i<problemInstance.periodCount;i++)
-		{
-			// initially every permutation is identity permutation or reverse identity 
-			coin = Utility.randomIntInclusive(1);
-			if(coin==0)
-			{
-				for( j=0;j<problemInstance.customerCount;j++)
-				{
-					permutation[i][j] = j;
-				}
-			}
-			else
-			{
-				for( j=0;j<problemInstance.customerCount;j++)
-				{
-					permutation[i][j] = problemInstance.customerCount-1-j;
-				}
-			}
-		}
-		
-		// NOW INITIALISE WITH VALUES
-
-		//initialize period assignment
-
-		int freq,allocated,random,tmp;
-
-		//Randomly allocate period to clients equal to their frequencies
-		for(int client=0; client < problemInstance.customerCount; client++)
-		{
-			freq = problemInstance.frequencyAllocation[client];
-			allocated=0;
-
-			while(allocated!=freq)
-			{
-				random = Utility.randomIntInclusive(problemInstance.periodCount-1);
-				
-				if(periodAssignment[random][client]==false)
-				{
-					periodAssignment[random][client]=true;
-					allocated++;
-				}
-			}
-		}
-		
-		
-		
-		
-		//initialize permutation map
-		for(int period=0; period < problemInstance.periodCount;period++)
-		{
-			
-			coin = Utility.randomIntInclusive(1);
-
-
-			
-			if(coin==0) // apply randomization
-			{	
-				int boundary = Utility.randomIntInclusive(problemInstance.customerCount-1);
-				
-				//problemInstance.out.println("Boundary : "+boundary);
-				
-				int coin2 = Utility.randomIntInclusive(1);
-				int coin3;
-				
-				String st;
-				//st = (coin2==0)?" Left to right":" right to left";
-				//problemInstance.out.println("1st segment :"+st);
-				
-				if(coin2==0)//left to right for 1st segment
-				{
-					for(i=0;i<boundary;i++)
-					{
-						coin3 = Utility.randomIntInclusive(1);
-						
-						if(coin3==0)
-						{
-							tmp = permutation[period][i];
-							permutation[period][i] = permutation[period][i+1];
-							permutation[period][i+1] = tmp;
-						}
-					}
-				}
-				else //right to left
-				{	
-					for(i=boundary-1;i>=0;i--)
-					{
-						coin3 = Utility.randomIntInclusive(1);
-						
-						if(coin3==0)
-						{
-							tmp = permutation[period][i];
-							permutation[period][i] = permutation[period][i+1];
-							permutation[period][i+1] = tmp;
-						}
-					}
-					
-				}
-				
-				coin2 = Utility.randomIntInclusive(1);
-				
-				//st = (coin2==0)?" Left to right":" right to left";
-				//problemInstance.out.println("2nt segment :"+st);
-				
-				if(coin2==0)//left to right for 2ndt segment
-				{
-					for(i=boundary;i<problemInstance.customerCount-1;i++)
-					{
-						coin3 = Utility.randomIntInclusive(1);
-						
-						if(coin3==0)
-						{
-							tmp = permutation[period][i];
-							permutation[period][i] = permutation[period][i+1];
-							permutation[period][i+1] = tmp;
-						}
-					}
-				}
-				else //right to left
-				{	
-					for(i=problemInstance.customerCount-2;i>=boundary;i--)
-					{
-						coin3 = Utility.randomIntInclusive(1);
-						
-						if(coin3==0)
-						{
-							tmp = permutation[period][i];
-							permutation[period][i] = permutation[period][i+1];
-							permutation[period][i+1] = tmp;
-						}
-					}
-					
-				}
-
-				
-			}
-		
-			else
-			{
-				//apply knuths shuffle
-				for( i = problemInstance.customerCount -1 ;i>0 ;i-- )
-				{
-					j = Utility.randomIntInclusive(i);
-					
-					if(i==j)continue;
-	
-					tmp = permutation[period][i];
-					permutation[period][i] = permutation[period][j];
-					permutation[period][j] = tmp;
-				}
-			}
-		}
-		
-		//NEED TO GENERATE #vehicle-1 (not distinct - distinct) random numbers in increasing order from [0,#customer - 1]
-		// DEVICE some faster and smarter algorithm
-
-		// route for vehicle i is  [ routePartition[i-1]+1 , routePartition[i] ]
-		// given that routePartition[i-1]+1 <= routePartition[i]
-
-		
-
-		int avgStepSize = problemInstance.customerCount / problemInstance.vehicleCount;
-		int deviation = avgStepSize / 3;
-
-		//problemInstance.out.println("Step Size : "+avgStepSize+" Deviation : "+deviation);
-		
-		for(int period=0;period<problemInstance.periodCount;period++)
-		{
-			allocated = 0;
-					
-			while(allocated != problemInstance.vehicleCount-1)
-			{
-				int minus  = Utility.randomIntInclusive(1);
-				int base = avgStepSize * (allocated+1);
-				random = Utility.randomIntInclusive(deviation);
-				
-				int partition = base;
-				if(minus==1) partition = base - random;
-				else partition = base + random;
-				
-				routePartition[period][allocated]=partition;
-				sort(period,partition,allocated);
-				allocated++;
-			}
-			routePartition[period][problemInstance.vehicleCount-1] = problemInstance.customerCount-1;
-		}
-
-		
-		calculateCostAndPenalty();
-
-	}
-	
-
-
-	public void initialise3() 
-	{
-		// TODO Auto-generated method stub
-
-		int i,j;
-		int coin;
-		for( i=0;i<problemInstance.periodCount;i++)
-		{
-			// initially every permutation is identity permutation or reverse identity 
-			coin = Utility.randomIntInclusive(1);
-			if(coin==0)
-			{
-				for( j=0;j<problemInstance.customerCount;j++)
-				{
-					permutation[i][j] = j;
-				}
-			}
-			else
-			{
-				for( j=0;j<problemInstance.customerCount;j++)
-				{
-					permutation[i][j] = problemInstance.customerCount-1-j;
-				}
-			}
-		}
-		
-		// NOW INITIALISE WITH VALUES
-
-		//initialize period assignment
-
-		int freq,allocated,random,tmp;
-
-		//Randomly allocate period to clients equal to their frequencies
-		for(int client=0; client < problemInstance.customerCount; client++)
-		{
-			freq = problemInstance.frequencyAllocation[client];
-			allocated=0;
-
-			while(allocated!=freq)
-			{
-				random = Utility.randomIntInclusive(problemInstance.periodCount-1);
-				
-				if(periodAssignment[random][client]==false)
-				{
-					periodAssignment[random][client]=true;
-					allocated++;
-				}
-			}
-		}
-		
-		
-		
-		
-		//initialize permutation map
-		//apply knuths shuffle for period 0
-		for( i = problemInstance.customerCount -1 ;i>0 ;i-- )
-		{
-			j = Utility.randomIntInclusive(i);
-			
-			if(i==j)continue;
-
-			tmp = permutation[0][i];
-			permutation[0][i] = permutation[0][j];
-			permutation[0][j] = tmp;
-		}
-		
-		for(int period=1; period < problemInstance.periodCount;period++)
-		{
-			
-			coin = Utility.randomIntInclusive(1);
-
-				
-			int coin2 = Utility.randomIntInclusive(1);
-			int coin3;
-			
-			String st;
-			
-			for( i = 0 ;i <problemInstance.customerCount ;i++ )
-			{
-				permutation[period][i] = permutation[0][i];
-			}
-			
-			
-			
-			
-			//st = (coin2==0)?" Left to right":" right to left";
-			//problemInstance.out.println("1st segment :"+st);
-			/*
-			if(coin2==0)//left to right
-			{
-				for(i=0;i<problemInstance.customerCount-1;i++)
-				{
-					coin3 = Utility.randomIntInclusive(7);
-					
-					if(coin3==0)
-					{
-						tmp = permutation[period][i];
-						permutation[period][i] = permutation[period][i+1];
-						permutation[period][i+1] = tmp;
-					}
-				}
-			}
-			else //right to left
-			{	
-				for(i=problemInstance.customerCount-2;i>=0;i--)
-				{
-					coin3 = Utility.randomIntInclusive(7);
-					
-					if(coin3==0)
-					{
-						tmp = permutation[period][i];
-						permutation[period][i] = permutation[period][i+1];
-						permutation[period][i+1] = tmp;
-					}
-				}
-				
-			}
-			
-			*/
-					
-		
-		}
-		
-		//NEED TO GENERATE #vehicle-1 (not distinct - distinct) random numbers in increasing order from [0,#customer - 1]
-		// DEVICE some faster and smarter algorithm
-
-		// route for vehicle i is  [ routePartition[i-1]+1 , routePartition[i] ]
-		// given that routePartition[i-1]+1 <= routePartition[i]
-
-		
-
-		int avgStepSize = problemInstance.customerCount / problemInstance.vehicleCount;
-		int deviation = avgStepSize / 3;
-
-		//problemInstance.out.println("Step Size : "+avgStepSize+" Deviation : "+deviation);
-		
-		for(int period=0;period<problemInstance.periodCount;period++)
-		{
-			allocated = 0;
-					
-			while(allocated != problemInstance.vehicleCount-1)
-			{
-				int minus  = Utility.randomIntInclusive(1);
-				int base = avgStepSize * (allocated+1);
-				random = Utility.randomIntInclusive(deviation);
-				
-				int partition = base;
-				if(minus==1) partition = base - random;
-				else partition = base + random;
-				
-				routePartition[period][allocated]=partition;
-				sort(period,partition,allocated);
-				allocated++;
-			}
-			routePartition[period][problemInstance.vehicleCount-1] = problemInstance.customerCount-1;
 		}
 
 		
@@ -522,13 +97,17 @@ public class Individual
 		
 		// ALLOCATING periodCount * customerCount Matrix for Period Assignment
 		periodAssignment = new boolean[problemInstance.periodCount][problemInstance.customerCount];
+		//ALlocating routes
+		routes =  new Vector<Vector<ArrayList<Integer>>>();
 		
-		//ALLOCATING permutation map matrix -> period * customer
-		permutation = new int[problemInstance.periodCount][problemInstance.customerCount];
-		
-		
-		//allocating routeAllocation
-		routePartition = new int[problemInstance.periodCount][problemInstance.vehicleCount];
+		for(int period=0;period<problemInstance.periodCount;period++)
+		{
+			routes.add(new Vector<ArrayList<Integer>>());
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+			{
+				routes.get(period).add(new ArrayList<Integer>());
+			}
+		}
 
 		loadViolation = new double[problemInstance.periodCount][problemInstance.vehicleCount];
 	}
@@ -542,39 +121,42 @@ public class Individual
 		 */
 	public Individual(Individual original)
 	{
-	    int i,j;
 		problemInstance = original.problemInstance;
 
 		periodAssignment = new boolean[problemInstance.periodCount][problemInstance.customerCount];
-		for( i=0;i<problemInstance.periodCount;i++)
+		for(int i=0;i<problemInstance.periodCount;i++)
 		{
-			for( j=0;j<problemInstance.customerCount;j++)
+			for(int j=0;j<problemInstance.customerCount;j++)
 			{
 				periodAssignment[i][j] = original.periodAssignment[i][j];
 			}
 		}
 
-
-
-		permutation = new int[problemInstance.periodCount][problemInstance.customerCount];
-		for( i=0;i<problemInstance.periodCount;i++)
+		for(int period=0;period<problemInstance.periodCount;period++)
 		{
-			for( j=0;j<problemInstance.customerCount;j++)
+			routes.add(new Vector<ArrayList<Integer>>());
+
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
 			{
-				permutation[i][j] = original.permutation[i][j];
+				routes.get(period).add(new ArrayList<Integer>());
 			}
 		}
 
 
-		routePartition = new int[problemInstance.periodCount][problemInstance.vehicleCount];
-		for( i=0;i<problemInstance.periodCount;i++)
+		for(int period=0;period<problemInstance.periodCount;period++)
 		{
-			for( j=0;j<problemInstance.vehicleCount;j++)
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
 			{
-				routePartition[i][j] = original.routePartition[i][j];
+				ArrayList<Integer> originalRoute = original.routes.get(period).get(vehicle);
+				ArrayList<Integer> thisRoute = routes.get(period).get(vehicle);
+				thisRoute.clear();//lagbena eta yet :P
+				
+				for(int i=0;i<originalRoute.size();i++)
+				{
+					thisRoute.add(originalRoute.get(i));
+				}
 			}
 		}
-		
 
 		cost = original.cost;
 		costWithPenalty = original.costWithPenalty;
@@ -582,7 +164,6 @@ public class Individual
 		//allocate demanViolationMatrix
 
         loadViolation = new double[problemInstance.periodCount][problemInstance.vehicleCount];
-
 	}
 	
 	public void copyIndividual(Individual original)
@@ -598,22 +179,21 @@ public class Individual
 			}
 		}
 
-		for( i=0;i<problemInstance.periodCount;i++)
+		for(int period=0;period<problemInstance.periodCount;period++)
 		{
-			for( j=0;j<problemInstance.customerCount;j++)
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
 			{
-				permutation[i][j] = original.permutation[i][j];
+				ArrayList<Integer> originalRoute = original.routes.get(period).get(vehicle);
+				ArrayList<Integer> thisRoute = routes.get(period).get(vehicle);
+				thisRoute.clear();
+				
+				for( i=0;i<originalRoute.size();i++)
+				{
+					thisRoute.add(originalRoute.get(i));
+				}
 			}
 		}
 
-		for( i=0;i<problemInstance.periodCount;i++)
-		{
-			for( j=0;j<problemInstance.vehicleCount;j++)
-			{
-				routePartition[i][j] = original.routePartition[i][j];
-			}
-		}
-		
 		cost = original.cost;
 		costWithPenalty = original.costWithPenalty;
 
@@ -665,86 +245,52 @@ public class Individual
 
 	double calculateCost(int period,int vehicle)
 	{
-		int assignedDepot;
+		int assignedDepot;		
+		int clientNode,previous;
+
+		ArrayList<Integer> route = routes.get(period).get(vehicle);
 		assignedDepot = problemInstance.depotAllocation[vehicle];
+        
+		if(route.isEmpty())return 0;
+
 		double costForPV = 0;
-		int start,end; // marks the first and last position of corresponding route for the array permutation
-
-		if(vehicle == 0) start = 0;
-		else start = routePartition[period][vehicle-1]+1;
-
-		end = routePartition[period][vehicle];
-
-		if(end<start) return 0;
-
-		int activeStart=-1,activeEnd=-1,previous=-1,clientNode;
-
-        double clientDemand=0;
+		double clientDemand=0;
 		double totalRouteTime=0;
-		for(int i=start;i<=end;i++)
+		
+		//First client er service time
+		totalRouteTime = problemInstance.serviceTime[route.get(0)];
+		clientDemand = problemInstance.demand[route.get(0)];
+		for(int i=1;i<route.size();i++)
 		{
-			clientNode = permutation[period][i];
-			if(periodAssignment[period][clientNode]==false) continue;
-
-			if(activeStart == -1) activeStart = clientNode;
-			activeEnd = clientNode;
+			clientNode = route.get(i);
+			previous = route.get(i-1);
+			
+			if(periodAssignment[period][clientNode]==false) System.out.println("NEVER SHOULD HAPPEN!!!!! THIS CLIENT IS NOT PRESENT IN THIS PERIOD");
+			
+			costForPV +=	problemInstance.costMatrix[previous+problemInstance.depotCount][clientNode+problemInstance.depotCount];
 
 			totalRouteTime += problemInstance.serviceTime[clientNode]; //adding service time for that node
-
-            //Caluculate total client demand for corresponding period,vehicle
-            clientDemand += problemInstance.demand[clientNode];
-
-			if(previous == -1)
-			{
-				previous = clientNode;
-				continue;
-			}
-
-			costForPV +=	problemInstance.costMatrix[previous+problemInstance.depotCount][clientNode+problemInstance.depotCount];
+            clientDemand += problemInstance.demand[clientNode];        //Caluculate total client demand for corresponding period,vehicle
 			
 			//ignoring travelling time for now - for cordeau MDVRP
 			//totalRouteTime += problemInstance.travellingTimeMatrix[previous+problemInstance.depotCount][clientNode+problemInstance.depotCount];
-			
-			previous = clientNode;
 
 		}
 
-        if(activeStart!=-1 && activeEnd != -1)
-        {
-            costForPV += problemInstance.costMatrix[assignedDepot][activeStart+problemInstance.depotCount];
-            costForPV += problemInstance.costMatrix[activeEnd+problemInstance.depotCount][assignedDepot];
+        costForPV += problemInstance.costMatrix[assignedDepot][route.get(0)+problemInstance.depotCount];
+        costForPV += problemInstance.costMatrix[route.get(route.size()-1)+problemInstance.depotCount][assignedDepot];
 
-//			totalRouteTime += problemInstance.travellingTimeMatrix[assignedDepot][activeStart+problemInstance.depotCount];
-//            totalRouteTime += problemInstance.travellingTimeMatrix[activeEnd+problemInstance.depotCount][assignedDepot];
-        }
+//  	totalRouteTime += problemInstance.travellingTimeMatrix[assignedDepot][activeStart+problemInstance.depotCount];
+//      totalRouteTime += problemInstance.travellingTimeMatrix[activeEnd+problemInstance.depotCount][assignedDepot];
+    
         loadViolation[period][vehicle] = clientDemand - problemInstance.loadCapacity[vehicle];
 
 		double routeTimeViolation = totalRouteTime - problemInstance.timeConstraintsOfVehicles[period][vehicle] ;
 		if(routeTimeViolation>0) totalRouteTimeViolation += routeTimeViolation;
 
 		return costForPV;
-
 	}
 	
-
-	// sorts the array routePartition in increasing order
-	// input -> routePartition array [0, upperbound ], with,n inserted at the last in the array
-	// output -> sorted array [0, upperbound]
-	void sort(int period,int n,int upperbound)
-	{
-		int tmp;
-		for(int v = upperbound-1;v>=0;v--)
-		{
-			if(routePartition[period][v]>routePartition[period][v+1])
-			{
-				tmp = routePartition[period][v];
-				routePartition[period][v] = routePartition[period][v+1];
-				routePartition[period][v+1] = tmp;
-			}
-			else
-				break;
-		}
-	}
 	
 	void print()
 	{
@@ -764,27 +310,26 @@ public class Individual
 			out.println();
 		}
 
-		out.print("Permutation : \n");
-		for( i=0; i<problemInstance.periodCount;i++)
+		out.print("Routes : \n");
+		for(int period=0;period<problemInstance.periodCount;period++)
 		{
-			for( j=0;j<problemInstance.customerCount;j++)
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
 			{
-				out.print(permutation[i][j]+" ");
+				out.print("< ");
+				ArrayList<Integer> route = routes.get(period).get(vehicle);
+				for(int clientIndex=0;clientIndex<route.size();clientIndex++)
+				{
+						out.print(route.get(clientIndex)+" ");
+				}
+				out.print("> ");
 			}
 			out.println();
 		}
 
-		out.print("Route partition : \n");
 		
-		for(i=0;i<problemInstance.periodCount;i++)
-		{
-			for( j=0;j<problemInstance.vehicleCount;j++)
-				out.print(routePartition[i][j] +" ");
-			out.println();
-		}
-
+		
         // print load violation
-
+		/*
 		out.print("LOAD VIOLATION MATRIX : \n");
         for( i=0;i<problemInstance.periodCount;i++)
         {
@@ -794,7 +339,8 @@ public class Individual
             }
             out.println();
         }
-
+        */
+		
         out.println("Is Feasible : "+isFeasible);
         out.println("Total Load Violation : "+totalLoadViolation);        
         out.println("Total route time violation : "+totalRouteTimeViolation);		

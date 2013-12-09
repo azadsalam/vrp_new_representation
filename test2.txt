@@ -1,0 +1,23 @@
+1 ; number of test cases ; for now it is ignored
+2 ; number of periods
+2 ; number of depots
+4 ; number of total vehicles
+2 2 ; number of vehicle per depot
+200.0 200.0 200.0 200.0 ; Maximum allowable load of each vehicle 
+ ; t(total period) lines containing  v (total vehicle) values each referring maximum time limit (route duration) for that day for that vehicle (NEW)
+500.0 500.0  500.0 500.0  
+500.0 500.0  500.0 500.0  
+7 ; number of clients
+2 1 2 2 1 1 1 ; frequency
+0 0 0 0 0 0 0 ; service time for every client 
+0 0 0 0 0 0 0 ; demand for every client 
+; COST MATRIX
+0 5 1 1 1 1 0 0 0
+5 0 5 5 5 5 1 1 1
+1 5 0 1 5 5 5 5 5
+1 5 1 0 5 5 5 5 5
+1 5 5 5 0 1 5 5 5 
+1 5 5 5 1 0 5 5 5 
+5 1 5 5 5 5 0 1 5
+5 1 5 5 5 5 1 0 5
+5 1 5 5 5 5 5 5 0

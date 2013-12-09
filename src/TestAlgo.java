@@ -60,7 +60,7 @@ public class TestAlgo  implements GeneticAlgorithm
 		problemInstance.print();
 		// INITIALISE POPULATION
 		initialisePopulation();
-		TotalCostCalculator.calculateCostofPopulation(population,0,POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor);
+//		TotalCostCalculator.calculateCostofPopulation(population,0,POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor);
 	
 		
 		for(int generation=0;generation<1;generation++)
@@ -78,11 +78,11 @@ public class TestAlgo  implements GeneticAlgorithm
 	
 	void initialisePopulation()
 	{
-		//out.print("Initial population : \n");
+		out.print("Initial population : \n");
 		for(int i=0; i<POPULATION_SIZE; i++)
 		{
 			population[i] = new Individual(problemInstance);
-			population[i].initialise2();
+			population[i].initialise();
 			//out.println("Printing individual "+ i +" : \n");
 			population[i].print();
 		}
