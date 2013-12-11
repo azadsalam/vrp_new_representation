@@ -27,7 +27,8 @@ public class Individual
 	
 	double totalRouteTimeViolation;
 	double distance = -1;
-	
+	static	double distanceRatioToEachVehicle[][]=null;
+	static	double cumulativeDistanceRatioToEachVehicle[][]=null;
 	ProblemInstance problemInstance;
 	
 	
@@ -44,14 +45,12 @@ public class Individual
 	public void initialise() 
 	{
 		// TODO Auto-generated method stub
-
-		int i,j;
 		
 		
 		// NOW INITIALISE WITH VALUES
 		//initialize period assignment
 
-		int freq,allocated,random,tmp;
+		int freq,allocated,random;
 		//Randomly allocate period to clients equal to their frequencies
 		
 		for(int client=0; client < problemInstance.customerCount; client++)
@@ -71,24 +70,159 @@ public class Individual
 			}
 		}
 		
-		ArrayList<Integer> route;
-		for(int period=0;period<problemInstance.periodCount;period++)
-		{	
-			for(int clientNo=0;clientNo<problemInstance.customerCount;clientNo++)
-			{
+		//Assign customer to route
+		for(int clientNo=0;clientNo<problemInstance.customerCount;clientNo++)
+		{
+			for(int period=0;period<problemInstance.periodCount;period++)
+			{		
 				if(periodAssignment[period][clientNo]==false)continue;
 
-				int vehicle = (int) (clientNo/ ((double)problemInstance.customerCount / problemInstance.vehicleCount));
-				if(vehicle==problemInstance.vehicleCount)vehicle--;
-				
+				int vehicle = closestRoute(clientNo);				
 				routes.get(period).get(vehicle).add(clientNo);
 			}
 		}
 
 		
+		//randomize the pattern for each route
+		//adjacent swap
+		int coin;
+		int ran;
+		for(int period=0;period<problemInstance.periodCount;period++)
+		{		
+		
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+			{
+				ArrayList<Integer> route = routes.get(period).get(vehicle);
+				
+				ran = Utility.randomIntInclusive(3);
+				
+				if(ran==0 || ran==1)
+				{
+					for( int i = route.size()-1;i>=1;i--)
+				    {
+						int j = Utility.randomIntInclusive(0, i);
+						int tmp = route.get(j);
+						route.set(j, route.get(i));
+						route.set(i, tmp);
+				    } 
+				}
+				else if(ran==2)
+				{
+					for(int i=1;i<route.size();i++)
+					{
+						coin = Utility.randomIntInclusive(1);
+						if(coin==1)
+						{
+							int tmp = route.get(i-1);
+							route.set(i-1, route.get(i));
+							route.set(i, tmp);
+						}
+					}
+				}
+				else
+				{
+					for(int i=route.size()-1;i>0;i--)
+					{
+						coin = Utility.randomIntInclusive(1);
+						if(coin==1)
+						{
+							int tmp = route.get(i-1);
+							route.set(i-1, route.get(i));
+							route.set(i, tmp);
+						}
+					}
+				}
+			}
+		}
+		
 		calculateCostAndPenalty();
 
 	}
+	
+	
+	private int closestRoute(int client)
+	{
+		double max=-1;
+		int index = -1;
+	//	System.out.print("Client : "+client+" Rand : " +rand );
+		for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+		{
+			if(max<distanceRatioToEachVehicle[client][vehicle])
+			{
+				max = distanceRatioToEachVehicle[client][vehicle];
+				index = vehicle;
+			}
+		}
+		//System.out.println("Client : "+client+" vehicle : " +index );
+		return index;
+	}
+	
+	private int mostProbableRoute(int client)
+	{
+		double rand = Utility.randomDouble(0, 1);
+	//	System.out.print("Client : "+client+" Rand : " +rand );
+		for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+		{
+			if(rand<cumulativeDistanceRatioToEachVehicle[client][vehicle])
+			{
+				//System.out.println("Chosen Vehicle : " +vehicle );
+				return vehicle;
+			}
+		}
+		return -1;
+	}
+	
+	public static void calculateProbalityForDiefferentVehicle(ProblemInstance problemInstance) 
+	{
+		int depot;
+		double sum=0;
+		distanceRatioToEachVehicle = new double[problemInstance.customerCount][problemInstance.vehicleCount];
+		cumulativeDistanceRatioToEachVehicle= new double[problemInstance.customerCount][problemInstance.vehicleCount];
+		for(int client=0;client<problemInstance.customerCount;client++)
+		{
+
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+			{
+				depot = problemInstance.depotAllocation[vehicle];
+				distanceRatioToEachVehicle[client][vehicle] = (1/problemInstance.costMatrix[depot][problemInstance.depotCount+client]);
+			}
+			
+			
+			sum=0;
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+			{
+				sum+= distanceRatioToEachVehicle[client][vehicle];
+			}
+			
+
+			/*for(int i=0;i<problemInstance.vehicleCount;i++)
+				System.out.print(distanceRatioToEachVehicle[client][i]+" ");
+			System.out.println("Sum : "+sum);
+			*/
+			
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+			{
+				distanceRatioToEachVehicle[client][vehicle] /= sum;
+			}
+			
+			cumulativeDistanceRatioToEachVehicle[client][0] = distanceRatioToEachVehicle[client][0];
+			for(int vehicle=1;vehicle<problemInstance.vehicleCount;vehicle++)
+			{
+				cumulativeDistanceRatioToEachVehicle[client][vehicle] = cumulativeDistanceRatioToEachVehicle[client][vehicle-1]+ distanceRatioToEachVehicle[client][vehicle];
+			}
+			
+			/*
+			for(int i=0;i<problemInstance.vehicleCount;i++)
+				System.out.print(distanceRatioToEachVehicle[client][i]+" ");
+			System.out.println();			
+			
+			for(int i=0;i<problemInstance.vehicleCount;i++)
+				System.out.print(cumulativeDistanceRatioToEachVehicle[client][i]+" ");
+			
+			System.out.println();*/
+		}
+	}
+	
 	
 
 	public Individual(ProblemInstance problemInstance)
@@ -119,6 +253,8 @@ public class Individual
 		 * <br>
 		 * @param original
 		 */
+	
+	/*
 	public Individual(Individual original)
 	{
 		problemInstance = original.problemInstance;
@@ -198,7 +334,7 @@ public class Individual
 		costWithPenalty = original.costWithPenalty;
 
 	}
-
+*/
 	/**
 	 * Calculates cost and penalty of every individual
 	 * For route time violation travelling times are not considered
@@ -341,11 +477,12 @@ public class Individual
         }
         */
 		
+		/*
         out.println("Is Feasible : "+isFeasible);
         out.println("Total Load Violation : "+totalLoadViolation);        
         out.println("Total route time violation : "+totalRouteTimeViolation);		
 		out.println("Cost : " + cost);
-		out.println("Cost with penalty : "+costWithPenalty);
+		out.println("Cost with penalty : "+costWithPenalty);*/
 		out.println();
 		
 	}
@@ -399,565 +536,84 @@ public class Individual
 		*/
 	}
 	
-	/*
-	// swaps even if neither of the customers get visited that day
-	//  updates cost and penalty
-	void mutatePermutationUC(int period)
-	{
-		int first = Utility.randomIntInclusive(problemInstance.customerCount-1);
-
-		int second;
-		int count=0;
-		do
-		{
-			second = Utility.randomIntInclusive(problemInstance.customerCount-1);
-			count++;
-			if(count==problemInstance.customerCount)break;
-		}
-		while(second == first);
-
-		int temp = permutation[period][first];
-		permutation[period][first] = permutation[period][second];
-		permutation[period][second] = temp;
-
-		calculateCostAndPenalty();
-		// FITNESS CAN BE UPDATED HERE
-	}
 	
+	/** 
+	<br> do NOT updates cost and penalty
+	*/
 	
-		// updates cost and penalty
-	void mutatePermutationWithinSingleRouteUC()
+	void mutateRouteWithInsertion()
 	{
-		boolean success = false;
+		boolean success;
 		do
 		{
 			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
 			int vehicle = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			success = mutatePermutationWithinSingleRoute(period, vehicle);
-		}while(success==false);
-		calculateCostAndPenalty();
-	}
-	
-	
-		// updates cost and penalty
-	void mutatePermutationOfDifferentRouteUC()
-	{	
-		if(problemInstance.vehicleCount<2)return;
-		
-		boolean success = false;
-		do
-		{
-			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-			int vehicle1 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			int vehicle2 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			if(vehicle1==vehicle2)continue;
-			success = mutatePermutationOfDifferentRoute(period, vehicle1,vehicle2);
-		}while(success==false);
-		
-		calculateCostAndPenalty();
-	}
-
-	// updates cost and penalty
-	void mutateRoutePartitionUC()
-	{
-		//nothing to do if only one vehicle
-		if(problemInstance.vehicleCount == 1) return ;
-		
-		int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-		mutateRoutePartition(period);
-		
-		calculateCostAndPenalty();
-	}
-
-	// updates cost + penalty
-	// if sobgula client er frequency = period hoy tahole, period assignment mutation er kono effect nai
-	void mutatePeriodAssignmentUC()
-	{
-		boolean success;
-		int clientNo;
-		int total = problemInstance.customerCount;
-		do
-		{
-			clientNo = Utility.randomIntInclusive(problemInstance.customerCount-1);
-			success = mutatePeriodAssignment(clientNo);
-			total--;
-		}while(success==false && total>0);
-		
-		calculateCostAndPenalty();
-	}
-	
-	*/
-	/** swaps even if neither of the customers get visited that day
-	<br> do NOT updates cost and penalty
-	*/
-
-	
-	
-	void mutatePermutationWithInsertion()
-	{
-		int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-		boolean success;
-		do
-		{
-			success = mutatePermutationWithInsertion(period);
+			success = mutateRouteWithInsertion(period,vehicle);
 		}while(success==false);
 	}
 	
-	private boolean mutatePermutationWithInsertion(int period)
+	private boolean mutateRouteWithInsertion(int period,int vehicle)
 	{
-		int left = Utility.randomIntInclusive(0,problemInstance.customerCount-1);
-		int right = Utility.randomIntInclusive(0,problemInstance.customerCount-1);
+		ArrayList<Integer> route = routes.get(period).get(vehicle);
+		int size=route.size(); 
+		if(route.size()<2) return false;
 		
-		if(left==right) return false;
-		if(left > right)
-		{
-			int tmp = left;
-			left = right;
-			right = tmp;
-		}
+		int selectedClientIndex = Utility.randomIntInclusive(route.size()-1);
+		int selectedClient = route.get(selectedClientIndex);
 		
-		int clockwise  =  Utility.randomIntInclusive(1);
 		
-		//for(int j =0;j<problemInstance.customerCount;j++)
-		//	System.out.print(" "+permutation[period][j]);
-		//System.out.println("");
-		
-		//clockwise - left goes right , all the rest go left
-		if(clockwise==1)
-		{
-			int saved = permutation[period][left];
-			for(int i=left+1;i<=right;i++)
-			{
-				permutation[period][i-1]=permutation[period][i];
-			}
-			permutation[period][right] = saved;
-			//System.out.println("period : "+period+" "+left+" -> "+right+" "+" all go left");
-		}
-		else //amticlockwise - right goes left, all other go right
-		{
-			int saved = permutation[period][right];
-			
-			for(int i = right-1;i>=left;i--)
-			{
-				permutation[period][i+1] = permutation[period][i];
-			}
-			permutation[period][left]=saved;
-			//System.out.println("period : "+period+" "+left+" -> "+right+" "+" all go right");
-
-		}
-		
-		//for(int j =0;j<problemInstance.customerCount;j++)
-		//	System.out.print(" "+permutation[period][j]);
-		//System.out.println("\n\n");
-		
-		return true;
-	}
-	
-	
-	void mutatePermutationWithReversal()
-	{
-		int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-		boolean success;
+		int newIndex;
 		do
 		{
-			success = mutatePermutationWithReversal(period);
-		}while(success==false);
-	}
-	
-	private boolean mutatePermutationWithReversal(int period)
-	{
-		int left = Utility.randomIntInclusive(0,problemInstance.customerCount-1);
-		int right = Utility.randomIntInclusive(0,problemInstance.customerCount-1);
-		
-		if(left==right) return false;
-		if(left > right)
-		{
-			int tmp = left;
-			left = right;
-			right = tmp;
-		}
-		
-		int rotations = Utility.randomIntInclusive(1,((right-left+1)/2));
-		
-		int rotateLeft  =  Utility.randomIntInclusive(1);
-		
-		/*
-		System.out.println("APPLIED :D :D :D");
-		String rt = (rotateLeft==1)?"Left rotate":"right rotate";
-		System.out.println("period : "+period+" "+rt+" [ "+left+" , "+right+" ] "+" rotations :  "+rotations+"\n\n");
-		for(int j =0;j<problemInstance.customerCount;j++)
-		{	
-			if(j==left)System.out.print(" |");
-			System.out.print(" "+permutation[period][j]);
-			if(j==right)System.out.print(" |");
-		}
-		System.out.println("");
-		
-		*/
-		for(int r=0;r<rotations;r++)
-		{	
-			//left rotate - left goes right , all the rest go left
-			if(rotateLeft==1)
-			{
-				int saved = permutation[period][left];
-				for(int i=left+1;i<=right;i++)
-				{
-					permutation[period][i-1]=permutation[period][i];
-				}
-				permutation[period][right] = saved;
-				//System.out.println("period : "+period+" "+left+" -> "+right+" "+" all go left");
-			}
-			else //amticlockwise - right goes left, all other go right
-			{
-				int saved = permutation[period][right];
+			newIndex = Utility.randomIntInclusive(route.size()-1);
+		}while(newIndex==selectedClientIndex);
 				
-				for(int i = right-1;i>=left;i--)
-				{
-					permutation[period][i+1] = permutation[period][i];
-				}
-				permutation[period][left]=saved;
-				//System.out.println("period : "+period+" "+left+" -> "+right+" "+" all go right");
-	
-			}
-		}
+		route.remove(selectedClientIndex);
+		route.add(newIndex, selectedClient);
 		
-/*
-		for(int j =0;j<problemInstance.customerCount;j++)
-		{	
-			if(j==left)System.out.print(" |");
-			System.out.print(" "+permutation[period][j]);
-			if(j==right)System.out.print(" |");
-		}
-		System.out.println("\n\n");
-		*/
+		//problemInstance.out.println("Period : "+period+" vehicle : "+vehicle+" selected Client : "+selectedClient+" "+ " new Position : "+newIndex);
 		return true;
 	}
 	
-	void mutatePermutationWithRotation()
-	{
-		int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-		boolean success;
-		do
-		{
-			success = mutatePermutationWithRotation(period);
-		}while(success==false);
 	
-	}
-	
-	
-	private boolean mutatePermutationWithRotation(int period)
-	{
-		int left = Utility.randomIntInclusive(0,problemInstance.customerCount-1);
-		int right = Utility.randomIntInclusive(0,problemInstance.customerCount-1);
-		
-		if(left==right) return false;
-		if(left > right)
-		{
-			int tmp = left;
-			left = right;
-			right = tmp;
-		}
-		
-		int rotations = Utility.randomIntInclusive(1,((right-left+1)/2));
-		
-		int rotateLeft  =  Utility.randomIntInclusive(1);
-		
-		/*
-		System.out.println("APPLIED :D :D :D");
-		String rt = (rotateLeft==1)?"Left rotate":"right rotate";
-		System.out.println("period : "+period+" "+rt+" [ "+left+" , "+right+" ] "+" rotations :  "+rotations+"\n\n");
-		for(int j =0;j<problemInstance.customerCount;j++)
-		{	
-			if(j==left)System.out.print(" |");
-			System.out.print(" "+permutation[period][j]);
-			if(j==right)System.out.print(" |");
-		}
-		System.out.println("");
-		
-		*/
-		for(int r=0;r<rotations;r++)
-		{	
-			//left rotate - left goes right , all the rest go left
-			if(rotateLeft==1)
-			{
-				int saved = permutation[period][left];
-				for(int i=left+1;i<=right;i++)
-				{
-					permutation[period][i-1]=permutation[period][i];
-				}
-				permutation[period][right] = saved;
-				//System.out.println("period : "+period+" "+left+" -> "+right+" "+" all go left");
-			}
-			else //amticlockwise - right goes left, all other go right
-			{
-				int saved = permutation[period][right];
-				
-				for(int i = right-1;i>=left;i--)
-				{
-					permutation[period][i+1] = permutation[period][i];
-				}
-				permutation[period][left]=saved;
-				//System.out.println("period : "+period+" "+left+" -> "+right+" "+" all go right");
-	
-			}
-		}
-		
-/*
-		for(int j =0;j<problemInstance.customerCount;j++)
-		{	
-			if(j==left)System.out.print(" |");
-			System.out.print(" "+permutation[period][j]);
-			if(j==right)System.out.print(" |");
-		}
-		System.out.println("\n\n");
-		*/
-		return true;
-	}
-
-	void mutatePermutationWithAdjacentSwap()
-	{
-		int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-		boolean success;
-		do
-		{
-			success = mutatePermutationWithAdjacentSwap(period);
-		}while(success==false);
-	}
-
-	
-	private boolean mutatePermutationWithAdjacentSwap(int period)
-	{
-		int left = Utility.randomIntInclusive(0,problemInstance.customerCount-1);
-		int right = Utility.randomIntInclusive(0,problemInstance.customerCount-1);
-		
-		if(left==right) return false;
-		if(left > right)
-		{
-			int tmp = left;
-			left = right;
-			right = tmp;
-		}
-				
-		int direction  =  Utility.randomIntInclusive(1);
-		
-		/*
-		System.out.println("APPLIED :D :D :D");
-		String rt = (direction==1)?"Left ":"right ";
-		System.out.println("period : "+period+" "+rt+" [ "+left+" , "+right+" ] "+"  \n\n");
-		for(int j =0;j<problemInstance.customerCount;j++)
-		{	
-			if(j==left)System.out.print(" |");
-			System.out.print(" "+permutation[period][j]);
-			if(j==right)System.out.print(" |");
-		}
-		System.out.println("");
-		
-		*/
-		
-		int coin ;	
-		//from left to right 
-		if(direction==1)
-		{
-			int saved;
-			for(int i=left;i<right;i++)
-			{
-				coin = Utility.randomIntInclusive(1);
-				if(coin==0)
-				{
-						saved = permutation[period][i];
-						permutation[period][i]=permutation[period][i+1];
-						permutation[period][i+1] = saved;
-				}
-			}
-			
-		}
-		else // right to left
-		{
-			for(int i=right-1;i>=left;i--)
-			{
-				int saved;
-				coin = Utility.randomIntInclusive(1);
-				if(coin==0)
-				{
-						saved = permutation[period][i];
-						permutation[period][i]=permutation[period][i+1];
-						permutation[period][i+1] = saved;
-				}
-			}
-			
-		}
-	
-		
-/*
-		for(int j =0;j<problemInstance.customerCount;j++)
-		{	
-			if(j==left)System.out.print(" |");
-			System.out.print(" "+permutation[period][j]);
-			if(j==right)System.out.print(" |");
-		}
-		System.out.println("\n\n");
-		*/
-		return true;
-	}
-
-
-	void mutatePermutationBySwappingAnyTwo()
-	{
-		int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-		mutatePermutationBySwappingAnyTwo(period);
-	}
-	
-	void mutatePermutationMultipleTimesBySwappingAnyTwo(int count)
-	{
-		for(int i=0; i<count ;i++)
-		{
-			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-			mutatePermutationBySwappingAnyTwo(period);
-		}
-	}
-	
-	private void mutatePermutationBySwappingAnyTwo(int period)
-	{
-		int first = Utility.randomIntInclusive(problemInstance.customerCount-1);
-
-		int second;
-		int count=0;
-		do
-		{
-			second = Utility.randomIntInclusive(problemInstance.customerCount-1);
-			count++;
-			if(count==problemInstance.customerCount)break;
-		}
-		while(second == first);
-
-		int temp = permutation[period][first];
-		permutation[period][first] = permutation[period][second];
-		permutation[period][second] = temp;
-	}
 	
 	
 	//DO NOT updates cost and penalty
 	
-	void mutatePermutationWithRotationWithinSingleRoute(int count)
-	{
-		boolean success = false;
-		for(int i=0;i<count;i++)
-		{
-			do
-			{
-				int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-				int vehicle = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-				success = mutatePermutationWithRotationWithinSingleRoute(period, vehicle);
-			}while(success==false);
-		}
-	}
-	
-	private boolean mutatePermutationWithRotationWithinSingleRoute(int period,int vehicle)
-	{
-		
-		int left,right;
-		
-		if(vehicle == 0) left = 0;
-		else left = routePartition[period][vehicle-1]+1;
-
-		right = routePartition[period][vehicle];
-
-		if(right<=left) return false;
-		
-		
-		int rotations = Utility.randomIntInclusive(1,((right-left+1)/2));
-		
-		int rotateLeft  =  Utility.randomIntInclusive(1);
-		
-		/*
-		System.out.println("APPLIED :D :D :D");
-		String rt = (rotateLeft==1)?" Left rotate":" Right rotate";
-		System.out.println("period : "+period+" "+" vehicle "+vehicle+rt+" [ "+left+" , "+right+" ] "+" rotations :  "+rotations+"\n\n");
-		for(int j =0;j<problemInstance.customerCount;j++)
-		{	
-			if(j==left)System.out.print(" |");
-			System.out.print(" "+permutation[period][j]);
-			if(j==right)System.out.print(" |");
-		}
-		System.out.println("");
-		*/
-		
-		for(int r=0;r<rotations;r++)
-		{	
-			//left rotate - left goes right , all the rest go left
-			if(rotateLeft==1)
-			{
-				int saved = permutation[period][left];
-				for(int i=left+1;i<=right;i++)
-				{
-					permutation[period][i-1]=permutation[period][i];
-				}
-				permutation[period][right] = saved;
-				//System.out.println("period : "+period+" "+left+" -> "+right+" "+" all go left");
-			}
-			else //amticlockwise - right goes left, all other go right
-			{
-				int saved = permutation[period][right];
-				
-				for(int i = right-1;i>=left;i--)
-				{
-					permutation[period][i+1] = permutation[period][i];
-				}
-				permutation[period][left]=saved;
-				//System.out.println("period : "+period+" "+left+" -> "+right+" "+" all go right");
-	
-			}
-		}
-		
-/*
-		for(int j =0;j<problemInstance.customerCount;j++)
-		{	
-			if(j==left)System.out.print(" |");
-			System.out.print(" "+permutation[period][j]);
-			if(j==right)System.out.print(" |");
-		}
-		System.out.println("\n\n");
-		*/
-		return true;
-	}
-
-	void mutatePermutationWithinSingleRouteBySwapping()
+	void mutateRouteBySwapping()
 	{
 		boolean success = false;
 		do
 		{
 			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
 			int vehicle = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			success = mutatePermutationWithinSingleRouteBySwapping(period, vehicle);
+			success = mutateRouteBySwapping(period, vehicle);
 		}while(success==false);
 	}
 
 	
 	//returns true if permutation successful
-	private boolean mutatePermutationWithinSingleRouteBySwapping(int period,int vehicle)
+	private boolean mutateRouteBySwapping(int period,int vehicle)
 	{
-		int start,end;
-		
-		if(vehicle == 0) start = 0;
-		else start = routePartition[period][vehicle-1]+1;
+		ArrayList<Integer> route = routes.get(period).get(vehicle);
 
-		end = routePartition[period][vehicle];
-
-		if(end<=start) return false;
+		if(route.size() < 2) return false;
 		
-		int first = Utility.randomIntInclusive(start,end);
+		int first = Utility.randomIntInclusive(route.size()-1);
 
 		int second;
 		do
 		{
-			second = Utility.randomIntInclusive(start,end);
+			second = Utility.randomIntInclusive(route.size()-1);
 		}
 		while(second == first);
 
-		int temp = permutation[period][first];
-		permutation[period][first] = permutation[period][second];
-		permutation[period][second] = temp;
-
+		//problemInstance.out.println("Period : "+period+" vehicle : "+vehicle+" SELCTED FOR SWAP "+route.get(first)+" "+route.get(second));
+		
+		int temp = route.get(first);
+		route.set(first, route.get(second));
+		route.set(second,temp);
+		
 		
 		return true;
 		
@@ -966,211 +622,51 @@ public class Individual
 	
 	/** DO NOT updates cost and penalty
 	*/
-	void mutatePermutationOfDifferentRouteBySwapping()
+	void mutateTwoDifferentRouteBySwapping()
 	{	
 		if(problemInstance.vehicleCount<2)return;
 		
 		boolean success = false;
+		int retry = 0;
 		do
 		{
 			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
 			int vehicle1 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
 			int vehicle2 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
 			if(vehicle1==vehicle2)continue;
-			success = mutatePermutationOfDifferentRouteBySwapping(period, vehicle1,vehicle2);
-		}while(success==false);
+			success = mutateTwoDifferentRouteBySwapping(period, vehicle1,vehicle2);
+			retry++;
+		}while(success==false && retry<10);
+		
+		if(success==false)
+		{
+			//System.out.println("mutateTwoDifferentRouteBySwapping Failed !!");
+			Solver.mutateRouteOfTwoDiefferentFailed++;
+		}
 	
 	}
 	
 
 	//returns if permutation successful
-	private boolean mutatePermutationOfDifferentRouteBySwapping(int period,int vehicle1,int vehicle2)
+	private boolean mutateTwoDifferentRouteBySwapping(int period,int vehicle1,int vehicle2)
 	{
-		int start1,end1,start2,end2;
-		
-		if(vehicle1 == 0) start1 = 0;
-		else start1 = routePartition[period][vehicle1-1]+1;
+		ArrayList<Integer> route1 = routes.get(period).get(vehicle1);
+		ArrayList<Integer> route2 = routes.get(period).get(vehicle2);
 
-		end1 = routePartition[period][vehicle1];
-
-		if(end1<start1) return false;
+		if(route1.size()==0 || route2.size()==0) return false;
 		
+		int first = Utility.randomIntInclusive(route1.size()-1);
+		int second = Utility.randomIntInclusive(route2.size()-1);
 		
-		if(vehicle2 == 0) start2 = 0;
-		else start2 = routePartition[period][vehicle2-1]+1;
+		problemInstance.out.println("Period : "+period+" vehicles  : "+vehicle1+" "+vehicle2+" SELCTED FOR SWAP "+route1.get(first)+" "+route2.get(second));
 
-		end2 = routePartition[period][vehicle2];
-
-		if(end2<start2) return false;
-		
-		int first = Utility.randomIntInclusive(start1,end1);
-		int second = Utility.randomIntInclusive(start2,end2);
-		
-
-		
-		int temp = permutation[period][first];
-		permutation[period][first] = permutation[period][second];
-		permutation[period][second] = temp;
-
+		int temp = route1.get(first);
+		route1.set(first, route2.get(second));
+		route2.set(second,temp);
 		
 		return true;
-		
 	}
 
-	
-
-	/** do not updates cost and penalty
-	*/
-	void mutateRoutePartitionWithRandomStepSize()
-	{
-		//nothing to do if only one vehicle
-		if(problemInstance.vehicleCount == 1) return ;
-		
-		int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-		mutateRoutePartitionWithRandomStepSize(period);
-		
-	}
-	
-	//moves some red line / route partition line
-    //
-	//NEW ONE 
-	private void mutateRoutePartitionWithRandomStepSize(int period)
-	{
-		int distance,increment;
-
-		while(true)
-		{
-			int seperatorIndex = Utility.randomIntInclusive(problemInstance.vehicleCount-2);
-			int dir = Utility.randomIntInclusive(1); // 0-> left , 1-> right
-			if(dir==0)//move the seperator left
-			{
-				if(seperatorIndex==0) distance = routePartition[period][0] ;
-				else distance = routePartition[period][seperatorIndex] - routePartition[period][seperatorIndex-1];
-				if(distance==0)continue;
-				
-				int max  = distance/4;						
-				increment = Utility.randomIntInclusive(max);
-				
-				if(increment<1)increment=1;				
-				routePartition[period][seperatorIndex] -= increment;
-				return;
-			}
-			else	//move the seperator right
-			{
-				distance = routePartition[period][seperatorIndex+1] - routePartition[period][seperatorIndex] ;
-				if(distance==0)continue;
-				int max  = distance/4;						
-				increment = Utility.randomIntInclusive(max);
-				if(increment<1)increment=1;
-				routePartition[period][seperatorIndex] += increment;
-				return;
-			}
-		}
-
-	}
-	
-
-	
-	
-	/** do not updates cost and penalty
-	*/
-	void mutateRoutePartition()
-	{
-		//nothing to do if only one vehicle
-		if(problemInstance.vehicleCount == 1) return ;
-		
-		int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-		mutateRoutePartition(period);
-		
-
-	}
-	
-
-/*
-	//moves some red line
-	//no effect if only one vehicle
-	private void mutateRoutePartition(int period)
-	{
-		//nothing to do if only one vehicle
-		if(problemInstance.vehicleCount == 1) return ;
-
-		//pick a red line/seperator
-		//generate random number in [0,vehicleCount-1)
-
-		int distance,increment;
-
-		while(true)
-		{
-			int seperatorIndex = Utility.randomIntInclusive(problemInstance.vehicleCount-2);
-			int dir = Utility.randomIntInclusive(1); // 0-> left , 1-> right
-			if(dir==0)//move the seperator left
-			{
-				if(seperatorIndex==0) distance = routePartition[period][0] ;
-				else distance = routePartition[period][seperatorIndex] - routePartition[period][seperatorIndex-1];
-				// if the line can not merge with the previous one ,
-				// difference = routePartition[seperatorIndex] - 1 - routePartition[seperatorIndex-1]
-
-				// increment should be in [1,distance]
-				if(distance==0)continue;
-				increment = 1 + Utility.randomIntInclusive(distance-1);
-				routePartition[period][seperatorIndex] -= increment;
-				return;
-			}
-			else	//move the seperator right
-			{
-				distance = routePartition[period][seperatorIndex+1] - routePartition[period][seperatorIndex] ;
-				if(distance==0)continue;
-				increment = 1 + Utility.randomIntInclusive(distance-1);
-				routePartition[period][seperatorIndex] += increment;
-				return;
-			}
-		}
-
-	}
-
-*/
-	
-	//moves some red line / route partition line
-    // only single step left or right
-	//NEW ONE 
-	private void mutateRoutePartition(int period)
-	{
-		//nothing to do if only one vehicle
-		if(problemInstance.vehicleCount == 1) return ;
-
-		//pick a red line/seperator
-		//generate random number in [0,vehicleCount-1)
-
-		int distance,increment;
-
-		while(true)
-		{
-			int seperatorIndex = Utility.randomIntInclusive(problemInstance.vehicleCount-2);
-			int dir = Utility.randomIntInclusive(1); // 0-> left , 1-> right
-			if(dir==0)//move the seperator left
-			{
-				if(seperatorIndex==0) distance = routePartition[period][0] ;
-				else distance = routePartition[period][seperatorIndex] - routePartition[period][seperatorIndex-1];
-				// if the line can not merge with the previous one ,
-				// difference = routePartition[seperatorIndex] - 1 - routePartition[seperatorIndex-1]
-
-				// increment should be in [1,distance]
-				if(distance==0)continue;
-				increment = 1;
-				routePartition[period][seperatorIndex] -= increment;
-				return;
-			}
-			else	//move the seperator right
-			{
-				distance = routePartition[period][seperatorIndex+1] - routePartition[period][seperatorIndex] ;
-				if(distance==0)continue;
-				increment = 1 ;
-				routePartition[period][seperatorIndex] += increment;
-				return;
-			}
-		}
-
-	}
 	
 
 	/** do not updates cost + penalty
@@ -1191,6 +687,7 @@ public class Individual
 	}
 	
 	//returns 0 if it couldnt mutate as period == freq
+	//need to edit this- must repair 
 	private boolean mutatePeriodAssignment(int clientNo)
 	{
 		//no way to mutate per. ass. as freq. == period
@@ -1212,252 +709,47 @@ public class Individual
 		periodAssignment[previouslyAssigned][clientNo] = false;
 		periodAssignment[previouslyUnassigned][clientNo]= true;
 
+		int vehicle = removeClientFromPeriod(previouslyAssigned,clientNo);
+		addClientIntoPeriod(previouslyUnassigned,vehicle,clientNo);
 
+
+		//problemInstance.out.println("previouslyAssigned Period : "+previouslyAssigned+"previouslyUnassigned : "+previouslyUnassigned+" vehicle  : "+vehicle+" client "+clientNo);
+
+		
 		return true;
 	}
 	
-	
-	/*
-	void mutatePermutationWithSingleGreedySwap()
+	private void addClientIntoPeriod(int period, int vehicle, int client)
 	{
-		boolean success = false;
-		int retry = 10;
-		do
-		{
-			retry--;
-			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-			int vehicle = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			success = mutatePermutationWithSingleGreedySwap(period, vehicle);
-		}while(success==false && retry>0);
+		ArrayList<Integer> route = routes.get(period).get(vehicle);
+		
+		int position = Utility.randomIntInclusive(route.size());
+		route.add(position,client);
 	}
-
-	
-	
-	private boolean mutatePermutationWithSingleGreedySwap(int period,int vehicle)
-	{
-		int start,end;
-		
-		if(vehicle == 0) start = 0;
-		else start = routePartition[period][vehicle-1]+1;
-
-		end = routePartition[period][vehicle];
-
-		if(end<=start) return false;
-		
-		int first = Utility.randomIntInclusive(start,end-1);
-		first = getNextClientIndex(period, vehicle, first);
-		
-		
-		int second=first+1;
-		second = getNextClientIndex(period, vehicle, second);
-		
-		if( first == -1 || second == -1 )return false;
-		
-		if(first==-100 || second==-100) 
-		{
-			System.out.println("NEVER SHOULD HAVE BEEN PRINTED !!!!!!!! in mutatePermutationWithSingleGreedySwap in Individual ");
-			return false;
-		}
-		
-		
-		int prevIndex = getPreviousClientIndex(period, vehicle, first);
-		int nextIndex = getNextClientIndex(period, vehicle, second );
-		
-				
-		int b = permutation[period][first];
-		int c = permutation[period][second];
-		
-		double dis1,dis1Prime,dis2,dos2Prime;
-		
-		
-		
-
-		return true;
-		
-	}
-	
-	*/
-
-	/**
-	 * returns the next client (inclusive first) in that vehicle's route if there is one, else return -1
-	 * <br/> 
-	 * @param period
-	 * @param vehicle
-	 * @param index index of the client
-	 * @return
-	 * nodeIndex of the next Node in route
-	 * <br/>-100 if parameter node is out of range, not part of this vehicles route
-	 * <br/>-1 if this is the last presentNode
-	 */
-	private int getNextClientIndex(int period, int vehicle, int index)
-	{
-		int end = routePartition[period][vehicle];
-		
-		int start;
-		if(vehicle == 0) start = 0;
-		else start = routePartition[period][vehicle-1]+1;
-
-		if(index<start || index>end)
-		{
-			System.out.println("PROBLEM IN getNextClientIndex function in Individual");
-			return -100;
-		}	
-		while(index<=end)
-		{
-			if(periodAssignment[period][permutation[period][index]] == true)
-			{
-				return index;
-			}
-			index++;
-		}
-		return -1;
-	}
-	
-	/**
-	 * returns the previous client (inclusive first) in that vehicle's route if there is one
-	 * <br/> 
-	 * @param period
-	 * @param vehicle
-	 * @param index
-	 * @return
-	 * nodeIndex of the previous Node in route
-	 * -100 if parameter node is out of range, not part of this vehicles route
-	 * -1 if this is the first presentNode
-	 */
-	private int getPreviousClientIndex(int period, int vehicle, int index)
-	{
-		int start;
-		
-		if(vehicle == 0) start = 0;
-		else start = routePartition[period][vehicle-1]+1;
-
-		int end = routePartition[period][vehicle];
-		
-		if(index<start || index>end)
-		{
-			System.out.println("PROBLEM IN getPreviousClientIndex function in Individual");
-			return -100;
-		}	
-		while(index>=start)
-		{
-			if(periodAssignment[period][permutation[period][index]] == true)
-			{
-				return index;
-			}
-			index--;
-		}		
-		return -1;
-	}
-	
-	
-	/*
+	/** Removes client from that periods route
 	 * 
-	 * void mutatePermutationWithinSingleGreedySwap()
+	 * @param period
+	 * @param client
+	 * @return number of the vehicle, of which route it was present.. <br/> -1 if it wasnt present in any route
+	 */
+	private int removeClientFromPeriod(int period, int client)
 	{
-		boolean success = false;
-		int retry = 10;
-		do
+		
+		for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
 		{
-			retry--;
-			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-			int vehicle = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			success = mutatePermutationWithinSingleGreedySwap(period, vehicle);
-		}while(success==false && retry>0);
-	}
-	//returns true if permutation successful
-	private boolean mutatePermutationWithinSingleGreedySwap(int period,int vehicle)
-	{
-		int start,end;
-		
-		if(vehicle == 0) start = 0;
-		else start = routePartition[period][vehicle-1]+1;
-
-		end = routePartition[period][vehicle];
-
-		if(end<=start) return false;
-		if(end-start<2) return false;
-		
-		int first = Utility.randomIntInclusive(start,end-2);
-		first = getNextClientIndex(period, vehicle, first);
-		
-		int second=first+1;
-		second = getNextClientIndex(period, vehicle, second);
-		
-		int third = second+1;
-		third = getNextClientIndex(period, vehicle, third);
-		
-		if( first ==-1 || second == -1 || third==-1)
-			return false;
-		
-		
-
-		int client1 = permutation[period][first];
-		int client2 = permutation[period][second];
-		int client3 = permutation[period][third];
-		
-		int d = problemInstance.depotCount;
-		
-		
-		double temp1 = problemInstance.costMatrix[client1+d][client2+d] + problemInstance.costMatrix[client1+d][client3+d];
-		double temp2 = problemInstance.costMatrix[client2+d][client1+d] + problemInstance.costMatrix[client2+d][client3+d];
-		double temp3 = problemInstance.costMatrix[client3+d][client1+d] + problemInstance.costMatrix[client3+d][client2+d];
-
-		int coin;
-		if(temp1<temp2 && temp1<temp3)
-		{
-			permutation[period][second] = client1;
-			
-			coin = Utility.randomIntInclusive(1);
-			if(coin==0)
+			ArrayList<Integer> route = routes.get(period).get(vehicle);
+			if(route.contains(client))
 			{
-				permutation[period][first] = client2;
-				permutation[period][third] = client3;
-			}
-			else
-			{
-				permutation[period][first] = client3;
-				permutation[period][third] = client2;
+				route.remove(new Integer(client));
+				return vehicle;
 			}
 		}
-		
-		else if(temp2<temp1 && temp2<temp3)
-		{
-			permutation[period][second] = client2;
-			
-			coin = Utility.randomIntInclusive(1);
-			if(coin==0)
-			{
-				permutation[period][first] = client1;
-				permutation[period][third] = client3;
-			}
-			else
-			{
-				permutation[period][first] = client3;
-				permutation[period][third] = client1;
-			}
-		}
-		else			
-		{
-			permutation[period][second] = client3;
-			
-			coin = Utility.randomIntInclusive(1);
-			if(coin==0)
-			{
-				permutation[period][first] = client1;
-				permutation[period][third] = client2;
-			}
-			else
-			{
-				permutation[period][first] = client2;
-				permutation[period][third] = client1;
-			}
-		}
-		return true;
-		
+		return -1;
 	}
 	
-	*/
 	
+	
+
 	
 	private static  void uniformCrossoverForPeriodAssignment(Individual child1,Individual child2, Individual parent1, Individual parent2,ProblemInstance problemInstance)
 	{
@@ -1480,9 +772,6 @@ public class Individual
 				temp2=child1;
 			}	
 			
-			//problemInstance.out.println("Customer "+i+ " coin : "+coin);
-			
-			
 			for(int period = 0; period<problemInstance.periodCount; period++)
 			{
 				//if(parent1==null)System.out.print("nul");
@@ -1493,7 +782,111 @@ public class Individual
 		
 	}
 
-	static void crossOver_Uniform_VPMX_sortedCrissCross(ProblemInstance problemInstance,Individual parent1,Individual parent2,Individual child1,Individual child2)
+	
+	private static  void uniformCrossoverForRoutes(Individual child1,Individual child2, Individual parent1, Individual parent2,ProblemInstance problemInstance)
+	{
+		int coin;
+		
+		Individual temp1,temp2;
+		for(int period = 0; period<problemInstance.periodCount; period++)
+		{
+			coin = Utility.randomIntInclusive(1);
+			
+			if(coin==0)
+			{
+				temp1=child1;
+				temp2=child2;
+			}
+			else
+			{
+				temp1=child2;
+				temp2=child1;
+			}	
+			
+			
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+			{
+				
+				ArrayList<Integer> parent1Route = parent1.routes.get(period).get(vehicle);
+				ArrayList<Integer> parent2Route = parent2.routes.get(period).get(vehicle);
+				ArrayList<Integer> child1Route = temp1.routes.get(period).get(vehicle);
+				ArrayList<Integer> child2Route = temp2.routes.get(period).get(vehicle);
+				
+				child1Route.clear();
+				child2Route.clear();
+				
+				//copy temp1 <- parent1				
+				for(int clientIndex=0;clientIndex<parent1Route.size();clientIndex++)
+				{
+					int node = parent1Route.get(clientIndex);
+					if(temp1.periodAssignment[period][node])
+						child1Route.add(node);
+				}
+				
+				
+				
+				//copy temp2 <- parent2				
+				for(int clientIndex=0;clientIndex<parent2Route.size();clientIndex++)
+				{
+					int node = parent2Route.get(clientIndex);
+					if(temp2.periodAssignment[period][node])
+						child2Route.add(node);
+				}
+
+				
+			}
+			
+			
+			for(int client=0;client<problemInstance.customerCount;client++)
+			{
+				//repair offspring route 1
+				if(temp1.periodAssignment[period][client]==true)
+				{
+					if(doesRouteContainThisClient(problemInstance, temp1, period, client)==false)
+					{
+						temp1.routes.get(period).get(0).add(client);
+					}
+				}
+				//repair offspring route 2
+
+				if(temp2.periodAssignment[period][client]==true)
+				{
+					if(doesRouteContainThisClient(problemInstance, temp2, period, client)==false)
+					{
+						temp2.routes.get(period).get(0).add(client);
+					}
+				}
+			}
+			
+		}
+		
+	}
+	
+	
+	
+	/**
+	 * Checks if the client is present in any route or not for the specified period
+	 * @param problemInstance
+	 * @param individual
+	 * @param period
+	 * @param client
+	 * @return true if client is present in some route <br/> else false
+	 */
+	private static boolean doesRouteContainThisClient(ProblemInstance problemInstance, Individual individual, int period, int client)
+	{
+
+		for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+		{
+			if(individual.routes.get(period).get(vehicle).contains(client))
+			{
+				return true;
+			}
+		}	
+		return false;
+	}
+
+	
+	static void crossOver_Uniform_Uniform(ProblemInstance problemInstance,Individual parent1,Individual parent2,Individual child1,Individual child2)
 	{
 		//with 50% probability swap parents
 		int ran = Utility.randomIntInclusive(1);
@@ -1504,165 +897,18 @@ public class Individual
 			parent2 = temp;
 		}
 		
-		// UNIFORM CROSSOVER FOR PeriodAssignment
 		uniformCrossoverForPeriodAssignment(child1,child2,parent1, parent2,problemInstance);
-		
-		
-		//child 1 gets permutation of first n period from parent 1
-		
-		VPMX(child1, child2, parent1, parent2, problemInstance);
-		
-		
-		// crossover route partition
-		sortedCrisscrossCrossoverForRoutePartition(child1, child2, parent1, parent2, problemInstance);
+		uniformCrossoverForRoutes(child1, child2, parent1, parent2, problemInstance);
 		
 		
 		//update cost and penalty
 		child1.calculateCostAndPenalty();
 		child2.calculateCostAndPenalty();
 		
-		//System.out.println(" "+n);
+		
 	}
 
-	
-	static void sortedCrisscrossCrossoverForRoutePartition(Individual child1,Individual child2, Individual parent1, Individual parent2,ProblemInstance problemInstance)
-	{
-		for(int period=0;period<problemInstance.periodCount;period++)
-		{
-			int temp[] = new int[problemInstance.vehicleCount*2];
-			int i;
-			for(i=0;i<problemInstance.vehicleCount;i++) temp[i] = parent1.routePartition[period][i];
-			for(i=0;i<problemInstance.vehicleCount;i++) temp[i+problemInstance.vehicleCount] = parent2.routePartition[period][i];
-			
-			
-			for(i=0;i<problemInstance.vehicleCount*2;i++)
-			{
-				for(int j=i+1;j<problemInstance.vehicleCount*2;j++)
-				{
-					if(temp[i]>temp[j])
-					{
-						int tmp = temp[i];
-						temp[i] = temp[j];
-						temp[j]=tmp;
-					}
-				}
-			}
-			
-			for( i=0;i<problemInstance.vehicleCount;i++) child1.routePartition[period][i] = temp[2*i];
-			for( i=0;i<problemInstance.vehicleCount;i++) child2.routePartition[period][i] = temp[2*i+1];
-			
-		}
-		
-	}
-	
-	/** 
-	 * 
-	  */
-	static void crossOver(ProblemInstance problemInstance,Individual parent1,Individual parent2,Individual child1,Individual child2)
-	{
-		//with 50% probability swap parents
-		int ran = Utility.randomIntInclusive(1);
-		if(ran ==1)
-		{
-			Individual temp = parent1;
-			parent1 = parent2;
-			parent2 = temp;
-		}
-		
-		
-		//child 1 gets first n customers assignment from parent 1 and rest from parent 2
-		//child 2 gets first n customers assignment from parent 2 and rest from parent 1
-		int n = Utility.randomIntInclusive(problemInstance.customerCount);
-		
-		
-		copyPeriodAssignmentFromParents(child1, parent1, parent2, n ,problemInstance);
-		copyPeriodAssignmentFromParents(child2, parent2, parent1, n ,problemInstance);
-		
-		//child 1 gets permutation of first n period from parent 1
-		n = Utility.randomIntInclusive(problemInstance.periodCount);
-		
-		copyPermutation(child1, parent1, parent2, n, problemInstance);
-		copyPermutation(child2, parent2, parent1, n, problemInstance);
-		
-		
-		// crossover route partition
-		
-		for(int period=0;period<problemInstance.periodCount;period++)
-		{
-			int temp[] = new int[problemInstance.vehicleCount*2];
-			int i;
-			for(i=0;i<problemInstance.vehicleCount;i++) temp[i] = parent1.routePartition[period][i];
-			for(i=0;i<problemInstance.vehicleCount;i++) temp[i+problemInstance.vehicleCount] = parent2.routePartition[period][i];
-			
-			
-			for(i=0;i<problemInstance.vehicleCount*2;i++)
-			{
-				for(int j=i+1;j<problemInstance.vehicleCount*2;j++)
-				{
-					if(temp[i]>temp[j])
-					{
-						int tmp = temp[i];
-						temp[i] = temp[j];
-						temp[j]=tmp;
-					}
-				}
-			}
-			
-			for( i=0;i<problemInstance.vehicleCount;i++) child1.routePartition[period][i] = temp[2*i];
-			for( i=0;i<problemInstance.vehicleCount;i++) child2.routePartition[period][i] = temp[2*i+1];
-			
-		}
-		
-		child1.calculateCostAndPenalty();
-		child2.calculateCostAndPenalty();
-		
-		//System.out.println(" "+n);
-	}
-
-	//copy first n row from parent 1's permutation
-	private static void copyPermutation(Individual child, Individual parent1, Individual parent2,int n,ProblemInstance problemInstance) 
-	{
-		int i;
-		
-		for(i=0;i<problemInstance.customerCount;i++)
-		{
-			for(int period = 0;period<n;period++)
-			{
-				child.permutation[period][i] = parent1.permutation[period][i];
-			}
-		}
-		
-		for(i=0;i<problemInstance.customerCount;i++)
-		{
-			for(int period = n;period<problemInstance.periodCount;period++)
-			{
-				child.permutation[period][i] = parent2.permutation[period][i];
-			}
-		}
-		
-	}
-	
-	//copies first n columns from parent1 and rest of them from parent 2 
-	private static  void copyPeriodAssignmentFromParents(Individual child, Individual parent1, Individual parent2,int n,ProblemInstance problemInstance)
-	{
-		int i;
-		for(int period = 0; period<problemInstance.periodCount; period++)
-		{
-			for(i=0;i<n;i++)
-			{
-				//if(parent1==null)System.out.print("nul");
-				child.periodAssignment[period][i] = parent1.periodAssignment[period][i];
-			}
-		}
-		for(int period = 0; period<problemInstance.periodCount; period++)
-		{
-			for(i=n;i<problemInstance.customerCount;i++)
-			{
-				child.periodAssignment[period][i] = parent2.periodAssignment[period][i];
-			}
-		}
-	}
-
+	/*
 	public static double distance(ProblemInstance problemInstance, Individual first,Individual second)
 	{
 		boolean print=false;
@@ -1742,212 +988,9 @@ public class Individual
 		return distance;
 	}
 	
+	*/
 	
-	static void crossOverWithVPMX(ProblemInstance problemInstance,Individual parent1,Individual parent2,Individual child1,Individual child2)
-	{
-		int ran = Utility.randomIntInclusive(1);
-		if(ran ==1)
-		{
-			Individual temp = parent1;
-			parent1 = parent2;
-			parent2 = temp;
-		}
-		
-		
-		//child 1 gets first n customers assignment from parent 1 and rest from parent 2
-		//child 2 gets first n customers assignment from parent 2 and rest from parent 1
-		int n = Utility.randomIntInclusive(problemInstance.customerCount);
-		
-		
-		copyPeriodAssignmentFromParents(child1, parent1, parent2, n ,problemInstance);
-		copyPeriodAssignmentFromParents(child2, parent2, parent1, n ,problemInstance);
-		
-		//child 1 gets permutation of first n period from parent 1
-		n = Utility.randomIntInclusive(problemInstance.periodCount);
-		
-		VPMX(child1,child2,parent1,parent2,problemInstance);
-		
-		
-		// crossover route partition
-		
-		for(int period=0;period<problemInstance.periodCount;period++)
-		{
-			int temp[] = new int[problemInstance.vehicleCount*2];
-			int i;
-			for(i=0;i<problemInstance.vehicleCount;i++) temp[i] = parent1.routePartition[period][i];
-			for(i=0;i<problemInstance.vehicleCount;i++) temp[i+problemInstance.vehicleCount] = parent2.routePartition[period][i];
-			
-			
-			for(i=0;i<problemInstance.vehicleCount*2;i++)
-			{
-				for(int j=i+1;j<problemInstance.vehicleCount*2;j++)
-				{
-					if(temp[i]>temp[j])
-					{
-						int tmp = temp[i];
-						temp[i] = temp[j];
-						temp[j]=tmp;
-					}
-				}
-			}
-			
-			for( i=0;i<problemInstance.vehicleCount;i++) child1.routePartition[period][i] = temp[2*i];
-			for( i=0;i<problemInstance.vehicleCount;i++) child2.routePartition[period][i] = temp[2*i+1];
-			
-		}
-		
-		child1.calculateCostAndPenalty();
-		child2.calculateCostAndPenalty();
-	}
-	private static void VPMX(Individual child1, Individual child2,
-			Individual parent1, Individual parent2,
-			ProblemInstance problemInstance2) {
-		int count=problemInstance2.customerCount;
-		
-		// TODO Auto-generated method stub
-		for(int i=0;i<problemInstance2.periodCount;i++)
-		{
-			
-			int start1=Utility.randomIntInclusive(0, count-2);
-			int end1=Utility.randomIntInclusive(start1+1, count-1);
-			int diff=end1-start1;
-			
-			int start2=Utility.randomIntInclusive(0, count-1-diff);
-			int end2=start2+diff;
-			
-			for(int s=0;s<start1;s++) child1.permutation[i][s]=parent1.permutation[i][s];
-			for(int e=end1+1;e<count;e++) child1.permutation[i][e]=parent1.permutation[i][e];
-			for(int m=start1;m<=end1;m++)  child1.permutation[i][m]=parent2.permutation[i][start2+m-start1] ;
-			
-			for(int s=0;s<start2;s++) child2.permutation[i][s]=parent2.permutation[i][s];
-			for(int e=end2+1;e<count;e++) child2.permutation[i][e]=parent2.permutation[i][e];
-			for(int m=start2;m<=end2;m++)  child2.permutation[i][m]=parent1.permutation[i][start1+m-start2] ;
-			/*System.out.println();
-			for(int i=0;i<count;i++){
-				System.out.print(child1[i]+" ");
-			}
-			System.out.println();
-			for(int i=0;i<count;i++){
-				System.out.print(child2[i]+" ");
-			}*/
-			
-			HashMap<Integer, Integer> OneToTwo=new HashMap<Integer,Integer>();
-			HashMap<Integer, Integer> TwoToOne=new HashMap<Integer,Integer>();
-			
-			for(int it=0;it<=(end1-start1);it++){
-				OneToTwo.put(parent1.permutation[i][start1+it], parent2.permutation[i][start2+it]);
-				TwoToOne.put(parent2.permutation[i][start2+it], parent1.permutation[i][start1+it]);
-			}
-			int []rest1=new int[count-(end1-start1+1)];
-			int iter=0;
-			for(int it=0;it<start1;it++){
-				rest1[iter++]=parent1.permutation[i][it];
-			}
-			for(int it=end1+1;it<count;it++){
-				rest1[iter++]=parent1.permutation[i][it];
-			}
-			
-			int []rest2=new int[count-(end2-start2+1)];
-			iter=0;
-			for(int it=0;it<start2;it++){
-				rest2[iter++]=parent2.permutation[i][it];
-			}
-			for(int it=end2+1;it<count;it++){
-				rest2[iter++]=parent2.permutation[i][it];
-			}
-			
-			for(int it=0;it<rest1.length;it++){
-				OneToTwo.put(rest1[it], rest2[it]);
-				TwoToOne.put(rest2[it], rest1[it]);
-			}
-			
-			/*Set<Integer>set=OneToTwo.keySet();
-			for (Iterator iterator = set.iterator(); iterator.hasNext();) {
-				Integer integer = (Integer) iterator.next();
-				System.out.print("\n"+integer+"->"+OneToTwo.get(integer));
-				
-			}
-			System.out.println();
-			set=TwoToOne.keySet();
-			for (Iterator iterator = set.iterator(); iterator.hasNext();) {
-				Integer integer = (Integer) iterator.next();
-				System.out.print("\n"+integer+"->"+TwoToOne.get(integer));
-				
-			}*/
-			
-			/********************** child 1 check kortesi *******************************/
-			int notSafeStart=start1;
-			int notSafeEnd=end1;
-			while(notSafeStart<=notSafeEnd){
-				int num_retry=0;
-				boolean retired=false;
-				while(checkConflict(child1,i,notSafeStart,notSafeEnd,count)){
-					num_retry++;
-					if(num_retry==count){
-						//System.out.println("Breaked!!");
-						retired=true;
-						break;
-					}
-					int p=child1.permutation[i][notSafeStart];
-					child1.permutation[i][notSafeStart]=OneToTwo.get(p);
-				}
-				if(retired) break;
-				notSafeStart++;
-			}
-			/***********************************************************************/
-			
-			/********************** child 2 check kortesi *******************************/
-			notSafeStart=start2;
-			notSafeEnd=end2;
-			while(notSafeStart<=notSafeEnd){
-				int num_retry=0;
-				boolean retired=false;
-				while(checkConflict(child2,i,notSafeStart,notSafeEnd,count)){
-					num_retry++;
-					if(num_retry==count){
-						retired=true;
-						break;
-					}
-					int p=child2.permutation[i][notSafeStart];
-					child2.permutation[i][notSafeStart]=TwoToOne.get(p);
-				}
-				if(retired) break;
-				notSafeStart++;
-			}
-			/***********************************************************************/
-			
-			
-		}
-	}
 
 
-	private static boolean checkConflict(Individual child1,int period, int notSafeStart,
-			int notSafeEnd, int count) {
-		// TODO Auto-generated method stub
-		
-			int p=child1.permutation[period][notSafeStart];
-			for(int it=0;it<notSafeStart;it++){
-				if(child1.permutation[period][it]==p){
-					return true;
-				}
-			}
-			for(int it=notSafeEnd+1;it<count;it++){
-				if(child1.permutation[period][it]==p){
-					return true;
-				}
-			}
-			return false;
-
-	}
-
-
-
-
-
-
-	class Route
-	{
-		
-	}
 	
 }

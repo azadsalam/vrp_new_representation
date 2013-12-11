@@ -7,8 +7,8 @@ import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
 
 public class Solver 
 {
-	String inputFileName = "test2.txt";
-	String outputFileName = "outTest.txt";
+	String inputFileName = "PVRP/p14.txt";
+	String outputFileName = "PVRP/out14.txt";
 	int runSize=5;
 	boolean singleRun = true;
 	
@@ -23,6 +23,8 @@ public class Solver
 	public static boolean writeToExcel;
 	public static boolean generateAggregatedReport;
 	public static boolean outputToFile;
+	public static int mutateRouteOfTwoDiefferentFailed=0;
+
 	public void initialise() 
 	{
 		try
@@ -59,6 +61,7 @@ public class Solver
 		}
 	}
 	
+	
 	public void solve() 
 	{
 		// singlerun = true when excel needs to be generated or output checked for testing
@@ -70,7 +73,7 @@ public class Solver
 		
 		//problemInstance.print();
 		
-		GeneticAlgorithm ga = new TestAlgo(problemInstance);		
+		GeneticAlgorithm ga = new Scheme6(problemInstance);		
 		if(writeToExcel) 
 		{
 			Solver.exportToCsv.init(ga.getNumberOfGeeration()+1);	
@@ -82,8 +85,12 @@ public class Solver
 		if(generateAggregatedReport)
 			generateAggregatedReport(ga);
 		
+		
+		System.out.println("mutateTwoDifferentRouteBySwapping Failed : "+mutateRouteOfTwoDiefferentFailed);
 		output.close();
 	}
+	
+	
 	
 	
 	

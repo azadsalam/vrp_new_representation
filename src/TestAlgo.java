@@ -54,10 +54,11 @@ public class TestAlgo  implements GeneticAlgorithm
 		int selectedParent1,selectedParent2;
 		int i;
 		
-		Individual parent1,parent2,offspring;
+		Individual parent1,parent2,offspring1,offspring2;
 
 		
-		problemInstance.print();
+		Individual.calculateProbalityForDiefferentVehicle(problemInstance);
+		//problemInstance.print();
 		// INITIALISE POPULATION
 		initialisePopulation();
 //		TotalCostCalculator.calculateCostofPopulation(population,0,POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor);
@@ -65,6 +66,35 @@ public class TestAlgo  implements GeneticAlgorithm
 		
 		for(int generation=0;generation<1;generation++)
 		{
+			for(i=0;i<POPULATION_SIZE;i+=2)
+			{
+				parent1 = population[i];
+				parent2 = population[i+1];
+				
+				offspring1 = new Individual(problemInstance);
+				offspring2 = new Individual(problemInstance);
+			
+				Individual.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);
+				
+				
+				problemInstance.out.println("OFFSPRNG BEFORE: ");
+				offspring1.print();
+				
+				offspring1.mutatePeriodAssignment();
+				
+				problemInstance.out.println("OFFSPRNG After: ");
+				offspring1.print();
+				
+				
+				/*problemInstance.out.println("PARENT1 : ");
+				parent1.print();
+				problemInstance.out.println("PARENT2 : ");
+				parent2.print();
+				problemInstance.out.println("OFFSPRNG1 : ");
+				offspring1.print();
+				problemInstance.out.println("OFFSPRNG2 : ");
+				offspring2.print();*/
+			}
 		}
 
 		return population[0];

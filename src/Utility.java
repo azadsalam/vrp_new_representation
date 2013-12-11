@@ -6,6 +6,9 @@ import java.util.Vector;
 public class Utility 
 {
 	static Random randomGenerator = new Random(System.currentTimeMillis());
+	
+//	static Random randomGenerator = new Random(1);
+
 	static MyComparator mc = new MyComparator();
 	//returns a random numbor between [m,n] 
 	
@@ -39,7 +42,7 @@ public class Utility
 		sort(array, array.length);
 	}
 	
-	/**
+ 	/**
 	 * Sorts in increasing order of cost+penalty in rance [0, length)
 	 * @param array
 	 * @param length

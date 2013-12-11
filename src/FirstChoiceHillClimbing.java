@@ -65,7 +65,7 @@ public class FirstChoiceHillClimbing extends LocalSearch {
 		}
 		else if (selectedMutationOperator ==3)
 		{
-			offspring.mutatePermutationWithInsertion();
+			offspring.mutateRouteWithInsertion();
 		}
 		
 		else if (selectedMutationOperator ==4)

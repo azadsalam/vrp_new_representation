@@ -15,30 +15,27 @@ public class Mutation
 	
 	void applyMutation(Individual offspring,int generation)
 	{
-		int rand = 4;
+		int rand = 3;
 		if(offspring.problemInstance.periodCount==1)rand--;
 		
 		int selectedMutationOperator = Utility.randomIntInclusive(rand);
 		
 		if(selectedMutationOperator==0)
 		{
-			offspring.mutatePermutationWithinSingleRouteBySwapping();
+			offspring.mutateRouteBySwapping();
 		}
 		else if (selectedMutationOperator == 1)
 		{			
-			offspring.mutatePermutationOfDifferentRouteBySwapping();
+			offspring.mutateTwoDifferentRouteBySwapping();
 		}
 		else if (selectedMutationOperator == 2)
 		{
-			offspring.mutatePermutationWithInsertion();
-		}
-		else if (selectedMutationOperator == 3)
-		{
-			offspring.mutateRoutePartitionWithRandomStepSize();
+			offspring.mutateRouteWithInsertion();
 		}
 		else 
 		{
 			offspring.mutatePeriodAssignment();
+		
 		}
 		
 		offspring.calculateCostAndPenalty();

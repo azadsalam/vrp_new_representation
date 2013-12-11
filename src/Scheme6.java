@@ -20,7 +20,7 @@ public class Scheme6 implements GeneticAlgorithm
 	Individual parentOffspringTotalPopulation[];
 
 	//Operators
-	MutationWithVariedStepSize mutationWithVariedStepSize;
+	Mutation mutation;
     SelectionOperator rouletteWheelSelection;
     SelectionOperator fussSelection;
     SelectionOperator survivalSelectionOperator;
@@ -43,7 +43,7 @@ public class Scheme6 implements GeneticAlgorithm
 		out = problemInstance.out;
 
 
-		mutationWithVariedStepSize = new MutationWithVariedStepSize();
+		mutation = new Mutation();
 		
 		
 		//Change here if needed
@@ -56,8 +56,8 @@ public class Scheme6 implements GeneticAlgorithm
 	    fussSelection = new FUSS();
 		survivalSelectionOperator = new FUSS(); 
 
-		localSearch = new FirstChoiceHillClimbing();
-		localImprovement = new LocalImprovementBasedOnFussandElititst(loadPenaltyFactor, routeTimePenaltyFactor, localSearch, POPULATION_SIZE);	
+		//localSearch = new FirstChoiceHillClimbing();
+		//localImprovement = new LocalImprovementBasedOnFussandElititst(loadPenaltyFactor, routeTimePenaltyFactor, localSearch, POPULATION_SIZE);	
 	}
 
 	public Individual run() 
@@ -66,6 +66,7 @@ public class Scheme6 implements GeneticAlgorithm
 		
 		Individual offspring1,offspring2;
 
+		Individual.calculateProbalityForDiefferentVehicle(problemInstance);
 		PopulationInitiator.initialisePopulation(population, POPULATION_SIZE, problemInstance);
 		TotalCostCalculator.calculateCostofPopulation(population,0, POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor) ;
 		
@@ -96,10 +97,10 @@ public class Scheme6 implements GeneticAlgorithm
 			offspring1 = new Individual(problemInstance);
 			offspring2 = new Individual(problemInstance);
 			
-			Individual.crossOver_Uniform_VPMX_sortedCrissCross(problemInstance, parent1, parent2, offspring1, offspring2);	
+			Individual.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);	
 			
-			mutationWithVariedStepSize.applyMutation(offspring1,generation);
-			mutationWithVariedStepSize.applyMutation(offspring2,generation);
+			mutation.applyMutation(offspring1,generation);
+			mutation.applyMutation(offspring2,generation);
 			
 			offspringPopulation[i] = offspring1;
 			i++;
@@ -114,10 +115,11 @@ public class Scheme6 implements GeneticAlgorithm
 				offspring1 = new Individual(problemInstance);
 				offspring2 = new Individual(problemInstance);
 			
-				Individual.crossOver_Uniform_VPMX_sortedCrissCross(problemInstance, parent1, parent2, offspring1, offspring2);	
+				Individual.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);	
 				
-				mutationWithVariedStepSize.applyMutation(offspring1,generation);
-				mutationWithVariedStepSize.applyMutation(offspring2,generation);
+				//System.out.println("off : "+i);
+				mutation.applyMutation(offspring1,generation);
+				mutation.applyMutation(offspring2,generation);
 				
 				offspringPopulation[i] = offspring1;
 				i++;
@@ -128,8 +130,8 @@ public class Scheme6 implements GeneticAlgorithm
 			TotalCostCalculator.calculateCostofPopulation(offspringPopulation, 0,NUMBER_OF_OFFSPRING, loadPenaltyFactor, routeTimePenaltyFactor) ;
 			Utility.concatPopulation(parentOffspringTotalPopulation, population, offspringPopulation);
 			
-			localImprovement.initialise(parentOffspringTotalPopulation);
-			localImprovement.run(parentOffspringTotalPopulation);
+			//localImprovement.initialise(parentOffspringTotalPopulation);
+			//localImprovement.run(parentOffspringTotalPopulation);
 			
 			TotalCostCalculator.calculateCostofPopulation(parentOffspringTotalPopulation, 0, POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor);
 			
@@ -145,17 +147,8 @@ public class Scheme6 implements GeneticAlgorithm
 			
 			while(index1 < elitistRatio)
 			{
-				double d = Individual.distance(problemInstance, parentOffspringTotalPopulation[index2],population[index1-1]);
-				if(d==0)
-				{
-					
-				}
-				else
-				{
-					population[index1] = parentOffspringTotalPopulation[index2];
-					index1++;
-				}
-				
+				population[index1] = parentOffspringTotalPopulation[index2];
+				index1++;
 				index2++;
 			}
 			

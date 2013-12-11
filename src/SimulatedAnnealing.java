@@ -132,15 +132,15 @@ class SimulatedAnnealing  extends LocalSearch
 			
 			if(selectedMutationOperator==0)
 			{
-				offspring.mutatePermutationWithinSingleRouteBySwapping();
+				offspring.mutateRouteBySwapping();
 			}
 			else if (selectedMutationOperator == 1)
 			{			
-				offspring.mutatePermutationOfDifferentRouteBySwapping();
+				offspring.mutateTwoDifferentRouteBySwapping();
 			}
 			else if (selectedMutationOperator == 2)
 			{
-				offspring.mutatePermutationWithInsertion();
+				offspring.mutateRouteWithInsertion();
 			}
 			else if (selectedMutationOperator == 3)
 			{
