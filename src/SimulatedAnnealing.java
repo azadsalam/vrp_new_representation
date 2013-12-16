@@ -35,6 +35,7 @@ class SimulatedAnnealing  extends LocalSearch
 
         private Scheduler scheduler;
         private Random rand;
+        private Mutation mutation;
 
         /**
          * Constructs a simulated annealing search from the specified heuristic
@@ -44,10 +45,10 @@ class SimulatedAnnealing  extends LocalSearch
          *            a heuristic function
          */
         public SimulatedAnnealing() 
-        {
-                
+        {         
         	scheduler = new Scheduler();
         	rand = new Random();
+        	mutation = new Mutation();
         }
 
 
@@ -125,67 +126,9 @@ class SimulatedAnnealing  extends LocalSearch
 		void applyMutation(Individual offspring)
 		{
 			
-			int rand = 4;
-			if(offspring.problemInstance.periodCount==1)rand--;
-			
-			int selectedMutationOperator = Utility.randomIntInclusive(rand);
-			
-			if(selectedMutationOperator==0)
-			{
-				offspring.mutateRouteBySwapping();
-			}
-			else if (selectedMutationOperator == 1)
-			{			
-				offspring.mutateTwoDifferentRouteBySwapping();
-			}
-			else if (selectedMutationOperator == 2)
-			{
-				offspring.mutateRouteWithInsertion();
-			}
-			else if (selectedMutationOperator == 3)
-			{
-				offspring.mutateRoutePartitionWithRandomStepSize();
-			}
-			else 
-			{
-				offspring.mutatePeriodAssignment();
-			}
-			
-			offspring.calculateCostAndPenalty();
+			mutation.applyMutation(offspring);
+//			offspring.calculateCostAndPenalty();
 
-			/*
-			int rand = 5;
-			if(offspring.problemInstance.periodCount==1) rand--;
-			
-			int selectedMutationOperator = Utility.randomIntInclusive(rand);
-			
-			if(selectedMutationOperator==0)
-			{
-				offspring.mutatePermutationWithRotation();
-				//offspring.mutatePermutationWithInsertion();
-			}
-			else if (selectedMutationOperator == 1)
-			{
-				offspring.mutateRoutePartitionWithRandomStepSize();
-			}
-			else if (selectedMutationOperator == 2)
-			{
-				offspring.mutatePermutation();
-			}
-			else if (selectedMutationOperator ==3)
-			{
-				offspring.mutatePermutationWithAdjacentSwap();
-			}
-			else if (selectedMutationOperator ==4)
-			{
-				offspring.mutatePermutationWithRotationWithinSingleRoute(1);
-			}
-			else
-			{
-				offspring.mutatePeriodAssignment();
-			}		
-			
-			*/
 		}
 }
 
@@ -209,7 +152,7 @@ class Scheduler {
         {
                 this.k = 20;
                 this.lam = 0.045;
-                this.limit = 500;
+                this.limit = 400;
         }
 
         public double getTemp(int t) {

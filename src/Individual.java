@@ -41,7 +41,6 @@ public class Individual
 		isFeasible = false;	
 	}
 	
-	
 	public void initialise() 
 	{
 		// TODO Auto-generated method stub
@@ -77,7 +76,7 @@ public class Individual
 			{		
 				if(periodAssignment[period][clientNo]==false)continue;
 
-				int vehicle = closestRoute(clientNo);				
+				int vehicle = mostProbableRoute(clientNo);				
 				routes.get(period).get(vehicle).add(clientNo);
 			}
 		}
@@ -87,16 +86,16 @@ public class Individual
 		//adjacent swap
 		int coin;
 		int ran;
-		for(int period=0;period<problemInstance.periodCount;period++)
-		{		
 		
-			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
-			{
+		for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
+		{
+			ran = Utility.randomIntInclusive(3);
+			
+			for(int period=0;period<problemInstance.periodCount;period++)
+			{		
 				ArrayList<Integer> route = routes.get(period).get(vehicle);
-				
-				ran = Utility.randomIntInclusive(3);
-				
-				if(ran==0 || ran==1)
+					
+				if(ran==0 || ran==1)   // knuth shuffle
 				{
 					for( int i = route.size()-1;i>=1;i--)
 				    {
@@ -138,7 +137,6 @@ public class Individual
 		calculateCostAndPenalty();
 
 	}
-	
 	
 	private int closestRoute(int client)
 	{
@@ -223,8 +221,6 @@ public class Individual
 		}
 	}
 	
-	
-
 	public Individual(ProblemInstance problemInstance)
 	{
 		this.problemInstance = problemInstance;
@@ -246,7 +242,6 @@ public class Individual
 		loadViolation = new double[problemInstance.periodCount][problemInstance.vehicleCount];
 	}
 	
-	
 	/** Makes a copy cat individual.Copy Constructor.
 	 * 
 		* copies problem instance, periodAssignment, permutation, routePartition.
@@ -254,7 +249,6 @@ public class Individual
 		 * @param original
 		 */
 	
-	/*
 	public Individual(Individual original)
 	{
 		problemInstance = original.problemInstance;
@@ -289,7 +283,7 @@ public class Individual
 				
 				for(int i=0;i<originalRoute.size();i++)
 				{
-					thisRoute.add(originalRoute.get(i));
+					thisRoute.add(originalRoute.get(i).intValue());
 				}
 			}
 		}
@@ -325,7 +319,7 @@ public class Individual
 				
 				for( i=0;i<originalRoute.size();i++)
 				{
-					thisRoute.add(originalRoute.get(i));
+					thisRoute.add(originalRoute.get(i).intValue());
 				}
 			}
 		}
@@ -334,7 +328,7 @@ public class Individual
 		costWithPenalty = original.costWithPenalty;
 
 	}
-*/
+
 	/**
 	 * Calculates cost and penalty of every individual
 	 * For route time violation travelling times are not considered
@@ -371,14 +365,13 @@ public class Individual
 		
 	} 
 
-
+/**
 	//calcuate fitness for each period for each vehicle
 	// route for vehicle i is  [ routePartition[i-1]+1 , routePartition[i] ]
 	// given that routePartition[i-1]+1 <= routePartition[i]
 	//ignoring travelling time for now - for cordeau MDVRP
 	// only service time is considered
-
-
+*/	
 	double calculateCost(int period,int vehicle)
 	{
 		int assignedDepot;		
@@ -426,7 +419,6 @@ public class Individual
 
 		return costForPV;
 	}
-	
 	
 	void print()
 	{
@@ -477,12 +469,12 @@ public class Individual
         }
         */
 		
-		/*
+		
         out.println("Is Feasible : "+isFeasible);
         out.println("Total Load Violation : "+totalLoadViolation);        
         out.println("Total route time violation : "+totalRouteTimeViolation);		
 		out.println("Cost : " + cost);
-		out.println("Cost with penalty : "+costWithPenalty);*/
+		out.println("Cost with penalty : "+costWithPenalty);
 		out.println();
 		
 	}
@@ -537,10 +529,6 @@ public class Individual
 	}
 	
 	
-	/** 
-	<br> do NOT updates cost and penalty
-	*/
-	
 	void mutateRouteWithInsertion()
 	{
 		boolean success;
@@ -575,11 +563,7 @@ public class Individual
 		return true;
 	}
 	
-	
-	
-	
-	//DO NOT updates cost and penalty
-	
+	//DO NOT updates cost and penalty	
 	void mutateRouteBySwapping()
 	{
 		boolean success = false;
@@ -613,10 +597,8 @@ public class Individual
 		int temp = route.get(first);
 		route.set(first, route.get(second));
 		route.set(second,temp);
-		
-		
+				
 		return true;
-		
 	}
 	
 	
@@ -646,7 +628,6 @@ public class Individual
 	
 	}
 	
-
 	//returns if permutation successful
 	private boolean mutateTwoDifferentRouteBySwapping(int period,int vehicle1,int vehicle2)
 	{
@@ -658,16 +639,13 @@ public class Individual
 		int first = Utility.randomIntInclusive(route1.size()-1);
 		int second = Utility.randomIntInclusive(route2.size()-1);
 		
-		problemInstance.out.println("Period : "+period+" vehicles  : "+vehicle1+" "+vehicle2+" SELCTED FOR SWAP "+route1.get(first)+" "+route2.get(second));
+		//problemInstance.out.println("Period : "+period+" vehicles  : "+vehicle1+" "+vehicle2+" SELCTED FOR SWAP "+route1.get(first)+" "+route2.get(second));
 
 		int temp = route1.get(first);
 		route1.set(first, route2.get(second));
 		route2.set(second,temp);
-		
 		return true;
 	}
-
-	
 
 	/** do not updates cost + penalty
 	// if sobgula client er frequency = period hoy tahole, period assignment mutation er kono effect nai
@@ -712,10 +690,8 @@ public class Individual
 		int vehicle = removeClientFromPeriod(previouslyAssigned,clientNo);
 		addClientIntoPeriod(previouslyUnassigned,vehicle,clientNo);
 
-
 		//problemInstance.out.println("previouslyAssigned Period : "+previouslyAssigned+"previouslyUnassigned : "+previouslyUnassigned+" vehicle  : "+vehicle+" client "+clientNo);
 
-		
 		return true;
 	}
 	
@@ -746,11 +722,7 @@ public class Individual
 		}
 		return -1;
 	}
-	
-	
-	
-
-	
+		
 	private static  void uniformCrossoverForPeriodAssignment(Individual child1,Individual child2, Individual parent1, Individual parent2,ProblemInstance problemInstance)
 	{
 		int coin;
@@ -782,7 +754,6 @@ public class Individual
 		
 	}
 
-	
 	private static  void uniformCrossoverForRoutes(Individual child1,Individual child2, Individual parent1, Individual parent2,ProblemInstance problemInstance)
 	{
 		int coin;
@@ -823,8 +794,6 @@ public class Individual
 						child1Route.add(node);
 				}
 				
-				
-				
 				//copy temp2 <- parent2				
 				for(int clientIndex=0;clientIndex<parent2Route.size();clientIndex++)
 				{
@@ -832,8 +801,6 @@ public class Individual
 					if(temp2.periodAssignment[period][node])
 						child2Route.add(node);
 				}
-
-				
 			}
 			
 			
@@ -844,7 +811,8 @@ public class Individual
 				{
 					if(doesRouteContainThisClient(problemInstance, temp1, period, client)==false)
 					{
-						temp1.routes.get(period).get(0).add(client);
+						int vehicle = temp1.mostProbableRoute(client);
+						temp1.routes.get(period).get(vehicle).add(client);
 					}
 				}
 				//repair offspring route 2
@@ -853,7 +821,7 @@ public class Individual
 				{
 					if(doesRouteContainThisClient(problemInstance, temp2, period, client)==false)
 					{
-						temp2.routes.get(period).get(0).add(client);
+						temp2.routes.get(period).get(temp2.mostProbableRoute(client)).add(client);
 					}
 				}
 			}
@@ -861,8 +829,68 @@ public class Individual
 		}
 		
 	}
-	
-	
+		
+	static void crossOver_Uniform_Uniform(ProblemInstance problemInstance,Individual parent1,Individual parent2,Individual child1,Individual child2)
+	{
+		//with 50% probability swap parents
+		int ran = Utility.randomIntInclusive(1);
+		if(ran ==1)
+		{
+			Individual temp = parent1;
+			parent1 = parent2;
+			parent2 = temp;
+		}
+		
+		uniformCrossoverForPeriodAssignment(child1,child2,parent1, parent2,problemInstance);
+		uniformCrossoverForRoutes(child1, child2, parent1, parent2, problemInstance);
+		
+		
+		//update cost and penalty
+		child1.calculateCostAndPenalty();
+		child2.calculateCostAndPenalty();
+	}
+
+	boolean validationTest()
+	{
+		// 1. All client match their frequency 
+		// 2. All client only served once in a period
+		// 3. 
+		
+		
+		// CHECKING IF FREQUENCY RESTRICTION IS MET OR NOT
+		for(int client=0;client<problemInstance.customerCount;client++)
+		{
+			int freq=0;
+
+			for(int period=0; period<problemInstance.periodCount;period++)
+			{
+				if(doesRouteContainThisClient(problemInstance, this, period, client))	freq++;
+			}
+			
+			if(problemInstance.frequencyAllocation[client] != freq) return false;
+		}
+		
+		
+		// 2. All client only served once in a period
+		for(int client=0;client<problemInstance.customerCount;client++)
+		{
+			for(int period=0; period<problemInstance.periodCount;period++)
+			{
+				boolean present = periodAssignment[period][client];
+				int count = numberOfTimesClientGetsServedInAPeriod(problemInstance, this, period, client);
+				if(present== true)
+				{
+					if(count != 1) return false;
+				}
+				else
+				{
+					if(count != 0) return false;
+				}
+			}	
+		}
+
+		return true;
+	}
 	
 	/**
 	 * Checks if the client is present in any route or not for the specified period
@@ -884,31 +912,35 @@ public class Individual
 		}	
 		return false;
 	}
-
 	
-	static void crossOver_Uniform_Uniform(ProblemInstance problemInstance,Individual parent1,Individual parent2,Individual child1,Individual child2)
+	/**
+	 * Checks if how many times the client is present in any route for the specified period
+	 * @param problemInstance
+	 * @param individual
+	 * @param period
+	 * @param client
+	 * @return 0 if client is not present in some route <br/> 
+	 * 1 if client is present exactly once in that period <br/> 
+	 * 2 if client is present more than once in that period
+	 */
+	private static int numberOfTimesClientGetsServedInAPeriod(ProblemInstance problemInstance, Individual individual, int period, int client)
 	{
-		//with 50% probability swap parents
-		int ran = Utility.randomIntInclusive(1);
-		if(ran ==1)
+		int count=0;
+		for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
 		{
-			Individual temp = parent1;
-			parent1 = parent2;
-			parent2 = temp;
-		}
-		
-		uniformCrossoverForPeriodAssignment(child1,child2,parent1, parent2,problemInstance);
-		uniformCrossoverForRoutes(child1, child2, parent1, parent2, problemInstance);
-		
-		
-		//update cost and penalty
-		child1.calculateCostAndPenalty();
-		child2.calculateCostAndPenalty();
-		
-		
+			int first = individual.routes.get(period).get(vehicle).indexOf(client);
+			int last = individual.routes.get(period).get(vehicle).lastIndexOf(client);
+			
+			if(first != -1)
+			{
+				if(first==last) count++;
+				else count+=2;
+			}
+		}	
+		return count;
 	}
 
-	/*
+	/**
 	public static double distance(ProblemInstance problemInstance, Individual first,Individual second)
 	{
 		boolean print=false;

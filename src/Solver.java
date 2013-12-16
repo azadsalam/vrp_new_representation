@@ -7,8 +7,8 @@ import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
 
 public class Solver 
 {
-	String inputFileName = "PVRP/p14.txt";
-	String outputFileName = "PVRP/out14.txt";
+	String inputFileName = "MDPVRP/pr01.txt";
+	String outputFileName = "MDPVRP/out01.txt";
 	int runSize=5;
 	boolean singleRun = true;
 	
@@ -73,6 +73,8 @@ public class Solver
 		
 		//problemInstance.print();
 		
+		Visualiser visualiser = new Visualiser("original/"+inputFileName.substring(0, inputFileName.length()-4),problemInstance);
+		
 		GeneticAlgorithm ga = new Scheme6(problemInstance);		
 		if(writeToExcel) 
 		{
@@ -89,10 +91,6 @@ public class Solver
 		System.out.println("mutateTwoDifferentRouteBySwapping Failed : "+mutateRouteOfTwoDiefferentFailed);
 		output.close();
 	}
-	
-	
-	
-	
 	
 	
 	/**

@@ -10,9 +10,9 @@ public class Scheme6 implements GeneticAlgorithm
 	//Algorithm parameters
 	int POPULATION_SIZE = 200; 
 	int NUMBER_OF_OFFSPRING = 200;   
-	int NUMBER_OF_GENERATION = 400;
+	int NUMBER_OF_GENERATION = 500;
 	double loadPenaltyFactor = 50;
-	double routeTimePenaltyFactor = 10;
+	double routeTimePenaltyFactor = 50;
 
 	//Algorithm data structures
 	Individual population[];
@@ -56,8 +56,8 @@ public class Scheme6 implements GeneticAlgorithm
 	    fussSelection = new FUSS();
 		survivalSelectionOperator = new FUSS(); 
 
-		//localSearch = new FirstChoiceHillClimbing();
-		//localImprovement = new LocalImprovementBasedOnFussandElititst(loadPenaltyFactor, routeTimePenaltyFactor, localSearch, POPULATION_SIZE);	
+		localSearch = new SimulatedAnnealing();
+		localImprovement = new LocalImprovementBasedOnFussandElititst(loadPenaltyFactor, routeTimePenaltyFactor, localSearch, POPULATION_SIZE);	
 	}
 
 	public Individual run() 
@@ -99,8 +99,8 @@ public class Scheme6 implements GeneticAlgorithm
 			
 			Individual.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);	
 			
-			mutation.applyMutation(offspring1,generation);
-			mutation.applyMutation(offspring2,generation);
+			mutation.applyMutation(offspring1);
+			mutation.applyMutation(offspring2);
 			
 			offspringPopulation[i] = offspring1;
 			i++;
@@ -118,8 +118,8 @@ public class Scheme6 implements GeneticAlgorithm
 				Individual.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);	
 				
 				//System.out.println("off : "+i);
-				mutation.applyMutation(offspring1,generation);
-				mutation.applyMutation(offspring2,generation);
+				mutation.applyMutation(offspring1);
+				mutation.applyMutation(offspring2);
 				
 				offspringPopulation[i] = offspring1;
 				i++;
@@ -129,6 +129,14 @@ public class Scheme6 implements GeneticAlgorithm
 
 			TotalCostCalculator.calculateCostofPopulation(offspringPopulation, 0,NUMBER_OF_OFFSPRING, loadPenaltyFactor, routeTimePenaltyFactor) ;
 			Utility.concatPopulation(parentOffspringTotalPopulation, population, offspringPopulation);
+			
+			
+			
+			for(int p=0;p<parentOffspringTotalPopulation.length;p++)
+			{
+				if(parentOffspringTotalPopulation[p].validationTest()==false)
+					System.out.println("Individual is invalid :(!");
+			}
 			
 			//localImprovement.initialise(parentOffspringTotalPopulation);
 			//localImprovement.run(parentOffspringTotalPopulation);

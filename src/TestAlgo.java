@@ -63,7 +63,13 @@ public class TestAlgo  implements GeneticAlgorithm
 		initialisePopulation();
 //		TotalCostCalculator.calculateCostofPopulation(population,0,POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor);
 	
-		
+		for(i=0;i<POPULATION_SIZE;i++)
+		{
+			if(population[i].validationTest()==false)
+			{
+				System.out.println("INDIVIDUAL NOT VALID");
+			}
+		}
 		for(int generation=0;generation<1;generation++)
 		{
 			for(i=0;i<POPULATION_SIZE;i+=2)
@@ -76,24 +82,17 @@ public class TestAlgo  implements GeneticAlgorithm
 			
 				Individual.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);
 				
+				if(offspring1.validationTest()==false)
+				{
+					System.out.println("INDIVIDUAL NOT VALID");
+				}
 				
-				problemInstance.out.println("OFFSPRNG BEFORE: ");
-				offspring1.print();
-				
-				offspring1.mutatePeriodAssignment();
-				
-				problemInstance.out.println("OFFSPRNG After: ");
-				offspring1.print();
+				if(offspring2.validationTest()==false)
+				{
+					System.out.println("INDIVIDUAL NOT VALID");
+				}
 				
 				
-				/*problemInstance.out.println("PARENT1 : ");
-				parent1.print();
-				problemInstance.out.println("PARENT2 : ");
-				parent2.print();
-				problemInstance.out.println("OFFSPRNG1 : ");
-				offspring1.print();
-				problemInstance.out.println("OFFSPRNG2 : ");
-				offspring2.print();*/
 			}
 		}
 

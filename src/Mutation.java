@@ -13,7 +13,7 @@ public class Mutation
 	*/
 	
 	
-	void applyMutation(Individual offspring,int generation)
+	void applyMutation(Individual offspring)
 	{
 		int rand = 3;
 		if(offspring.problemInstance.periodCount==1)rand--;
