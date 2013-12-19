@@ -8,11 +8,11 @@ import javax.rmi.CORBA.Util;
 public class Scheme6 implements GeneticAlgorithm
 {
 	//Algorithm parameters
-	int POPULATION_SIZE = 200; 
-	int NUMBER_OF_OFFSPRING = 200;   
-	int NUMBER_OF_GENERATION = 500;
-	double loadPenaltyFactor = 50;
-	double routeTimePenaltyFactor = 50;
+	int POPULATION_SIZE = 100; 
+	int NUMBER_OF_OFFSPRING = 100;   
+	int NUMBER_OF_GENERATION = 100;
+	double loadPenaltyFactor = 0;
+	double routeTimePenaltyFactor = 0;
 
 	//Algorithm data structures
 	Individual population[];
@@ -66,6 +66,7 @@ public class Scheme6 implements GeneticAlgorithm
 		
 		Individual offspring1,offspring2;
 
+		Individual.calculateAssignmentProbalityForDiefferentDepot(problemInstance);
 		Individual.calculateProbalityForDiefferentVehicle(problemInstance);
 		PopulationInitiator.initialisePopulation(population, POPULATION_SIZE, problemInstance);
 		TotalCostCalculator.calculateCostofPopulation(population,0, POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor) ;

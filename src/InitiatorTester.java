@@ -43,32 +43,51 @@ public class InitiatorTester  implements GeneticAlgorithm
 		fitness = new double[POPULATION_SIZE];
 		cdf = new double[POPULATION_SIZE];
 		
-		loadPenaltyFactor = 10;
-		routeTimePenaltyFactor = 1;
+		loadPenaltyFactor = 0;
+		routeTimePenaltyFactor = 0;
 		
 	}
 
 	public Individual run() 
 	{
 		
-		int selectedParent1,selectedParent2;
-		int i;
-		
-		Individual parent1,parent2,offspring;
-
-		
-		problemInstance.print();
+				
+		//problemInstance.print();
 		// INITIALISE POPULATION
 		initialisePopulation();
 		TotalCostCalculator.calculateCostofPopulation(population,0,POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor);
-	
+		Utility.sort(population);
+
+		double min = population[0].costWithPenalty;
+		double max = population[0].costWithPenalty;
+		double total=0;
 		
-		for(int generation=0;generation<1;generation++)
+		for(int i=0;i<POPULATION_SIZE;i++)
 		{
+			if(population[i].costWithPenalty<min)
+				min = population[i].costWithPenalty;
+			if(population[i].costWithPenalty>max)
+				max = population[i].costWithPenalty;
+			
+			total +=  population[i].costWithPenalty;
+			
+		}
+		
+
+		System.out.println("Best : "+min +" avg : "+(total/POPULATION_SIZE)+" worst : "+max);
+		
+		for(int i=0; i<POPULATION_SIZE; i++)
+		{
+	
+			out.println("Printing individual "+ i +" : \n");
+			population[i].print();
 		}
 
+		boolean suc=false;
+		
+		Solver.visualiser.drawIndividual(population[0], "Best Initial");
+		
 		return population[0];
-
 	}
 	
 	
@@ -78,13 +97,16 @@ public class InitiatorTester  implements GeneticAlgorithm
 	
 	void initialisePopulation()
 	{
+		Individual.calculateAssignmentProbalityForDiefferentDepot(problemInstance);
+		Individual.calculateProbalityForDiefferentVehicle(problemInstance);
 		//out.print("Initial population : \n");
 		for(int i=0; i<POPULATION_SIZE; i++)
 		{
 			population[i] = new Individual(problemInstance);
-			population[i].initialise2();
-			//out.println("Printing individual "+ i +" : \n");
-			population[i].print();
+			population[i].initialise();
+			//out.println("Printing Initial individual "+ i +" : \n");
+			TotalCostCalculator.calculateCost(population[i], loadPenaltyFactor, routeTimePenaltyFactor);
+			//population[i].print();
 		}
 	}
 

@@ -1,0 +1,1312 @@
+Test cases (Now ignored): 1
+
+
+
+
+
+--------------------------------------------------
+
+
+
+FINAL POPULATION
+
+
+
+Individual : 0
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 49 29 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 913.3876876246009
+Cost with penalty : 913.3876876246009
+
+
+
+Individual : 1
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 913.3876876246009
+Cost with penalty : 913.3876876246009
+
+
+
+Individual : 2
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 913.3876876246009
+Cost with penalty : 913.3876876246009
+
+
+
+Individual : 3
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 49 29 > < 15 11 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 913.3876876246009
+Cost with penalty : 913.3876876246009
+
+
+
+Individual : 4
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 29 49 > < 15 11 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 913.3876876246009
+Cost with penalty : 913.3876876246009
+
+
+
+Individual : 5
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 29 49 > < 15 11 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 913.3876876246009
+Cost with penalty : 913.3876876246009
+
+
+
+Individual : 6
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 913.3876876246009
+Cost with penalty : 913.3876876246009
+
+
+
+Individual : 7
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 24 17 3 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 913.3876876246009
+Cost with penalty : 913.3876876246009
+
+
+
+Individual : 8
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 3 17 24 > < 39 > < 46 14 36 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 914.2523847879572
+Cost with penalty : 914.2523847879572
+
+
+
+Individual : 9
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 18 40 41 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 49 29 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 917.3412771173898
+Cost with penalty : 917.3412771173898
+
+
+
+Individual : 10
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 41 18 40 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 49 29 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 34 19 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 922.801377838066
+Cost with penalty : 922.801377838066
+
+
+
+Individual : 11
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 24 3 17 > < 39 > < 45 46 36 14 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 49 29 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 929.099730312586
+Cost with penalty : 929.099730312586
+
+
+
+Individual : 12
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 18 40 41 43 > < 3 17 24 > < 39 > < 36 46 14 45 > < > < > < > < 8 > < 1 27 35 2 7 47 10 37 4 32 31 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 958.4093847956717
+Cost with penalty : 958.4093847956717
+
+
+
+Individual : 13
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 41 18 40 43 > < 3 17 24 > < 39 > < 46 36 49 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 14 29 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 969.6083269222775
+Cost with penalty : 969.6083269222775
+
+
+
+Individual : 14
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 25 30 21 0 26 5 > < 41 18 40 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 2 7 47 10 37 35 4 32 31 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 991.4559535865606
+Cost with penalty : 991.4559535865606
+
+
+
+Individual : 15
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 41 18 40 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 2 7 47 10 37 35 4 32 31 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 996.9679728509432
+Cost with penalty : 996.9679728509432
+
+
+
+Individual : 16
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 18 41 40 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 2 7 47 10 37 35 4 32 31 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 1004.8559969768394
+Cost with penalty : 1004.8559969768394
+
+
+
+Individual : 17
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 29 49 > < 11 15 > < 38 22 6 23 13 12 16 9 44 42 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 1015.8467693013981
+Cost with penalty : 1015.8467693013981
+
+
+
+Individual : 18
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 41 18 40 43 > < 3 17 24 > < 11 > < 46 36 49 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 14 29 > < 39 15 > < 42 22 6 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 1028.7774478609103
+Cost with penalty : 1028.7774478609103
+
+
+
+Individual : 19
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 18 40 41 43 > < 3 17 24 > < 39 > < 46 36 28 45 > < > < > < > < 8 > < 1 27 35 2 7 47 10 37 4 32 31 48 > < 29 49 > < 11 15 > < 42 22 6 23 13 12 16 9 44 38 20 14 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 213.0
+Total route time violation : 0.0
+Cost : 1039.6013853981399
+Cost with penalty : 1039.6013853981399
+
+
+
+Individual : 20
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 18 41 43 > < 24 3 17 > < 6 > < 45 46 36 14 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 49 29 > < 11 15 > < 42 22 39 23 13 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 197.0
+Total route time violation : 0.0
+Cost : 1052.2472886998255
+Cost with penalty : 1052.2472886998255
+
+
+
+Individual : 21
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 0 21 25 5 26 > < 18 41 40 43 > < 17 3 24 > < 12 > < 11 14 36 49 > < > < > < > < 8 > < 1 37 35 27 2 7 47 10 31 4 32 48 > < 45 29 > < 46 15 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 193.0
+Total route time violation : 0.0
+Cost : 1065.402274620705
+Cost with penalty : 1065.402274620705
+
+
+
+Individual : 22
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 25 0 30 26 5 > < 40 18 41 43 > < 24 17 3 > < 12 > < 11 36 14 45 > < > < > < > < 15 > < 4 27 35 37 31 1 47 10 46 7 32 48 > < 29 49 > < 2 8 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 202.0
+Total route time violation : 0.0
+Cost : 1068.568131333109
+Cost with penalty : 1068.568131333109
+
+
+
+Individual : 23
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 41 18 40 43 > < 3 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 31 7 47 10 37 4 32 48 > < 49 29 > < 11 15 > < 42 28 6 23 13 12 16 9 44 38 20 22 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 1085.5981033037428
+Cost with penalty : 1085.5981033037428
+
+
+
+Individual : 24
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 18 40 8 43 > < 3 17 24 > < 39 > < 46 36 11 45 > < > < > < > < 41 > < 1 27 35 2 7 47 10 37 4 32 31 48 > < 29 49 > < 14 15 > < 42 22 6 23 13 12 16 9 44 20 38 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 209.0
+Total route time violation : 0.0
+Cost : 1089.4970693044393
+Cost with penalty : 1089.4970693044393
+
+
+
+Individual : 25
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 26 33 25 30 21 0 5 > < 41 43 40 18 > < 44 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 49 > < 1 27 35 2 7 47 10 11 4 32 31 48 > < 29 8 > < 34 15 > < 42 22 6 23 13 12 16 9 3 38 20 28 > < 19 37 > < > < > 
+Is Feasible : false
+Total Load Violation : 222.0
+Total route time violation : 0.0
+Cost : 1091.2745431918047
+Cost with penalty : 1091.2745431918047
+
+
+
+Individual : 26
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 25 0 30 26 5 > < 40 18 41 43 > < 24 17 3 > < 12 > < 11 36 14 45 > < > < > < > < 15 > < 4 27 35 37 31 1 47 10 46 7 32 48 > < 29 49 > < 2 8 > < 42 6 23 13 22 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 202.0
+Total route time violation : 0.0
+Cost : 1098.2867809717638
+Cost with penalty : 1098.2867809717638
+
+
+
+Individual : 27
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 0 21 25 5 26 > < 18 41 40 43 > < 17 3 24 > < 12 > < 45 14 36 49 > < > < > < > < 8 > < 1 37 35 27 2 7 47 34 31 4 32 48 > < 11 29 > < 46 15 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 10 > < > < > 
+Is Feasible : false
+Total Load Violation : 191.0
+Total route time violation : 0.0
+Cost : 1125.3742396449063
+Cost with penalty : 1125.3742396449063
+
+
+
+Individual : 28
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 0 21 25 5 26 > < 18 41 43 40 > < 17 3 24 > < 8 > < 45 14 36 49 > < > < > < > < 15 > < 1 37 35 27 2 7 47 10 31 4 32 48 > < 11 29 > < 46 12 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 193.0
+Total route time violation : 0.0
+Cost : 1139.911408674659
+Cost with penalty : 1139.911408674659
+
+
+
+Individual : 29
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 26 25 30 21 0 5 > < 40 41 18 43 > < 37 17 13 > < 22 > < 46 36 14 45 > < > < > < > < 8 > < 1 27 35 2 7 47 10 3 4 32 31 48 > < 29 49 > < 15 11 > < 42 39 6 23 24 12 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 201.0
+Total route time violation : 0.0
+Cost : 1154.165322100385
+Cost with penalty : 1154.165322100385
+
+
+
+Individual : 30
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 26 33 30 25 21 0 5 > < 40 18 22 43 > < 3 17 24 > < 12 > < 46 14 36 45 > < > < > < > < 8 > < 1 27 15 31 2 7 47 10 37 4 32 48 > < 29 49 > < 35 11 > < 42 6 13 41 23 39 16 9 44 38 20 28 > < 34 19 > < > < > 
+Is Feasible : false
+Total Load Violation : 199.0
+Total route time violation : 0.0
+Cost : 1159.722379164469
+Cost with penalty : 1159.722379164469
+
+
+
+Individual : 31
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 0 21 25 5 26 > < 18 41 43 40 > < 3 8 24 > < 17 > < 45 14 36 49 > < > < > < > < 12 > < 1 37 35 27 2 7 47 10 31 4 32 48 > < 11 29 > < 46 15 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 193.0
+Total route time violation : 0.0
+Cost : 1184.266898506577
+Cost with penalty : 1184.266898506577
+
+
+
+Individual : 32
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 26 33 25 30 21 0 5 > < 40 43 41 18 > < 44 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 49 > < 1 27 35 2 7 47 10 11 4 32 31 48 > < 29 8 > < 34 15 > < 42 22 6 13 12 16 9 3 38 20 28 23 > < 19 37 > < > < > 
+Is Feasible : false
+Total Load Violation : 222.0
+Total route time violation : 0.0
+Cost : 1191.1827759682362
+Cost with penalty : 1191.1827759682362
+
+
+
+Individual : 33
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 0 21 25 5 26 > < 22 41 40 43 > < 17 3 24 > < 12 > < 45 14 36 49 > < > < > < > < 8 > < 1 37 35 27 2 7 47 10 31 4 32 48 > < 11 29 > < 46 15 > < 42 6 18 23 13 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 186.0
+Total route time violation : 0.0
+Cost : 1203.961551280079
+Cost with penalty : 1203.961551280079
+
+
+
+Individual : 34
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 17 21 25 5 26 > < 18 41 40 43 > < 0 3 24 > < 12 > < 45 14 36 49 > < > < > < > < 8 > < 1 37 35 27 2 7 47 34 31 4 32 48 > < 11 29 > < 46 15 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 10 > < > < > 
+Is Feasible : false
+Total Load Violation : 225.0
+Total route time violation : 0.0
+Cost : 1223.4834931273306
+Cost with penalty : 1223.4834931273306
+
+
+
+Individual : 35
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 45 36 0 26 5 > < 40 18 43 41 > < 3 17 24 > < 46 > < 14 11 30 25 > < > < > < > < 8 > < 4 27 32 37 2 7 47 10 31 35 1 48 > < 49 29 > < 12 15 > < 42 6 9 22 23 13 39 16 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 189.0
+Total route time violation : 0.0
+Cost : 1232.173946026459
+Cost with penalty : 1232.173946026459
+
+
+
+Individual : 36
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 26 33 25 30 21 0 5 > < 40 43 41 19 > < 44 17 24 > < 39 > < 46 36 14 45 > < > < > < > < 49 > < 1 27 35 2 7 47 10 11 4 32 31 48 > < 29 8 > < 34 15 > < 42 22 6 23 13 12 16 9 3 38 20 28 > < 18 37 > < > < > 
+Is Feasible : false
+Total Load Violation : 226.0
+Total route time violation : 0.0
+Cost : 1253.966315673072
+Cost with penalty : 1253.966315673072
+
+
+
+Individual : 37
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 25 36 0 26 5 > < 18 41 43 40 > < 3 17 24 > < 12 > < 11 30 46 45 > < > < > < > < 8 > < 4 27 1 37 2 7 47 10 31 35 32 48 > < 49 29 > < 15 34 > < 42 6 9 22 23 13 39 16 44 38 20 28 > < 14 19 > < > < > 
+Is Feasible : false
+Total Load Violation : 191.0
+Total route time violation : 0.0
+Cost : 1269.0513187011486
+Cost with penalty : 1269.0513187011486
+
+
+
+Individual : 38
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 0 21 25 5 26 > < 18 41 40 43 > < 17 3 24 > < 12 > < 45 14 36 49 > < > < > < > < 8 > < 1 37 35 27 2 7 47 34 31 4 32 48 > < 11 29 > < 46 15 > < 42 6 22 44 13 39 16 9 23 38 20 28 > < 19 10 > < > < > 
+Is Feasible : false
+Total Load Violation : 191.0
+Total route time violation : 0.0
+Cost : 1278.4876939440016
+Cost with penalty : 1278.4876939440016
+
+
+
+Individual : 39
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 30 33 21 25 17 26 8 > < 40 18 41 24 > < 3 0 43 > < 12 > < 11 5 49 14 > < > < > < > < 36 > < 4 27 35 37 2 7 47 10 31 1 32 48 > < 29 45 > < 46 15 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 223.0
+Total route time violation : 0.0
+Cost : 1286.6588594241762
+Cost with penalty : 1286.6588594241762
+
+
+
+Individual : 40
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 26 21 25 0 30 33 5 > < 40 43 41 18 > < 17 8 24 > < 15 > < 11 36 14 45 > < > < > < > < 12 > < 4 27 35 37 46 1 47 2 31 7 32 48 > < 29 49 > < 3 10 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 199.0
+Total route time violation : 0.0
+Cost : 1313.7953323625206
+Cost with penalty : 1313.7953323625206
+
+
+
+Individual : 41
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 26 21 25 0 30 33 5 > < 40 43 41 16 > < 17 8 24 > < 15 > < 11 36 14 45 > < > < > < > < 12 > < 4 27 35 37 46 1 47 2 31 7 32 48 > < 29 49 > < 3 10 > < 42 6 22 23 13 39 18 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 205.0
+Total route time violation : 0.0
+Cost : 1314.8624826338614
+Cost with penalty : 1314.8624826338614
+
+
+
+Individual : 42
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 30 11 21 25 17 26 8 > < 40 18 41 24 > < 3 0 43 > < 12 > < 33 5 49 14 > < > < > < > < 36 > < 4 27 35 37 2 7 47 10 31 1 32 48 > < 29 45 > < 46 15 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 226.0
+Total route time violation : 0.0
+Cost : 1325.6478418234155
+Cost with penalty : 1325.6478418234155
+
+
+
+Individual : 43
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 30 11 25 21 17 26 8 > < 40 18 41 24 > < 3 0 43 > < 12 > < 33 5 49 14 > < > < > < > < 36 > < 4 27 35 37 2 7 47 10 31 1 32 48 > < 29 45 > < 46 15 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 226.0
+Total route time violation : 0.0
+Cost : 1332.8112792643942
+Cost with penalty : 1332.8112792643942
+
+
+
+Individual : 44
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 43 30 25 21 8 26 5 > < 33 18 40 12 > < 3 17 24 > < 19 > < 11 14 36 45 > < > < > < > < 41 > < 47 35 27 49 37 2 7 10 31 4 32 48 > < 29 1 > < 46 15 > < 42 6 22 23 16 13 39 9 44 38 20 28 > < 34 0 > < > < > 
+Is Feasible : false
+Total Load Violation : 172.0
+Total route time violation : 0.0
+Cost : 1343.8152837955124
+Cost with penalty : 1343.8152837955124
+
+
+
+Individual : 45
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 3 25 21 5 26 30 > < 41 40 18 43 > < 11 46 24 > < 12 > < 0 14 36 49 > < > < > < > < 19 > < 1 27 35 37 2 7 47 10 31 4 32 48 > < 45 29 > < 15 8 > < 42 22 6 23 38 39 16 9 44 13 20 28 > < 34 17 > < > < > 
+Is Feasible : false
+Total Load Violation : 197.0
+Total route time violation : 0.0
+Cost : 1387.448053750213
+Cost with penalty : 1387.448053750213
+
+
+
+Individual : 46
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 45 36 0 26 5 > < 40 18 43 41 > < 3 17 24 > < 49 > < 14 11 30 25 > < > < > < > < 8 > < 4 27 32 37 2 7 47 10 31 35 1 48 > < 34 29 > < 12 15 > < 42 6 9 22 23 13 39 16 44 38 20 28 > < 19 46 > < > < > 
+Is Feasible : false
+Total Load Violation : 189.0
+Total route time violation : 0.0
+Cost : 1398.0804990909205
+Cost with penalty : 1398.0804990909205
+
+
+
+Individual : 47
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 26 21 25 0 30 33 5 > < 40 34 41 18 > < 17 8 24 > < 12 > < 11 36 14 45 > < > < > < > < 15 > < 4 27 35 37 46 1 47 10 31 7 32 48 > < 29 49 > < 3 2 > < 42 6 22 23 13 39 16 9 44 38 20 28 > < 19 43 > < > < > 
+Is Feasible : false
+Total Load Violation : 202.0
+Total route time violation : 0.0
+Cost : 1404.0313684209068
+Cost with penalty : 1404.0313684209068
+
+
+
+Individual : 48
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 3 25 21 30 26 5 > < 40 18 41 43 > < 11 19 24 > < 12 > < 0 14 36 49 > < > < > < > < 46 > < 1 27 35 37 2 7 47 10 31 4 32 48 > < 29 45 > < 15 8 > < 42 22 6 23 38 39 16 20 9 44 13 28 > < 34 17 > < > < > 
+Is Feasible : false
+Total Load Violation : 200.0
+Total route time violation : 0.0
+Cost : 1428.12668428423
+Cost with penalty : 1428.12668428423
+
+
+
+Individual : 49
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 45 36 0 26 5 > < 40 18 43 41 > < 3 17 24 > < 34 > < 14 11 30 25 > < > < > < > < 8 > < 27 32 37 2 7 4 47 10 31 35 1 48 > < 49 29 > < 12 15 > < 42 6 9 22 23 13 39 16 44 38 20 28 > < 19 46 > < > < > 
+Is Feasible : false
+Total Load Violation : 189.0
+Total route time violation : 0.0
+Cost : 1430.4664704334098
+Cost with penalty : 1430.4664704334098
+
+
+
+Individual : 50
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 3 25 21 5 26 30 > < 41 40 18 43 > < 11 19 24 > < 12 > < 0 14 36 49 > < > < > < > < 46 > < 1 27 35 37 2 7 47 10 31 4 32 48 > < 45 29 > < 15 8 > < 42 22 6 23 38 39 16 9 44 13 20 28 > < 34 17 > < > < > 
+Is Feasible : false
+Total Load Violation : 200.0
+Total route time violation : 0.0
+Cost : 1445.5318545395385
+Cost with penalty : 1445.5318545395385
+
+
+
+Individual : 51
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 25 0 12 5 26 > < 40 18 41 43 > < 3 19 24 > < 4 > < 1 49 36 14 > < > < > < > < 8 > < 11 27 35 37 2 7 47 10 31 21 32 48 > < 45 29 > < 17 15 > < 42 22 6 23 38 39 16 9 44 13 20 28 > < 34 46 > < > < > 
+Is Feasible : false
+Total Load Violation : 194.0
+Total route time violation : 0.0
+Cost : 1445.8696042524598
+Cost with penalty : 1445.8696042524598
+
+
+
+Individual : 52
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 21 0 33 25 29 36 26 > < 40 18 41 43 > < 19 5 24 > < 12 > < 11 49 3 14 > < > < > < > < 8 > < 1 27 35 37 2 7 47 10 31 4 32 48 > < 30 45 > < 46 15 > < 42 22 6 23 38 39 16 9 44 13 20 28 > < 34 17 > < > < > 
+Is Feasible : false
+Total Load Violation : 195.0
+Total route time violation : 0.0
+Cost : 1482.68342454359
+Cost with penalty : 1482.68342454359
+
+
+
+Individual : 53
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 21 36 33 25 29 0 26 > < 40 18 41 43 > < 19 5 24 > < 12 > < 11 49 3 14 > < > < > < > < 8 > < 1 27 35 37 2 7 47 10 31 4 32 48 > < 30 45 > < 46 15 > < 42 22 6 23 38 39 16 9 44 13 20 28 > < 34 17 > < > < > 
+Is Feasible : false
+Total Load Violation : 195.0
+Total route time violation : 0.0
+Cost : 1500.5772742590104
+Cost with penalty : 1500.5772742590104
+
+
+
+Individual : 54
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 25 0 29 5 26 > < 40 18 41 43 > < 3 19 24 > < 4 > < 1 14 36 49 > < > < > < > < 8 > < 11 27 35 37 2 7 47 10 31 21 32 48 > < 45 12 > < 17 15 > < 42 22 6 23 38 39 16 9 44 13 20 28 > < 34 46 > < > < > 
+Is Feasible : false
+Total Load Violation : 190.0
+Total route time violation : 0.0
+Cost : 1513.0277726140207
+Cost with penalty : 1513.0277726140207
+
+
+
+Individual : 55
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 25 0 12 5 26 > < 40 18 41 43 > < 3 19 24 > < 21 > < 1 36 14 49 > < > < > < > < 8 > < 11 27 35 37 2 7 47 10 31 4 32 48 > < 45 29 > < 6 15 > < 42 22 17 23 38 39 16 9 44 13 20 28 > < 34 46 > < > < > 
+Is Feasible : false
+Total Load Violation : 229.0
+Total route time violation : 0.0
+Cost : 1529.236895418984
+Cost with penalty : 1529.236895418984
+
+
+
+Individual : 56
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 21 33 30 25 0 26 5 > < 3 43 40 41 > < 17 38 29 > < 14 > < 45 12 8 15 > < > < > < > < 18 > < 27 35 2 7 47 10 11 4 46 32 37 48 > < 36 34 > < 1 44 > < 6 9 16 42 22 23 39 31 19 24 20 28 > < 49 13 > < > < > 
+Is Feasible : false
+Total Load Violation : 228.0
+Total route time violation : 0.0
+Cost : 1540.9205428729601
+Cost with penalty : 1540.9205428729601
+
+
+
+Individual : 57
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 25 26 0 12 5 > < 40 18 41 43 > < 3 19 24 > < 21 > < 1 36 49 14 > < > < > < > < 8 > < 11 27 35 37 2 7 47 10 31 4 32 48 > < 45 29 > < 6 15 > < 42 22 17 23 38 39 16 9 44 13 20 28 > < 34 46 > < > < > 
+Is Feasible : false
+Total Load Violation : 229.0
+Total route time violation : 0.0
+Cost : 1546.542898801107
+Cost with penalty : 1546.542898801107
+
+
+
+Individual : 58
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 21 33 30 25 0 26 5 > < 3 43 40 41 > < 38 17 29 > < 14 > < 45 12 8 15 > < > < > < > < 18 > < 27 35 2 7 47 10 11 4 46 32 37 48 > < 36 34 > < 1 44 > < 6 9 13 42 22 23 39 31 19 24 20 28 > < 49 16 > < > < > 
+Is Feasible : false
+Total Load Violation : 246.0
+Total route time violation : 0.0
+Cost : 1574.9569174242465
+Cost with penalty : 1574.9569174242465
+
+
+
+Individual : 59
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 25 0 12 5 26 > < 40 8 41 43 > < 3 19 24 > < 21 > < 1 14 36 49 > < > < > < > < 9 > < 27 35 37 2 7 47 10 31 4 32 48 11 > < 45 29 > < 17 15 > < 42 22 6 23 38 39 16 18 44 13 20 28 > < 34 46 > < > < > 
+Is Feasible : false
+Total Load Violation : 211.0
+Total route time violation : 0.0
+Cost : 1587.589363757502
+Cost with penalty : 1587.589363757502
+
+
+
+Individual : 60
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 21 33 30 25 0 26 5 > < 3 43 40 41 > < 38 17 29 > < 14 > < 45 12 8 15 > < > < > < > < 18 > < 27 35 2 7 47 10 11 4 46 32 37 48 > < 36 34 > < 1 44 > < 6 9 16 42 22 23 39 31 19 24 20 28 > < 49 13 > < > < > 
+Is Feasible : false
+Total Load Violation : 228.0
+Total route time violation : 0.0
+Cost : 1596.293189442918
+Cost with penalty : 1596.293189442918
+
+
+
+Individual : 61
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 5 21 25 0 49 30 > < 27 43 15 18 > < 8 17 24 > < 3 > < 11 40 14 36 > < > < > < > < 12 > < 4 45 35 2 7 47 10 31 1 32 37 48 > < 26 29 > < 16 41 > < 42 6 13 22 28 39 46 9 44 23 20 38 > < 34 19 > < > < > 
+Is Feasible : false
+Total Load Violation : 201.0
+Total route time violation : 0.0
+Cost : 1605.8791498555322
+Cost with penalty : 1605.8791498555322
+
+
+
+Individual : 62
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 21 33 5 30 25 0 26 > < 18 43 40 41 > < 24 49 29 > < 14 > < 38 8 15 45 > < > < > < > < 3 > < 4 35 27 7 37 47 10 11 2 46 32 48 > < 34 36 > < 12 1 > < 20 9 13 42 22 23 16 31 19 44 6 28 > < 17 39 > < > < > 
+Is Feasible : false
+Total Load Violation : 224.0
+Total route time violation : 0.0
+Cost : 1622.3042222286613
+Cost with penalty : 1622.3042222286613
+
+
+
+Individual : 63
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 25 0 12 5 26 > < 40 8 41 43 > < 18 19 24 > < 21 > < 1 14 36 49 > < > < > < > < 3 > < 27 35 37 2 7 47 10 31 4 32 48 11 > < 45 29 > < 17 15 > < 42 22 6 23 38 39 16 9 44 13 20 28 > < 34 46 > < > < > 
+Is Feasible : false
+Total Load Violation : 207.0
+Total route time violation : 0.0
+Cost : 1644.9121034582174
+Cost with penalty : 1644.9121034582174
+
+
+
+Individual : 64
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 21 33 5 30 25 0 26 > < 18 43 40 41 > < 24 49 29 > < 14 > < 38 8 15 45 > < > < > < > < 3 > < 27 35 4 7 37 47 10 11 2 46 32 48 > < 34 36 > < 12 1 > < 6 9 13 42 22 23 16 31 19 44 20 28 > < 17 39 > < > < > 
+Is Feasible : false
+Total Load Violation : 224.0
+Total route time violation : 0.0
+Cost : 1682.7853287686426
+Cost with penalty : 1682.7853287686426
+
+
+
+Individual : 65
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 25 0 12 5 26 > < 40 8 41 43 > < 3 19 24 > < 21 > < 1 14 36 49 > < > < > < > < 9 > < 27 35 37 2 7 47 10 31 4 32 48 11 > < 45 29 > < 17 15 > < 42 22 6 23 38 39 16 18 28 13 20 44 > < 34 46 > < > < > 
+Is Feasible : false
+Total Load Violation : 211.0
+Total route time violation : 0.0
+Cost : 1697.492460851018
+Cost with penalty : 1697.492460851018
+
+
+
+Individual : 66
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 47 37 > < 22 2 19 36 31 42 > < 41 24 35 21 12 > < 14 > < 27 13 15 > < 45 11 > < 5 > < 28 0 7 46 3 > < 40 > < 49 17 8 38 48 32 9 34 4 > < 26 10 6 23 39 1 30 25 > < 33 > < 29 20 43 18 > < 44 16 > < > < > 
+Is Feasible : false
+Total Load Violation : 130.0
+Total route time violation : 0.0
+Cost : 1730.778580807134
+Cost with penalty : 1730.778580807134
+
+
+
+Individual : 67
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 47 33 > < 22 2 19 36 31 42 > < 12 24 35 21 41 > < 14 > < 13 27 15 > < 45 11 > < 5 > < 28 0 7 44 3 > < 40 > < 49 17 8 38 48 32 9 34 4 > < 26 10 6 23 39 1 30 25 > < 37 > < 29 20 43 18 > < 46 16 > < > < > 
+Is Feasible : false
+Total Load Violation : 130.0
+Total route time violation : 0.0
+Cost : 1734.6875045223603
+Cost with penalty : 1734.6875045223603
+
+
+
+Individual : 68
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 47 33 > < 22 2 19 36 31 42 > < 12 24 35 21 41 > < 14 > < 13 27 15 > < 45 11 > < 5 > < 28 0 7 44 3 > < 40 > < 49 17 8 38 48 9 34 4 32 > < 26 10 6 23 39 1 30 25 > < 37 > < 29 20 43 18 > < 46 16 > < > < > 
+Is Feasible : false
+Total Load Violation : 130.0
+Total route time violation : 0.0
+Cost : 1743.3861524505471
+Cost with penalty : 1743.3861524505471
+
+
+
+Individual : 69
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 47 33 > < 22 2 19 36 31 42 > < 12 24 41 21 35 > < 14 > < 27 13 15 > < 45 11 > < 5 > < 28 0 7 44 3 > < 40 > < 49 17 34 38 48 32 9 8 4 > < 26 10 6 23 39 1 30 25 > < 37 > < 29 20 43 18 > < 46 16 > < > < > 
+Is Feasible : false
+Total Load Violation : 130.0
+Total route time violation : 0.0
+Cost : 1770.678516104533
+Cost with penalty : 1770.678516104533
+
+
+
+Individual : 70
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 30 0 5 26 34 > < 19 46 22 36 > < 23 41 7 > < 13 > < 14 24 17 40 > < > < > < > < 43 > < 27 35 49 4 2 42 10 31 1 11 32 37 > < 29 20 > < 8 3 > < 6 47 25 44 48 28 16 38 45 9 18 39 > < 15 12 > < > < > 
+Is Feasible : false
+Total Load Violation : 211.0
+Total route time violation : 0.0
+Cost : 1779.7312260144442
+Cost with penalty : 1779.7312260144442
+
+
+
+Individual : 71
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 47 33 > < 22 2 19 36 31 42 > < 12 24 35 21 41 > < 14 > < 27 13 15 > < 45 11 > < 5 > < 28 0 37 44 3 > < 40 > < 49 17 8 38 48 32 9 34 4 > < 26 10 6 23 39 1 30 25 > < 7 > < 29 20 43 18 > < 46 16 > < > < > 
+Is Feasible : false
+Total Load Violation : 130.0
+Total route time violation : 0.0
+Cost : 1799.555813027568
+Cost with penalty : 1799.555813027568
+
+
+
+Individual : 72
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 47 33 > < 22 2 19 36 31 42 > < 12 24 35 21 41 > < 14 > < 27 13 15 > < 11 45 > < 5 > < 28 0 37 44 3 > < 40 > < 49 17 8 38 48 32 9 34 4 > < 26 10 6 23 39 1 30 25 > < 7 > < 29 20 43 18 > < 46 16 > < > < > 
+Is Feasible : false
+Total Load Violation : 130.0
+Total route time violation : 0.0
+Cost : 1799.555813027568
+Cost with penalty : 1799.555813027568
+
+
+
+Individual : 73
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 25 21 0 49 5 > < 27 18 41 43 > < 24 17 8 > < 34 > < 11 14 15 36 > < > < > < > < 12 > < 4 45 35 37 2 7 47 31 10 1 32 48 > < 29 26 > < 16 40 > < 42 6 13 44 22 28 39 46 9 23 20 38 > < 3 19 > < > < > 
+Is Feasible : false
+Total Load Violation : 201.0
+Total route time violation : 0.0
+Cost : 1809.3289544784345
+Cost with penalty : 1809.3289544784345
+
+
+
+Individual : 74
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 25 21 0 49 5 > < 27 18 15 43 > < 24 17 8 > < 34 > < 11 14 41 36 > < > < > < > < 12 > < 4 45 35 37 2 7 47 31 10 1 32 48 > < 26 29 > < 16 40 > < 42 6 13 44 22 28 39 46 9 23 20 38 > < 3 19 > < > < > 
+Is Feasible : false
+Total Load Violation : 201.0
+Total route time violation : 0.0
+Cost : 1847.7249512705378
+Cost with penalty : 1847.7249512705378
+
+
+
+Individual : 75
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 30 0 5 26 34 > < 19 46 36 22 > < 23 41 7 > < 13 > < 29 14 17 40 > < > < > < > < 20 > < 27 35 49 4 2 42 10 31 1 11 32 37 > < 24 43 > < 8 3 > < 9 6 47 25 44 48 28 16 38 45 18 39 > < 15 12 > < > < > 
+Is Feasible : false
+Total Load Violation : 202.0
+Total route time violation : 0.0
+Cost : 1849.9036825998048
+Cost with penalty : 1849.9036825998048
+
+
+
+Individual : 76
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 30 0 5 26 34 > < 19 46 22 36 > < 23 41 7 > < 13 > < 14 29 17 40 > < > < > < > < 43 > < 27 35 49 4 2 42 10 31 1 11 8 37 > < 24 20 > < 32 3 > < 6 47 25 44 48 28 16 38 45 9 18 39 > < 15 12 > < > < > 
+Is Feasible : false
+Total Load Violation : 190.0
+Total route time violation : 0.0
+Cost : 1864.2181060034343
+Cost with penalty : 1864.2181060034343
+
+
+
+Individual : 77
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 30 0 5 26 34 > < 19 46 22 36 > < 23 41 7 > < 13 > < 14 29 17 40 > < > < > < > < 43 > < 27 35 49 4 2 42 10 31 1 11 32 37 > < 20 24 > < 8 3 > < 6 47 25 44 48 28 16 38 45 9 18 39 > < 15 12 > < > < > 
+Is Feasible : false
+Total Load Violation : 202.0
+Total route time violation : 0.0
+Cost : 1872.9987228747714
+Cost with penalty : 1872.9987228747714
+
+
+
+Individual : 78
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 29 21 0 49 5 > < 27 18 41 43 > < 24 17 8 > < 34 > < 11 14 15 36 > < > < > < > < 12 > < 4 45 35 37 2 7 47 31 10 1 32 48 > < 26 25 > < 16 40 > < 42 6 13 44 22 28 39 46 9 23 20 38 > < 3 19 > < > < > 
+Is Feasible : false
+Total Load Violation : 213.0
+Total route time violation : 0.0
+Cost : 1882.7336404469354
+Cost with penalty : 1882.7336404469354
+
+
+
+Individual : 79
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 30 0 5 26 34 > < 19 23 22 36 > < 46 41 7 > < 20 > < 14 29 17 40 > < > < > < > < 13 > < 27 35 49 4 2 42 10 31 1 11 32 37 > < 24 43 > < 8 3 > < 6 47 25 44 48 28 16 38 45 9 18 39 > < 15 12 > < > < > 
+Is Feasible : false
+Total Load Violation : 202.0
+Total route time violation : 0.0
+Cost : 1884.3336152851343
+Cost with penalty : 1884.3336152851343
+
+
+
+Individual : 80
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 30 5 21 0 49 25 > < 27 18 15 43 > < 24 17 8 > < 34 > < 11 14 41 36 > < > < > < > < 12 > < 4 45 35 37 2 7 47 31 10 1 32 48 > < 26 29 > < 16 40 > < 42 6 13 44 22 28 39 46 9 23 20 38 > < 3 19 > < > < > 
+Is Feasible : false
+Total Load Violation : 201.0
+Total route time violation : 0.0
+Cost : 1897.0749884058826
+Cost with penalty : 1897.0749884058826
+
+
+
+Individual : 81
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 33 21 30 0 5 26 34 > < 19 46 22 36 > < 23 41 7 > < 13 > < 14 29 17 40 > < > < > < > < 43 > < 27 35 49 4 2 42 10 31 1 11 32 37 > < 24 20 > < 8 3 > < 6 47 25 44 48 16 38 45 9 18 28 39 > < 15 12 > < > < > 
+Is Feasible : false
+Total Load Violation : 202.0
+Total route time violation : 0.0
+Cost : 1946.4030464342259
+Cost with penalty : 1946.4030464342259
+
+
+
+Individual : 82
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 13 > < 27 32 2 47 14 35 > < 24 45 39 12 22 > < 36 > < 44 42 15 > < 3 11 > < 16 > < 19 28 0 7 41 > < 1 > < 17 8 33 31 48 49 40 20 9 > < 5 46 23 26 37 30 6 21 > < 34 > < 29 43 10 18 > < 4 38 > < > < > 
+Is Feasible : false
+Total Load Violation : 122.0
+Total route time violation : 0.0
+Cost : 1947.3748464873695
+Cost with penalty : 1947.3748464873695
+
+
+
+Individual : 83
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 11 18 > < 27 16 36 14 32 2 > < 35 28 21 24 45 > < 47 > < 42 13 15 > < 3 25 > < 41 > < 19 23 38 7 44 > < 0 > < 17 4 33 8 29 12 40 20 9 > < 5 39 26 37 30 6 49 46 > < 31 > < 10 43 48 1 > < 22 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 146.0
+Total route time violation : 0.0
+Cost : 1952.9109302830568
+Cost with penalty : 1952.9109302830568
+
+
+
+Individual : 84
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 1 > < 27 16 36 14 2 32 > < 22 28 21 24 45 > < 47 > < 42 13 15 > < 3 11 > < 41 > < 19 7 38 23 44 > < 0 > < 17 4 33 8 29 12 40 20 9 > < 5 39 26 37 30 6 49 46 > < 34 > < 10 43 18 48 > < 35 31 > < > < > 
+Is Feasible : false
+Total Load Violation : 143.0
+Total route time violation : 0.0
+Cost : 1978.9888094186092
+Cost with penalty : 1978.9888094186092
+
+
+
+Individual : 85
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 13 25 > < 27 32 47 14 2 35 > < 24 39 45 12 22 > < 16 > < 44 42 15 > < 3 11 > < 43 > < 19 28 0 41 7 > < 1 > < 17 8 33 31 48 49 40 20 9 > < 5 46 23 30 37 26 6 21 > < 34 > < 36 10 29 18 > < 4 38 > < > < > 
+Is Feasible : false
+Total Load Violation : 122.0
+Total route time violation : 0.0
+Cost : 1983.438442667914
+Cost with penalty : 1983.438442667914
+
+
+
+Individual : 86
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 1 > < 27 16 36 14 2 32 > < 22 28 21 24 45 > < 47 > < 42 13 15 > < 3 11 > < 41 > < 19 23 38 7 44 > < 0 > < 17 4 33 8 29 12 40 20 9 > < 5 39 26 37 30 6 49 46 > < 34 > < 10 43 18 48 > < 35 31 > < > < > 
+Is Feasible : false
+Total Load Violation : 143.0
+Total route time violation : 0.0
+Cost : 2002.4591499387782
+Cost with penalty : 2002.4591499387782
+
+
+
+Individual : 87
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 1 > < 27 16 36 14 32 2 > < 22 28 21 24 45 > < 47 > < 42 13 15 > < 46 11 > < 41 > < 19 23 38 7 44 > < 0 > < 17 4 33 8 29 12 40 20 9 > < 5 39 26 37 30 6 49 3 > < 34 > < 10 43 48 18 > < 35 31 > < > < > 
+Is Feasible : false
+Total Load Violation : 127.0
+Total route time violation : 0.0
+Cost : 2027.043944249495
+Cost with penalty : 2027.043944249495
+
+
+
+Individual : 88
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 13 > < 27 32 2 47 14 35 > < 1 45 39 12 22 > < 36 > < 44 42 15 > < 3 11 > < 16 > < 19 28 0 7 41 > < 24 > < 17 8 33 31 48 49 40 20 9 > < 5 46 23 26 37 30 6 21 > < 34 > < 43 10 29 18 > < 4 38 > < > < > 
+Is Feasible : false
+Total Load Violation : 123.0
+Total route time violation : 0.0
+Cost : 2030.9339697931205
+Cost with penalty : 2030.9339697931205
+
+
+
+Individual : 89
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 1 > < 27 16 35 36 14 32 > < 45 28 39 24 22 > < 10 > < 42 20 15 > < 3 11 > < 41 > < 44 19 38 7 21 > < 30 > < 17 8 33 4 48 49 40 0 9 > < 5 23 2 37 26 6 12 46 > < 34 > < 31 43 29 18 > < 13 47 > < > < > 
+Is Feasible : false
+Total Load Violation : 147.0
+Total route time violation : 0.0
+Cost : 2040.919814588747
+Cost with penalty : 2040.919814588747
+
+
+
+Individual : 90
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 13 > < 27 32 2 47 14 35 > < 1 45 39 12 22 > < 36 > < 44 42 15 > < 3 11 > < 16 > < 19 28 0 34 41 > < 24 > < 17 8 33 31 48 49 40 20 9 > < 5 46 23 26 37 30 6 21 > < 7 > < 29 43 10 18 > < 4 38 > < > < > 
+Is Feasible : false
+Total Load Violation : 123.0
+Total route time violation : 0.0
+Cost : 2044.218369804282
+Cost with penalty : 2044.218369804282
+
+
+
+Individual : 91
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 11 1 > < 27 16 36 14 32 2 > < 35 28 21 24 45 > < 47 > < 42 13 15 > < 3 25 > < 41 > < 19 23 38 7 44 > < 0 > < 17 4 33 8 29 12 40 20 9 > < 5 39 26 37 30 6 49 46 > < 31 > < 10 43 48 18 > < 22 34 > < > < > 
+Is Feasible : false
+Total Load Violation : 143.0
+Total route time violation : 0.0
+Cost : 2048.4360549903963
+Cost with penalty : 2048.4360549903963
+
+
+
+Individual : 92
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 1 25 > < 27 16 35 36 14 32 > < 45 28 21 24 22 > < 10 > < 42 20 15 > < 3 11 > < 41 > < 44 19 38 7 39 > < 30 > < 17 8 33 4 48 49 40 0 9 > < 5 23 2 37 26 6 12 46 > < 34 > < 31 43 29 18 > < 13 47 > < > < > 
+Is Feasible : false
+Total Load Violation : 146.0
+Total route time violation : 0.0
+Cost : 2070.467184341834
+Cost with penalty : 2070.467184341834
+
+
+
+Individual : 93
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 13 25 > < 27 32 2 47 14 35 > < 22 34 39 45 12 > < 16 > < 44 42 15 > < 3 11 > < 36 > < 19 28 0 41 7 > < 1 > < 17 8 33 31 48 49 40 20 9 > < 5 46 23 30 37 26 6 21 > < 24 > < 43 10 29 18 > < 38 4 > < > < > 
+Is Feasible : false
+Total Load Violation : 122.0
+Total route time violation : 0.0
+Cost : 2085.2148677265777
+Cost with penalty : 2085.2148677265777
+
+
+
+Individual : 94
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 41 > < 27 16 35 36 14 20 > < 28 21 45 24 22 > < 10 > < 42 43 15 > < 47 11 > < 32 > < 44 19 38 7 39 > < 30 > < 17 8 33 4 48 49 40 0 9 > < 6 23 2 37 26 5 12 46 > < 34 > < 3 18 29 13 > < 1 31 > < > < > 
+Is Feasible : false
+Total Load Violation : 146.0
+Total route time violation : 0.0
+Cost : 2095.641567916316
+Cost with penalty : 2095.641567916316
+
+
+
+Individual : 95
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 13 25 > < 27 32 2 47 14 35 > < 34 39 45 12 22 > < 16 > < 44 42 15 > < 3 11 > < 36 > < 19 28 0 41 7 > < 1 > < 17 8 33 31 48 49 40 20 9 > < 5 46 23 30 37 26 6 21 > < 24 > < 43 10 29 18 > < 38 4 > < > < > 
+Is Feasible : false
+Total Load Violation : 122.0
+Total route time violation : 0.0
+Cost : 2116.9599097467353
+Cost with penalty : 2116.9599097467353
+
+
+
+Individual : 96
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 13 25 > < 27 32 2 47 14 35 > < 22 39 45 12 34 > < 16 > < 44 42 15 > < 11 3 > < 36 > < 19 28 0 41 7 > < 1 > < 17 8 33 31 48 49 40 20 9 > < 5 46 23 30 37 26 6 21 > < 24 > < 43 10 29 18 > < 38 4 > < > < > 
+Is Feasible : false
+Total Load Violation : 122.0
+Total route time violation : 0.0
+Cost : 2123.19015213689
+Cost with penalty : 2123.19015213689
+
+
+
+Individual : 97
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 41 > < 27 16 35 36 14 20 > < 45 28 21 24 22 > < 10 > < 42 43 15 > < 47 11 > < 32 > < 44 19 38 7 39 > < 30 > < 17 8 33 4 18 49 40 0 9 > < 6 23 2 37 26 5 12 46 > < 34 > < 3 48 29 13 > < 1 31 > < > < > 
+Is Feasible : false
+Total Load Violation : 137.0
+Total route time violation : 0.0
+Cost : 2129.730573315616
+Cost with penalty : 2129.730573315616
+
+
+
+Individual : 98
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 1 > < 27 16 35 36 14 20 > < 45 28 21 24 22 > < 10 > < 42 13 15 > < 47 11 > < 32 > < 44 19 38 7 39 > < 30 > < 17 8 33 4 0 49 40 48 9 > < 46 5 23 2 37 26 6 12 > < 34 > < 3 43 29 18 > < 41 31 > < > < > 
+Is Feasible : false
+Total Load Violation : 146.0
+Total route time violation : 0.0
+Cost : 2146.1370695353185
+Cost with penalty : 2146.1370695353185
+
+
+
+Individual : 99
+PERIOD ASSIGMENT : 
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+Routes : 
+< 25 1 > < 27 16 35 36 14 20 > < 45 28 21 24 22 > < 10 > < 42 13 15 > < 47 11 > < 32 > < 44 19 38 7 39 > < 30 > < 17 8 33 4 0 49 40 48 9 > < 5 12 2 37 26 6 23 46 > < 34 > < 3 43 29 18 > < 41 31 > < > < > 
+Is Feasible : false
+Total Load Violation : 146.0
+Total route time violation : 0.0
+Cost : 2148.304465661068
+Cost with penalty : 2148.304465661068
+

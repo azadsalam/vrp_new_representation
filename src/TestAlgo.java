@@ -108,6 +108,7 @@ public class TestAlgo  implements GeneticAlgorithm
 	void initialisePopulation()
 	{
 		out.print("Initial population : \n");
+		Individual.calculateAssignmentProbalityForDiefferentDepot(problemInstance);
 		for(int i=0; i<POPULATION_SIZE; i++)
 		{
 			population[i] = new Individual(problemInstance);

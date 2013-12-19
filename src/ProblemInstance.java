@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -10,7 +11,8 @@ public class ProblemInstance
 	public PrintWriter out;
 	
 	int depotCount,customerCount,periodCount,nodeCount,vehicleCount;
-	int vehicleAllocation[]; // kon depot er koyta kore vehicle
+	int numberOfVehicleAllocatedToThisDepot[]; // kon depot er koyta kore vehicle
+	ArrayList<ArrayList<Integer>> vehiclesUnderThisDepot;
 	double costMatrix[][];
 	double travellingTimeMatrix[][];
 	int depotAllocation[]; // kon vehicle kon depot er under a
@@ -46,21 +48,36 @@ public class ProblemInstance
 		
 		//vehicle per depot
 		
-		vehicleAllocation = new int[depotCount];
+		numberOfVehicleAllocatedToThisDepot = new int[depotCount];
 		depotAllocation = new int[vehicleCount];
+		
+		vehiclesUnderThisDepot = new ArrayList<ArrayList<Integer>>();
+		for(i=0;i<depotCount;i++)
+		{
+			vehiclesUnderThisDepot.add(new ArrayList<Integer>());
+		}
 		
 		int vehicleCursor = 0;
 
 		for( j=0;j<depotCount;j++)
 		{
-			vehicleAllocation[j] = in.nextInt();
+			numberOfVehicleAllocatedToThisDepot[j] = in.nextInt();
 
-			for( i=0;i<vehicleAllocation[j];i++)
+			for( i=0;i<numberOfVehicleAllocatedToThisDepot[j];i++)
 			{
 				depotAllocation[vehicleCursor]=j;
+				vehiclesUnderThisDepot.get(j).add(vehicleCursor);
 				vehicleCursor++;
 			}
 		}
+		
+		/*for( j=0;j<depotCount;j++)
+		{
+			for(i=0;i<vehiclesUnderThisDepot.get(j).size();i++)
+				System.out.print(vehiclesUnderThisDepot.get(j).get(i)+" ");
+			
+			System.out.println();
+		}*/
 		escapeComment(in);
 
 
@@ -146,7 +163,7 @@ public class ProblemInstance
 		out.println("Vehicle Count : "+vehicleCount);
 		
 		out.print("Vehicle per depot :");
-		for(i=0;i<depotCount;i++) out.print(" "+vehicleAllocation[i]);
+		for(i=0;i<depotCount;i++) out.print(" "+numberOfVehicleAllocatedToThisDepot[i]);
 		out.print("\n");
 		
 		out.print("Depot allocation per depot :");

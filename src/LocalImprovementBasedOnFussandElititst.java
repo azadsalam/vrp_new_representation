@@ -7,7 +7,7 @@ public class LocalImprovementBasedOnFussandElititst extends LocalImprovement
 		super(loadPenaltyFactor, routeTimePenaltyFactor, localSearch, populationSize);
 		// TODO Auto-generated constructor stub
 		
-		count = populationSize/4;
+		//count = populationSize/4;
 	}
 
 	SelectionOperator selectionOperator;

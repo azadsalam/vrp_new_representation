@@ -7,6 +7,7 @@ import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
 
 public class Solver 
 {
+	static public Visualiser visualiser;
 	String inputFileName = "MDPVRP/pr01.txt";
 	String outputFileName = "MDPVRP/out01.txt";
 	int runSize=5;
@@ -73,9 +74,10 @@ public class Solver
 		
 		//problemInstance.print();
 		
-		Visualiser visualiser = new Visualiser("original/"+inputFileName.substring(0, inputFileName.length()-4),problemInstance);
+		visualiser = new Visualiser("original/"+inputFileName.substring(0, inputFileName.length()-4),problemInstance);
 		
-		GeneticAlgorithm ga = new Scheme6(problemInstance);		
+		
+		GeneticAlgorithm ga = new InitiatorTester(problemInstance);		
 		if(writeToExcel) 
 		{
 			Solver.exportToCsv.init(ga.getNumberOfGeeration()+1);	
