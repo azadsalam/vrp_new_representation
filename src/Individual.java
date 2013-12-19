@@ -74,14 +74,56 @@ public class Individual
 			}
 		}
 		
-		assignRoutesWithClosestDepotProportionalWithNeighbourCheckHeuristic();
+		assignRoutesWithClosestDepotWithNeighbourCheckHeuristic();
 		randomizeAllRoute();
-		
-
 		calculateCostAndPenalty();
+
 
 	}
 	
+	private void assignRoutesWithClosestDepotWithNeighbourCheckHeuristic()
+	{
+		//Assign customer to route
+		boolean[] clientMap = new boolean[problemInstance.customerCount];
+		
+		int assigned=0;
+		
+		while(assigned<problemInstance.customerCount)
+		{
+			int clientNo = Utility.randomIntInclusive(problemInstance.customerCount-1);
+			if(clientMap[clientNo]) continue;
+			clientMap[clientNo]=true;
+			assigned++;
+			
+			
+			for(int period=0;period<problemInstance.periodCount;period++)
+			{		
+				if(periodAssignment[period][clientNo]==false)continue;
+
+				int depot = closestDepot(clientNo);	
+				insertClientToRouteThatMinimizesTheIncreaseInCost(clientNo, depot, period);
+			}			
+		}
+	}
+	
+	private int closestDepot(int client)
+	{
+		int selectedDepot=-1;
+		double maxProbable = closenessToEachDepot[client][0];
+		//	System.out.print("Client : "+client+" Rand : " +rand );
+		for(int depot=0;depot<problemInstance.depotCount;depot++)
+		{
+			if(maxProbable<=closenessToEachDepot[client][depot])
+			{
+				selectedDepot = depot;
+				maxProbable = closenessToEachDepot[client][depot];
+			}
+		}
+		return selectedDepot ;
+	}
+
+	
+
 	
 	private void assignRoutesWithClosenessProportionalHeuristic()
 	{

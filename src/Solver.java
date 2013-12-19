@@ -8,8 +8,9 @@ import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
 public class Solver 
 {
 	static public Visualiser visualiser;
-	String inputFileName = "MDPVRP/pr01.txt";
-	String outputFileName = "MDPVRP/out01.txt";
+	static boolean showViz=true;
+	String inputFileName = "MDPVRP/pr03.txt";
+	String outputFileName = "MDPVRP/out03.txt";
 	int runSize=5;
 	boolean singleRun = true;
 	
@@ -74,7 +75,8 @@ public class Solver
 		
 		//problemInstance.print();
 		
-		visualiser = new Visualiser("original/"+inputFileName.substring(0, inputFileName.length()-4),problemInstance);
+		//if(showViz)
+			//visualiser = new Visualiser("original/"+inputFileName.substring(0, inputFileName.length()-4),problemInstance);
 		
 		
 		GeneticAlgorithm ga = new InitiatorTester(problemInstance);		

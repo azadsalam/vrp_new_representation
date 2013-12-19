@@ -11,6 +11,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.LayoutManager;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,9 +23,13 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 import javax.swing.BorderFactory;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.ViewportLayout;
 import javax.swing.border.StrokeBorder;
@@ -29,6 +37,7 @@ import javax.swing.border.StrokeBorder;
 
 public class Visualiser
 { 
+	static Color[] colors;
 	static ArrayList<Individual> individuals;
 	static ArrayList<String> names;
 	static public double scale;
@@ -41,8 +50,9 @@ public class Visualiser
     static public int drawingBoard_width = 800;
     static public int optionPanel_width = 400;
     static public int height = 650;
-    
+    Window window;
 	String inputFileName=null;
+	static public int selectedIndividual = 0;
 	public Visualiser(String string,ProblemInstance problemInstance) 
 	{
 		// TODO Auto-generated constructor stub
@@ -50,7 +60,13 @@ public class Visualiser
 			
 		individuals = new ArrayList<Individual>();
 		names = new ArrayList<String>();
+		colors = new Color[problemInstance.vehicleCount];
 		
+		
+		for(int i=0;i<problemInstance.vehicleCount;i++)
+		{
+			colors[i] = new Color(Utility.randomIntInclusive(255), Utility.randomIntInclusive(255), Utility.randomIntInclusive(255));
+		}
 		Scanner scanner=null;
 		try 
 		{
@@ -127,17 +143,13 @@ public class Visualiser
             @Override
             public void run() {
 
-                Window sk = new Window();
-                sk.setVisible(true);
+                window = new Window();
+                window.setVisible(true);
             }
         });
 	}
 	
 	
-	public void initialise() 
-	{
-		
-	}
 	private double Minimum(double[] dep_x2, double[] cus_x2) {
 		// TODO Auto-generated method stub
 		double min=dep_x2[0];
@@ -170,15 +182,7 @@ public class Visualiser
 	{
 		individuals.add(individual);
 		names.add(name);
-/*
-		try
-		{
-			Window.surface.repaint();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}*/
+		window.optionsPanel.updateOptionPane();
 	}
 }
 
@@ -186,8 +190,6 @@ class Window extends JFrame {
 
 	static public Surface surface=null;  
     static public OptionsPanel optionsPanel; 
-    static public int selectedIndividual = 0;
-    
     public Window() {
 
         initUI();
@@ -197,12 +199,12 @@ class Window extends JFrame {
 
         setTitle("VISUALISING MDPVRP");
         setSize(Visualiser.window_width+18, Visualiser.height+40);
-        setResizable(false);
+       // setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //setLocationRelativeTo(this);
         
-        Surface surface = new Surface();  
+        surface = new Surface();  
         OptionsPanel optionsPanel = new OptionsPanel(); 
         
         JPanel wholePanel = new JPanel();
@@ -235,10 +237,15 @@ class Window extends JFrame {
 
 class Surface extends JPanel {
 
+	static int selectedPeriod = 0;
+	static ArrayList<Integer> selectedVehicles;
 	public Surface() {
 		// TODO Auto-generated constructor stub
 		//setSize(Visualiser.drawingBoard_width,Visualiser.height);
 		//setBorder(BorderFactory.createLineBorder(Color.red));
+		selectedVehicles = new ArrayList<Integer>();
+		//for(int i=0;i<Visualiser.problemInstance.vehicleCount;i++)
+    	//	selectedVehicles.add(i);
         setPreferredSize(new Dimension(Visualiser.drawingBoard_width*2,Visualiser.height*2));
 
 		setBackground(Color.WHITE);
@@ -247,13 +254,9 @@ class Surface extends JPanel {
     {
 
         if(Visualiser.individuals.size()==0)return;
-    	Individual individual = Visualiser.individuals.get(Window.selectedIndividual);
-    	int selectedPeriod = 0;
+    	Individual individual = Visualiser.individuals.get(Visualiser.selectedIndividual);
     	
-    	ArrayList<Integer> selectedVehicles = new ArrayList<Integer>();
-    	for(int i=0;i<individual.problemInstance.vehicleCount;i++)
-    		selectedVehicles.add(i);
-
+    	
     	//Scale
         for(int i=0;i<Visualiser.problemInstance.depotCount;i++)
         {
@@ -301,12 +304,13 @@ class Surface extends JPanel {
         	else g2d.setColor(Color.lightGray);
         }
         
+        //drawing routes
         for(int i=0;i<selectedVehicles.size();i++)
         {
         	int selectedVehicle = selectedVehicles.get(i);
         	ArrayList<Integer> route = individual.routes.get(selectedPeriod).get(selectedVehicle);
         	
-        	g2d.setColor(new Color(15,25,25));
+        	g2d.setColor(Visualiser.colors[i]);
  
         	if(route.size()==0)continue;
         	
@@ -337,15 +341,154 @@ class Surface extends JPanel {
 
 class OptionsPanel extends JPanel
 {
+	JComboBox periodCombo;
+	JComboBox individualCombo;
+	JCheckBox vehicleCheckBox;
+	JTextArea info;
+	
+	public void updateOptionPane() 
+	{
+		
+		individualCombo.removeAllItems();
+		for(int i=0;i<Visualiser.individuals.size();i++)
+		{
+			individualCombo.addItem(Visualiser.names.get(i));
+			individualCombo.addActionListener(new IndividualComboActionListener());
+		}
 
+	}
 	public OptionsPanel() {
+
+		//Individual COmbo
+		individualCombo = new JComboBox();
+		add(individualCombo);
+		//PERIOD SELECTOR
+		periodCombo = new JComboBox();
+		for(int i=0;i<Visualiser.problemInstance.periodCount;i++) periodCombo.addItem("Period "+i);
+		periodCombo.addActionListener(new PeriodComboActionListener());		
+		add(periodCombo);
+		
+		
+		
+		
+		/////////////////////////////////////////////////////////////////////
+		//route panel
+		JPanel routePanel= new JPanel();
+		routePanel.setBackground(null);
+		routePanel.setPreferredSize(new Dimension(Visualiser.optionPanel_width*8/10,Visualiser.height*3/10));
+		
+		for(int i=0;i<Visualiser.problemInstance.vehicleCount;i++)
+		{
+			vehicleCheckBox = new JCheckBox("Route "+i);
+			vehicleCheckBox.setSelected(false);
+			vehicleCheckBox.addItemListener(new RouteSelectionItemStateChanged());
+			routePanel.add(vehicleCheckBox);
+		}
+		
+		add(routePanel);
+		/////////////////////////////////////////////////////////////////////
+		
+		info = new JTextArea();
+		info.setPreferredSize(new Dimension(Visualiser.optionPanel_width*8/10,Visualiser.height*3/10));
+		info.setEditable(false);
+		if(!Visualiser.individuals.isEmpty())
+		{
+			Individual individual = Visualiser.individuals.get(Visualiser.selectedIndividual);
+		
+			info.append("Individual : "+ Visualiser.names.get(Visualiser.selectedIndividual));
+			info.append("\nRoute Time VIolation : "+ individual.totalRouteTimeViolation);
+			info.append("\nTotal Load VIolation : "+ individual.totalLoadViolation);
+			info.append("\nCost : "+ individual.cost);
+			info.append("\nCost With Penalty : "+individual.costWithPenalty);
+		}
+		add(info);
+		
+		
+		updateOptionPane();
+		
 		// TODO Auto-generated constructor stub
 		setSize(Visualiser.optionPanel_width,Visualiser.height);
 		setPreferredSize(new Dimension( Visualiser.optionPanel_width,Visualiser.height));
 		setBackground(Color.DARK_GRAY);
 
 	}
+	
+	void updateTextArea()
+	{
+		if(!Visualiser.individuals.isEmpty())
+		{
+		
+			Individual individual = Visualiser.individuals.get(Visualiser.selectedIndividual);
+			info.setText("");
+			info.append("Individual : "+ Visualiser.names.get(Visualiser.selectedIndividual));
+			info.append("\nRoute Time VIolation : "+ individual.totalRouteTimeViolation);
+			info.append("\nTotal Load VIolation : "+ individual.totalLoadViolation);
+			info.append("\nCost : "+ individual.cost);
+			info.append("\nCost With Penalty : "+individual.costWithPenalty);
+		}
+	}
 	private static final long serialVersionUID = 5188642461382060738L;
 	
+	private class RouteSelectionItemStateChanged implements ItemListener
+	{
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			JCheckBox cb = (JCheckBox)e.getItem();
+			String text  = cb.getText();
+			int route = new Integer(text.substring(6)).intValue();
+			
+			if(cb.isSelected())
+			{
+				if(!Surface.selectedVehicles.contains(route))
+				{
+					Surface.selectedVehicles.add(route);
+				}
+			}
+			else
+			{
+				if(Surface.selectedVehicles.contains(route))
+				{
+					Surface.selectedVehicles.remove(new Integer(route));
+				}
+
+			}
+			Window.surface.repaint();
+		}
+		
+	}
+	
+	class PeriodComboActionListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Surface.selectedPeriod = periodCombo.getSelectedIndex();
+			Window.surface.repaint();
+			
+			//System.out.println(period+ " " +((JComboBox)e.getSource()).getSelectedItem());
+		}
+		
+	}
+
+	
+	class IndividualComboActionListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Visualiser.selectedIndividual = individualCombo.getSelectedIndex();
+			updateTextArea();
+			Window.surface.repaint();
+			
+			//System.out.println(period+ " " +((JComboBox)e.getSource()).getSelectedItem());
+		}
+		
+	}
+
+
 }
 

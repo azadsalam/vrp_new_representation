@@ -9,7 +9,7 @@ public class InitiatorTester  implements GeneticAlgorithm
 {
 	PrintWriter out; 
 	
-	int POPULATION_SIZE = 10;
+	int POPULATION_SIZE = 500;
 	int NUMBER_OF_OFFSPRING = 10;
 	int NUMBER_OF_GENERATION = 1;
 	
@@ -83,10 +83,13 @@ public class InitiatorTester  implements GeneticAlgorithm
 			population[i].print();
 		}
 
-		boolean suc=false;
-		
-		Solver.visualiser.drawIndividual(population[0], "Best Initial");
-		
+	
+		//Solver.visualiser.drawIndividual(population[0], "Best Initial");
+		//Solver.visualiser.drawIndividual(population[POPULATION_SIZE-1], "Worst Initial");
+
+		//if(Solver.showViz==true)
+		//{
+			//}
 		return population[0];
 	}
 	
