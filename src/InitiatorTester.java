@@ -84,12 +84,13 @@ public class InitiatorTester  implements GeneticAlgorithm
 		}
 
 	
-		//Solver.visualiser.drawIndividual(population[0], "Best Initial");
-		//Solver.visualiser.drawIndividual(population[POPULATION_SIZE-1], "Worst Initial");
-
-		//if(Solver.showViz==true)
-		//{
-			//}
+		
+		if(Solver.showViz==true)
+		{
+			Solver.visualiser.drawIndividual(population[0], "Best Initial");
+			Solver.visualiser.drawIndividual(population[POPULATION_SIZE-1], "Worst Initial");
+	
+		}
 		return population[0];
 	}
 	

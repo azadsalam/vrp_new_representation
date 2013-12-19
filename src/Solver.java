@@ -75,8 +75,8 @@ public class Solver
 		
 		//problemInstance.print();
 		
-		//if(showViz)
-			//visualiser = new Visualiser("original/"+inputFileName.substring(0, inputFileName.length()-4),problemInstance);
+		if(showViz)
+			visualiser = new Visualiser("original/"+inputFileName.substring(0, inputFileName.length()-4),problemInstance);
 		
 		
 		GeneticAlgorithm ga = new InitiatorTester(problemInstance);		

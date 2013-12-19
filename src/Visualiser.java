@@ -29,10 +29,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.ViewportLayout;
 import javax.swing.border.StrokeBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 
 public class Visualiser
@@ -40,7 +43,10 @@ public class Visualiser
 	static Color[] colors;
 	static ArrayList<Individual> individuals;
 	static ArrayList<String> names;
+	
 	static public double scale;
+	static public double scaleMin;
+	static public double scaleMax;
     static ProblemInstance problemInstance;
     static double[] dep_x,dep_y,cus_x,cus_y;
     static double center_x,center_y;
@@ -52,7 +58,7 @@ public class Visualiser
     static public int height = 650;
     Window window;
 	String inputFileName=null;
-	static public int selectedIndividual = 0;
+	static public int selectedIndividual = -1;
 	public Visualiser(String string,ProblemInstance problemInstance) 
 	{
 		// TODO Auto-generated constructor stub
@@ -139,6 +145,8 @@ public class Visualiser
         double scale_y = Visualiser.height / max_y *0.95;
         
         scale = Math.min(scale_x, scale_y);
+        scaleMin = scale;
+        scaleMax = scale * 5;
 		SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -180,6 +188,7 @@ public class Visualiser
 
 	public void drawIndividual(Individual individual,String name) 
 	{
+		//System.out.println("VIS - ADDING : "+name);
 		individuals.add(individual);
 		names.add(name);
 		window.optionsPanel.updateOptionPane();
@@ -190,13 +199,8 @@ class Window extends JFrame {
 
 	static public Surface surface=null;  
     static public OptionsPanel optionsPanel; 
+    
     public Window() {
-
-        initUI();
-    }
-
-    private void initUI() {
-
         setTitle("VISUALISING MDPVRP");
         setSize(Visualiser.window_width+18, Visualiser.height+40);
        // setResizable(false);
@@ -205,7 +209,7 @@ class Window extends JFrame {
         //setLocationRelativeTo(this);
         
         surface = new Surface();  
-        OptionsPanel optionsPanel = new OptionsPanel(); 
+        optionsPanel = new OptionsPanel(); 
         
         JPanel wholePanel = new JPanel();
 
@@ -230,8 +234,8 @@ class Window extends JFrame {
         wholePanel.add(optionsPanel,BorderLayout.EAST);
         
         getContentPane().add(wholePanel);
-
     }
+
 
 }
 
@@ -246,14 +250,14 @@ class Surface extends JPanel {
 		selectedVehicles = new ArrayList<Integer>();
 		//for(int i=0;i<Visualiser.problemInstance.vehicleCount;i++)
     	//	selectedVehicles.add(i);
-        setPreferredSize(new Dimension(Visualiser.drawingBoard_width*2,Visualiser.height*2));
+        setPreferredSize(new Dimension(Visualiser.drawingBoard_width*5,Visualiser.height*5));
 
 		setBackground(Color.WHITE);
 	}
     private void doDrawing(Graphics g) 
     {
 
-        if(Visualiser.individuals.size()==0)return;
+    	if(Visualiser.individuals.size()==0 || Visualiser.selectedIndividual==-1)return;
     	Individual individual = Visualiser.individuals.get(Visualiser.selectedIndividual);
     	
     	
@@ -344,6 +348,7 @@ class OptionsPanel extends JPanel
 	JComboBox periodCombo;
 	JComboBox individualCombo;
 	JCheckBox vehicleCheckBox;
+	JSlider zoomSlider;
 	JTextArea info;
 	
 	public void updateOptionPane() 
@@ -362,6 +367,7 @@ class OptionsPanel extends JPanel
 		//Individual COmbo
 		individualCombo = new JComboBox();
 		add(individualCombo);
+		
 		//PERIOD SELECTOR
 		periodCombo = new JComboBox();
 		for(int i=0;i<Visualiser.problemInstance.periodCount;i++) periodCombo.addItem("Period "+i);
@@ -388,23 +394,21 @@ class OptionsPanel extends JPanel
 		add(routePanel);
 		/////////////////////////////////////////////////////////////////////
 		
+		zoomSlider = new JSlider(JSlider.HORIZONTAL, 1,100 , 1);
+	    zoomSlider.setPreferredSize(new Dimension(Visualiser.optionPanel_width*8/10,Visualiser.height*1/25));
+	    zoomSlider.addChangeListener(new ZoomChangeListener());
+		add(zoomSlider);
+		
+		
 		info = new JTextArea();
 		info.setPreferredSize(new Dimension(Visualiser.optionPanel_width*8/10,Visualiser.height*3/10));
 		info.setEditable(false);
-		if(!Visualiser.individuals.isEmpty())
-		{
-			Individual individual = Visualiser.individuals.get(Visualiser.selectedIndividual);
-		
-			info.append("Individual : "+ Visualiser.names.get(Visualiser.selectedIndividual));
-			info.append("\nRoute Time VIolation : "+ individual.totalRouteTimeViolation);
-			info.append("\nTotal Load VIolation : "+ individual.totalLoadViolation);
-			info.append("\nCost : "+ individual.cost);
-			info.append("\nCost With Penalty : "+individual.costWithPenalty);
-		}
 		add(info);
 		
 		
+
 		updateOptionPane();
+		updateTextArea();
 		
 		// TODO Auto-generated constructor stub
 		setSize(Visualiser.optionPanel_width,Visualiser.height);
@@ -413,9 +417,27 @@ class OptionsPanel extends JPanel
 
 	}
 	
+	class ZoomChangeListener implements ChangeListener
+	{
+
+		@Override
+		public void stateChanged(ChangeEvent e) 
+		{
+			// TODO Auto-generated method stub
+			JSlider source = (JSlider)e.getSource();
+		    if (!source.getValueIsAdjusting()) 
+		    {
+		        int level = source.getValue();
+		        
+		        Visualiser.scale = Visualiser.scaleMin + (Visualiser.scaleMax - Visualiser.scaleMin)*level /100;
+		        Window.surface.repaint();
+		    }
+		}
+		
+	}
 	void updateTextArea()
 	{
-		if(!Visualiser.individuals.isEmpty())
+		if(!Visualiser.individuals.isEmpty() && Visualiser.selectedIndividual!=-1)
 		{
 		
 			Individual individual = Visualiser.individuals.get(Visualiser.selectedIndividual);
