@@ -52,7 +52,6 @@ public class InitiatorTester  implements GeneticAlgorithm
 	{
 		//problemInstance.print();
 		// INITIALISE POPULATION
-		Individual.initialiseSortedClientArray(problemInstance);
 		
 		initialisePopulation();
 		TotalCostCalculator.calculateCostofPopulation(population,0,POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor);
@@ -98,8 +97,6 @@ public class InitiatorTester  implements GeneticAlgorithm
 	
 	void initialisePopulation()
 	{
-		Individual.calculateAssignmentProbalityForDiefferentDepot(problemInstance);
-		Individual.calculateProbalityForDiefferentVehicle(problemInstance);
 		//out.print("Initial population : \n");
 		for(int i=0; i<POPULATION_SIZE; i++)
 		{
