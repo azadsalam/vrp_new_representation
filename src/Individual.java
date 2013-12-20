@@ -110,7 +110,23 @@ public class Individual
 		}
 	}
 	
-	
+	private int closestDepot(int client)
+	{
+		int selectedDepot=-1;
+		double maxProbable = closenessToEachDepot[client][0];
+		//	System.out.print("Client : "+client+" Rand : " +rand );
+		for(int depot=0;depot<problemInstance.depotCount;depot++)
+		{
+			if(maxProbable<=closenessToEachDepot[client][depot])
+			{
+				selectedDepot = depot;
+				maxProbable = closenessToEachDepot[client][depot];
+			}
+		}
+		return selectedDepot ;
+	}
+
+
 	private void insertClientToRouteThatMinimizesTheIncreaseInActualCost(int client,int depot,int period)
 	{
 		double min = 99999999;

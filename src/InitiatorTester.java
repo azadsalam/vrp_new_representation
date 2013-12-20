@@ -52,7 +52,6 @@ public class InitiatorTester  implements GeneticAlgorithm
 	{
 		//problemInstance.print();
 		// INITIALISE POPULATION
-		Individual.initialiseSortedClientArray(problemInstance);
 		
 		initialisePopulation();
 		TotalCostCalculator.calculateCostofPopulation(population,0,POPULATION_SIZE, loadPenaltyFactor, routeTimePenaltyFactor);
