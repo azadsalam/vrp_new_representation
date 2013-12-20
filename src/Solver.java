@@ -3,14 +3,13 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
 
 public class Solver 
 {
 	static public Visualiser visualiser;
-	static boolean showViz=true;
-	String inputFileName = "MDPVRP/pr03.txt";
-	String outputFileName = "MDPVRP/out03.txt";
+	static boolean showViz=false;
+	String inputFileName = "MDVRP/pr01.txt";
+	String outputFileName = "MDVRP/out10.txt";
 	int runSize=5;
 	boolean singleRun = true;
 	

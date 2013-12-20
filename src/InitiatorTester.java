@@ -43,8 +43,8 @@ public class InitiatorTester  implements GeneticAlgorithm
 		fitness = new double[POPULATION_SIZE];
 		cdf = new double[POPULATION_SIZE];
 		
-		loadPenaltyFactor = 0;
-		routeTimePenaltyFactor = 0;
+		loadPenaltyFactor = 10;
+		routeTimePenaltyFactor = 10;
 		
 	}
 
