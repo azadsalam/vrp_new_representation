@@ -45,6 +45,8 @@ public class Visualiser
 	static ArrayList<String> names;
 	
 	static public double scale;
+	
+	
 	static public double scaleMin;
 	static public double scaleMax;
     static ProblemInstance problemInstance;
@@ -56,7 +58,7 @@ public class Visualiser
     static public int drawingBoard_width = 800;
     static public int optionPanel_width = 400;
     static public int height = 650;
-    Window window;
+    static Window window;
 	String inputFileName=null;
 	static public int selectedIndividual = -1;
 	public Visualiser(String string,ProblemInstance problemInstance) 

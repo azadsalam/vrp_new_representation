@@ -32,6 +32,8 @@ public class Individual
 	static	double distanceRatioToEachVehicle[][]=null;
 	static	double cumulativeDistanceRatioToEachVehicle[][]=null;
 	
+	static int[][] clientsSortedWithDistance = null;
+	
 	static	double closenessToEachDepot[][]=null;
 	static	double cumulativeClosenessToEachDepot[][]=null;
 	
@@ -74,8 +76,10 @@ public class Individual
 			}
 		}
 		
+
+		
 		assignRoutesWithClosestDepotWithNeighbourCheckHeuristic();
-		randomizeAllRoute();
+		//randomizeAllRoute();
 		calculateCostAndPenalty();
 
 
@@ -101,73 +105,278 @@ public class Individual
 				if(periodAssignment[period][clientNo]==false)continue;
 
 				int depot = closestDepot(clientNo);	
-				insertClientToRouteThatMinimizesTheIncreaseInCost(clientNo, depot, period);
+				insertClientToRouteThatMinimizesTheIncreaseInActualCost(clientNo, depot, period);
 			}			
 		}
 	}
 	
-	private int closestDepot(int client)
+	
+	private void insertClientToRouteThatMinimizesTheIncreaseInActualCost(int client,int depot,int period)
 	{
-		int selectedDepot=-1;
-		double maxProbable = closenessToEachDepot[client][0];
-		//	System.out.print("Client : "+client+" Rand : " +rand );
-		for(int depot=0;depot<problemInstance.depotCount;depot++)
+		double min = 99999999;
+		int chosenVehicle =- 1;
+		int chosenInsertPosition =- 1;
+		double cost;
+		
+		double [][]costMatrix = problemInstance.costMatrix;
+		int depotCount = problemInstance.depotCount;
+		
+		ArrayList<Integer> vehiclesUnderThisDepot = problemInstance.vehiclesUnderThisDepot.get(depot);
+		
+		for(int i=0; i<vehiclesUnderThisDepot.size(); i++)
 		{
-			if(maxProbable<=closenessToEachDepot[client][depot])
+			int vehicle = vehiclesUnderThisDepot.get(i);
+			
+			ArrayList<Integer> route = routes.get(period).get(vehicle);
+			
+			if(route.size()==0)
 			{
-				selectedDepot = depot;
-				maxProbable = closenessToEachDepot[client][depot];
+				cost = costMatrix[depot][depotCount+client] + costMatrix[depotCount+client][depot];
+				if(cost<min)
+				{
+					min=cost;
+					chosenVehicle = vehicle;
+					chosenInsertPosition = 0;
+				}
+				continue;
 			}
+			
+			
+			cost = costMatrix[depot][depotCount+client] + costMatrix[depotCount+client][depotCount+route.get(0)];
+			cost -= (costMatrix[depot][depotCount+route.get(0)]);
+			if(cost<min)
+			{
+				min=cost;
+				chosenVehicle = vehicle;
+				chosenInsertPosition = 0;
+			}
+			
+			for(int insertPosition=1;insertPosition<route.size();insertPosition++)
+			{
+				//insert the client between insertPosition-1 and insertPosition and check 
+				cost = costMatrix[depotCount+route.get(insertPosition-1)][depotCount+client] + costMatrix[depotCount+client][depotCount+route.get(insertPosition)];
+				cost -= (costMatrix[depotCount+route.get(insertPosition-1)][depotCount+route.get(insertPosition)]);
+				if(cost<min)
+				{
+					min=cost;
+					chosenVehicle = vehicle;
+					chosenInsertPosition = insertPosition;
+				}
+			}
+			
+			cost = costMatrix[depotCount+route.get(route.size()-1)][depotCount+client] + costMatrix[depotCount+client][depot];
+			cost-=(costMatrix[depotCount+route.get(route.size()-1)][depot]);
+			
+			if(cost<min)
+			{
+				min=cost;
+				chosenVehicle = vehicle;
+				chosenInsertPosition = route.size();
+			}
+			
 		}
-		return selectedDepot ;
+		routes.get(period).get(chosenVehicle).add(chosenInsertPosition, client);
 	}
 
-	
 
-	
-	private void assignRoutesWithClosenessProportionalHeuristic()
+	//see you later 
+	class MinimumCostInfo
 	{
-
-		//Assign customer to route
-		boolean[] clientMap = new boolean[problemInstance.customerCount];
+		public int vehicle;
+		public int insertPosition;
+		public double minimumIncreaseInCost;
+		public double loadViolation;
+	}
+	private MinimumCostInfo getMinimumCostIncreseInfo(int client,int vehicle,int period,double[][] thisRouteLoad)
+	{
+		MinimumCostInfo minimumCostInfo = new MinimumCostInfo();
+		double min = 99999999;
+		int chosenInsertPosition =- 1;
+		double cost;
 		
-		int assigned=0;
+		double [][]costMatrix = problemInstance.costMatrix;
+		int depotCount = problemInstance.depotCount;
+		int depot = problemInstance.depotAllocation[vehicle];	
+		ArrayList<Integer> route = routes.get(period).get(vehicle);
 		
-	//	int[] cl=new int[problemInstance.customerCount];
-		while(assigned<problemInstance.customerCount)
+		
+		double loadViolation =  (thisRouteLoad[period][vehicle] + problemInstance.demand[client]) - problemInstance.loadCapacity[vehicle];
+		
+		if(loadViolation>0)
 		{
-			int clientNo = Utility.randomIntInclusive(problemInstance.customerCount-1);
-			if(clientMap[clientNo]) continue;
-			clientMap[clientNo]=true;
-			assigned++;
-			//cl[assigned-1] = clientNo;
-					
-
-			for(int period=0;period<problemInstance.periodCount;period++)
-			{		
-				if(periodAssignment[period][clientNo]==false)continue;
-
-				int vehicle = mostProbableRoute(clientNo);				
-				routes.get(period).get(vehicle).add(clientNo);
+			minimumCostInfo.insertPosition=-1;
+			minimumCostInfo.minimumIncreaseInCost=99999999;
+			minimumCostInfo.vehicle = vehicle;
+			minimumCostInfo.loadViolation = loadViolation;
+			return minimumCostInfo;
+		}
+		
+		if(route.size()==0)
+		{
+			cost = costMatrix[depot][depotCount+client] + costMatrix[depotCount+client][depot];
+						
+			minimumCostInfo.insertPosition=0;
+			minimumCostInfo.minimumIncreaseInCost=cost;
+			minimumCostInfo.vehicle = vehicle;
+			minimumCostInfo.loadViolation = loadViolation;
+			return minimumCostInfo;
+		}
+		
+		cost=0;
+		cost = costMatrix[depot][depotCount+client] + costMatrix[depotCount+client][depotCount+route.get(0)];
+		cost -= (costMatrix[depot][depotCount+route.get(0)]);
+		if(cost<min)
+		{
+			min=cost;
+			chosenInsertPosition = 0;
+		}
+		
+		for(int insertPosition=1;insertPosition<route.size();insertPosition++)
+		{
+			//insert the client between insertPosition-1 and insertPosition and check 
+			cost = costMatrix[depotCount+route.get(insertPosition-1)][depotCount+client] + costMatrix[depotCount+client][depotCount+route.get(insertPosition)];
+			cost -= (costMatrix[depotCount+route.get(insertPosition-1)][depotCount+route.get(insertPosition)]);
+			if(cost<min)
+			{
+				min=cost;
+				chosenInsertPosition = insertPosition;
 			}
 		}
-		/*Arrays.sort(cl);
-		for(int i=0;i<cl.length;i++)
-			System.out.print(cl[i]+" ");
-		System.out.println("");*/
+		
+		cost = costMatrix[depotCount+route.get(route.size()-1)][depotCount+client] + costMatrix[depotCount+client][depot];
+		cost-=(costMatrix[depotCount+route.get(route.size()-1)][depot]);
+		
+		if(cost<min)
+		{
+			min=cost;
+			chosenInsertPosition = route.size();
+		}
+			
+		minimumCostInfo.insertPosition=chosenInsertPosition;
+		minimumCostInfo.minimumIncreaseInCost=min;
+		minimumCostInfo.vehicle = vehicle;
+		minimumCostInfo.loadViolation = loadViolation;
+		return minimumCostInfo;
 	}
+	////////////////
+
+	
+	/*---------------------THESE ARE OF NO USE NOW ---------------------*/
 	
 	/**
-	 *  At first selects a depot with probability proportional to closeness to the depot
-	 *  Then among the vehicles under this selected depot
-	 *  assigns to the cheapest route  
+	 * Sorts clients according to their distance from corresponding depot, closer clients have smaller indices
+	 * @param problemInstance
 	 */
-	private void assignRoutesWithClosestDepotProportionalWithNeighbourCheckHeuristic()
+	
+	/*public static void initialiseSortedClientArray(ProblemInstance problemInstance)
+	{
+		int depotCount = problemInstance.depotCount;
+		int clientCount= problemInstance.customerCount;
+		clientsSortedWithDistance = new int[depotCount][clientCount];
+		double[][] cost = problemInstance.costMatrix;
+		for(int depot=0; depot<depotCount;depot++)
+		{
+			for(int client=0;client<clientCount;client++)
+			{
+				clientsSortedWithDistance[depot][client]=client;
+			}
+		}
+		
+		//sort each array
+		for(int depot=0; depot<depotCount;depot++)
+		{
+			for(int i=0;i<clientCount;i++)
+			{
+				for(int j=i+1;j<clientCount;j++)
+				{
+					//if j< i then swap
+					if(cost[depot][depotCount+clientsSortedWithDistance[depot][i]] > cost[depot][depotCount+clientsSortedWithDistance[depot][j]])
+					{
+						int tmp = clientsSortedWithDistance[depot][i];
+						clientsSortedWithDistance[depot][i] = clientsSortedWithDistance[depot][j];
+						clientsSortedWithDistance[depot][j] = tmp;
+ 					}
+				}
+			}
+		}
+		
+		
+		//print to confirm if right ?
+		for(int depot=0; depot<depotCount;depot++)
+		{
+			System.out.println("Depot : "+depot);
+			
+			for(int i=0;i<clientCount;i++)
+			{
+				System.out.print(clientsSortedWithDistance[depot][i] +" " );
+			}
+			System.out.println();
+			
+			for(int i=0;i<clientCount;i++)
+			{
+				System.out.print(cost[depot][depotCount+clientsSortedWithDistance[depot][i]] +" " );
+			}
+			System.out.println();
+			
+		}
+		
+		
+	}
+	
+	*/
+	
+	/* Heuristic -> each client assigned to closest Depot 
+	 * client added to the position where cost in minimum
+	 * every vehicle gets the first client a closest client
+
+	private void assignRoutesWithClosestDepotWithNeighbourCheckHeuristic2()
 	{
 		//Assign customer to route
 		boolean[] clientMap = new boolean[problemInstance.customerCount];
 		
 		int assigned=0;
+		
+		// assign each vehicle with the closest client 
+		for(int period=0;period<problemInstance.periodCount;period++)
+		{
+			for(int depot=0;depot<problemInstance.depotCount;depot++)
+			{
+				ArrayList<Integer> vehiclesUnderThisDepot = problemInstance.vehiclesUnderThisDepot.get(depot);
+				
+				int clientIndex=0;
+				
+				for(int i=0; i<vehiclesUnderThisDepot.size(); i++)
+				{
+					int vehicle = vehiclesUnderThisDepot.get(i);
+					
+					while(true)
+					{
+						if(clientIndex >= problemInstance.customerCount)
+						{
+							System.out.println("NOT ENOUGH CLIENTS!!");
+						}
+						
+						if(periodAssignment[period][clientsSortedWithDistance[depot][clientIndex]]==true)
+						{	
+							if(routes.get(period).get(vehicle).size() > 0)
+							{
+								System.out.println("\n\nNEVER SHOULD HAPPEN");
+							}
+							routes.get(period).get(vehicle).add(clientsSortedWithDistance[depot][clientIndex]);
+							clientIndex++;
+							break;
+						}
+						clientIndex++;						
+					}
+					
+				}
+				
+
+			}
+		}
+			
+		
+		//
 		
 		while(assigned<problemInstance.customerCount)
 		{
@@ -181,12 +390,80 @@ public class Individual
 			{		
 				if(periodAssignment[period][clientNo]==false)continue;
 
-				int depot = mostProbableDepot(clientNo);	
-				insertClientToRouteThatMinimizesTheIncreaseInCost(clientNo, depot, period);
+				int depot = closestDepot(clientNo);	
+				insertClientToRouteThatMinimizesTheIncreaseInActualCost2(clientNo, depot, period);
 			}			
 		}
 	}
+	private void insertClientToRouteThatMinimizesTheIncreaseInActualCost2(int client,int depot,int period)
+	{
+		double min = 99999999;
+		int chosenVehicle =- 1;
+		int chosenInsertPosition =- 1;
+		double cost;
+		
+		double [][]costMatrix = problemInstance.costMatrix;
+		int depotCount = problemInstance.depotCount;
+		
+		ArrayList<Integer> vehiclesUnderThisDepot = problemInstance.vehiclesUnderThisDepot.get(depot);
+		
+		for(int i=0; i<vehiclesUnderThisDepot.size(); i++)
+		{
+			int vehicle = vehiclesUnderThisDepot.get(i);
+			
+			ArrayList<Integer> route = routes.get(period).get(vehicle);
+						
+			if(route.size()==0)
+			{
+				cost = costMatrix[depot][depotCount+client] + costMatrix[depotCount+client][depot];
+				if(cost<min)
+				{
+					min=cost;
+					chosenVehicle = vehicle;
+					chosenInsertPosition = 0;
+				}
+				System.out.println("Period "+period+" Vehicle "+vehicle+" has initially empty route");
+				continue;
+			}
+			cost = costMatrix[depot][depotCount+client] + costMatrix[depotCount+client][depotCount+route.get(0)];
+			cost -= (costMatrix[depot][depotCount+route.get(0)]);
+			if(cost<min)
+			{
+				min=cost;
+				chosenVehicle = vehicle;
+				chosenInsertPosition = 0;
+			}
+			
+			for(int insertPosition=1;insertPosition<route.size();insertPosition++)
+			{
+				//insert the client between insertPosition-1 and insertPosition and check 
+				cost = costMatrix[depotCount+route.get(insertPosition-1)][depotCount+client] + costMatrix[depotCount+client][depotCount+route.get(insertPosition)];
+				cost -= (costMatrix[depotCount+route.get(insertPosition-1)][depotCount+route.get(insertPosition)]);
+				if(cost<min)
+				{
+					min=cost;
+					chosenVehicle = vehicle;
+					chosenInsertPosition = insertPosition;
+				}
+			}
+			
+			cost = costMatrix[depotCount+route.get(route.size()-1)][depotCount+client] + costMatrix[depotCount+client][depot];
+			cost-=(costMatrix[depotCount+route.get(route.size()-1)][depot]);
+			
+			if(cost<min)
+			{
+				min=cost;
+				chosenVehicle = vehicle;
+				chosenInsertPosition = route.size();
+			}
+			
+		}
+		routes.get(period).get(chosenVehicle).add(chosenInsertPosition, client);
+	}
+
+*/
 	
+	/*
 	private void insertClientToRouteThatMinimizesTheIncreaseInCost(int client,int depot,int period)
 	{
 		double min = 99999999;
@@ -249,8 +526,71 @@ public class Individual
 		}
 		routes.get(period).get(chosenVehicle).add(chosenInsertPosition, client);
 	}
+	*/
 	
+	private void assignRoutesWithClosenessProportionalHeuristic()
+	{
 
+		//Assign customer to route
+		boolean[] clientMap = new boolean[problemInstance.customerCount];
+		
+		int assigned=0;
+		
+	//	int[] cl=new int[problemInstance.customerCount];
+		while(assigned<problemInstance.customerCount)
+		{
+			int clientNo = Utility.randomIntInclusive(problemInstance.customerCount-1);
+			if(clientMap[clientNo]) continue;
+			clientMap[clientNo]=true;
+			assigned++;
+			//cl[assigned-1] = clientNo;
+					
+
+			for(int period=0;period<problemInstance.periodCount;period++)
+			{		
+				if(periodAssignment[period][clientNo]==false)continue;
+
+				int vehicle = mostProbableRoute(clientNo);				
+				routes.get(period).get(vehicle).add(clientNo);
+			}
+		}
+		/*Arrays.sort(cl);
+		for(int i=0;i<cl.length;i++)
+			System.out.print(cl[i]+" ");
+		System.out.println("");*/
+	}
+	
+	/**
+	 *  At first selects a depot with probability proportional to closeness to the depot
+	 *  Then among the vehicles under this selected depot
+	 *  assigns to the cheapest route  
+	 */
+	private void assignRoutesWithClosestDepotProportionalWithNeighbourCheckHeuristic()
+	{
+		//Assign customer to route
+		boolean[] clientMap = new boolean[problemInstance.customerCount];
+		
+		int assigned=0;
+		
+		while(assigned<problemInstance.customerCount)
+		{
+			int clientNo = Utility.randomIntInclusive(problemInstance.customerCount-1);
+			if(clientMap[clientNo]) continue;
+			clientMap[clientNo]=true;
+			assigned++;
+			
+			
+			for(int period=0;period<problemInstance.periodCount;period++)
+			{		
+				if(periodAssignment[period][clientNo]==false)continue;
+
+				int depot = mostProbableDepot(clientNo);	
+				insertClientToRouteThatMinimizesTheIncreaseInActualCost(clientNo, depot, period);
+			}			
+		}
+	}
+	
+	
 	private int mostProbableDepot(int client)
 	{
 		double rand = Utility.randomDouble(0, 1);
@@ -265,6 +605,7 @@ public class Individual
 		}
 		return -1;
 	}
+	
 	
 	public static void calculateAssignmentProbalityForDiefferentDepot(ProblemInstance problemInstance) 
 	{
@@ -370,7 +711,8 @@ public class Individual
 			
 	}
 	
- 	private int closestRoute(int client)
+ 	
+	private int closestRoute(int client)
 	{
 		double max=-1;
 		int index = -1;
@@ -453,6 +795,9 @@ public class Individual
 			System.out.println();*/
 		}
 	}
+	
+	
+	/* THESE ARE OF NO USE NOW - END -------------------------------------- */
 	
 	public Individual(ProblemInstance problemInstance)
 	{
@@ -690,7 +1035,7 @@ public class Individual
 		
 		
         // print load violation
-		/*
+		
 		out.print("LOAD VIOLATION MATRIX : \n");
         for( i=0;i<problemInstance.periodCount;i++)
         {
@@ -700,7 +1045,7 @@ public class Individual
             }
             out.println();
         }
-        */
+        
 		
 		
         out.println("Is Feasible : "+isFeasible);
@@ -860,6 +1205,53 @@ public class Individual
 		}
 	
 	}
+	
+	/** DO NOT updates cost and penalty
+	*/
+	void mutateTwoDifferentRouteBySubstitution()
+	{	
+		if(problemInstance.vehicleCount<2)return;
+		
+		boolean success = false;
+		int retry = 0;
+		do
+		{
+			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
+			int vehicle1 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
+			int vehicle2 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
+			if(vehicle1==vehicle2)continue;
+			success = mutateTwoDifferentRouteBySubstitution(period, vehicle1,vehicle2);
+			retry++;
+		}while(success==false && retry<10);
+		
+		if(success==false)
+		{
+			//System.out.println("mutateTwoDifferentRouteBySwapping Failed !!");
+			Solver.mutateRouteOfTwoDiefferentFailed++;
+		}
+	
+	}
+
+	//returns if permutation successful
+	private boolean mutateTwoDifferentRouteBySubstitution(int period,int vehicle1,int vehicle2)
+	{
+		ArrayList<Integer> route1 = routes.get(period).get(vehicle1);
+		ArrayList<Integer> route2 = routes.get(period).get(vehicle2);
+
+		if(route1.size()==0 || route2.size()==0) return false;
+		
+		int first = Utility.randomIntInclusive(route1.size()-1);
+		int second = Utility.randomIntInclusive(route2.size());
+		
+		//problemInstance.out.println("Period : "+period+" vehicles  : "+vehicle1+" "+vehicle2+" SELCTED FOR SWAP "+route1.get(first)+" "+route2.get(second));
+
+		
+		route2.add (second , route1.get(first));
+		route1.remove(first);
+		return true;
+	}
+
+
 	
 	//returns if permutation successful
 	private boolean mutateTwoDifferentRouteBySwapping(int period,int vehicle1,int vehicle2)

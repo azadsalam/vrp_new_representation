@@ -15,7 +15,7 @@ public class Mutation
 	
 	void applyMutation(Individual offspring)
 	{
-		int rand = 3;
+		int rand = 4;
 		if(offspring.problemInstance.periodCount==1)rand--;
 		
 		int selectedMutationOperator = Utility.randomIntInclusive(rand);
@@ -32,10 +32,13 @@ public class Mutation
 		{
 			offspring.mutateRouteWithInsertion();
 		}
+		else if (selectedMutationOperator == 3)
+		{
+			offspring.mutateTwoDifferentRouteBySubstitution();
+		}
 		else 
 		{
 			offspring.mutatePeriodAssignment();
-		
 		}
 		
 		offspring.calculateCostAndPenalty();
