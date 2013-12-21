@@ -73,14 +73,27 @@ public class InitiatorTester  implements GeneticAlgorithm
 		}
 		
 
-		System.out.println("Best : "+min +" avg : "+(total/POPULATION_SIZE)+" worst : "+max);
-		
+		int invalid = 0;
+		int infeasible = 0;
 		for(int i=0; i<POPULATION_SIZE; i++)
 		{
-	
+			if(population[i].validationTest()==false)
+			{
+				System.out.println("INVALID INDIVIDUAL");
+
+				invalid++;
+			}
+			if(population[i].isFeasible==false)
+			{
+				infeasible++;
+			}
 			out.println("Printing individual "+ i +" : \n");
 			population[i].print();
 		}
+		
+		double infeasiblePercent= ((double)infeasible*100/POPULATION_SIZE);
+		
+		System.out.println("Best : "+min +" avg : "+(total/POPULATION_SIZE)+" worst : "+max+ "Infeasible : "+infeasiblePercent+"%  invalid : "+invalid);
 
 		if(Solver.showViz==true)
 		{

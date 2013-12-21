@@ -9,7 +9,7 @@ public class Solver
 	static public Visualiser visualiser;
 	static boolean showViz=false;
 	String inputFileName = "MDVRP/pr01.txt";
-	String outputFileName = "MDVRP/out10.txt";
+	String outputFileName = "MDPVRP/out01.txt";
 	int runSize=5;
 	boolean singleRun = true;
 	
