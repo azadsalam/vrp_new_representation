@@ -8,8 +8,8 @@ public class Solver
 {
 	static public Visualiser visualiser;
 	static boolean showViz=false;
-	String inputFileName = "MDVRP/pr01.txt";
-	String outputFileName = "MDPVRP/out01.txt";
+	String inputFileName = "MDPVRP/pr10.txt";
+	String outputFileName = "MDPVRP/out10.txt";
 	int runSize=5;
 	boolean singleRun = true;
 	

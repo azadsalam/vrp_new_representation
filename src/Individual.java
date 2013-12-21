@@ -10,6 +10,9 @@ import java.util.Vector;
 
 public class Individual 
 {
+	static int total=0;
+	static int count=0;
+	static int max=0;
 	//representation
 	boolean periodAssignment[][];
 	Vector<Vector<ArrayList<Integer>>> routes;
@@ -171,7 +174,12 @@ public class Individual
 		
 		if(!bigRoute.isEmpty())
 		{
-			//System.out.println("DO SOMETHING!!");
+			int left = bigRoute.size();
+			if(left>max)max=left;
+			count++;
+			total+=left;
+			
+			//System.out.println("LEFT : "+bigRoute.size());
 			while(!bigRoute.isEmpty())
 			{
 				int client = bigRoute.get(0);
@@ -848,7 +856,6 @@ public class Individual
 			{
 				if(periodAssignment[i][j])	out.print("1 ");
 				else out.print("0 ");
-				
 			}
 			out.println();
 		}
@@ -878,7 +885,12 @@ public class Individual
         {
             for( j=0;j<problemInstance.vehicleCount;j++)
             {
-            	out.print(loadViolation[i][j]+" ");
+            	if(loadViolation[i][j]>0)
+            	{
+            		out.print("<<<<<< "+loadViolation[i][j]+" >>>>>> ");
+            	}
+            	else
+            		out.print(loadViolation[i][j]+" ");
             }
             out.println();
         }

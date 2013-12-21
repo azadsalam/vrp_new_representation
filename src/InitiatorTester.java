@@ -93,6 +93,7 @@ public class InitiatorTester  implements GeneticAlgorithm
 		
 		double infeasiblePercent= ((double)infeasible*100/POPULATION_SIZE);
 		
+		System.out.printf("Max : %d Avg : %f Count : %d \n",Individual.max,(double)Individual.total/Individual.count,Individual.count);
 		System.out.println("Best : "+min +" avg : "+(total/POPULATION_SIZE)+" worst : "+max+ "Infeasible : "+infeasiblePercent+"%  invalid : "+invalid);
 
 		if(Solver.showViz==true)
