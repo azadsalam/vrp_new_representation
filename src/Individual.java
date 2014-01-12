@@ -409,10 +409,6 @@ public class Individual
 //		System.out.println("Chosen vehicle : "+chosenVehicle);
 		routes.get(period).get(chosenVehicle).add(chosenInsertPosition, client);
 	}
-
-
-
-
  
 	class MinimumCostInsertionInfo
 	{
@@ -916,34 +912,33 @@ public class Individual
 		{
 			for( j=0;j<problemInstance.customerCount;j++)
 			{
-				if(periodAssignment[i][j])	out.print("1 ");
-				else out.print("0 ");
+				out.print("( "+ j+" -> ");
+				if(periodAssignment[i][j])	out.print("1 )");
+				else out.print("0 )");
 				
 			}
 			out.println();
 		}
 		
-		/*
-
-		out.print("Permutation : \n");
-		for( i=0; i<problemInstance.periodCount;i++)
+		out.print("Routes : \n");
+		for(int period=0;period<problemInstance.periodCount;period++)
 		{
-			for( j=0;j<problemInstance.customerCount;j++)
+			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
 			{
-				out.print(permutation[i][j]+" ");
+				out.print("< ");
+				ArrayList<Integer> route = routes.get(period).get(vehicle);
+				for(int clientIndex=0;clientIndex<route.size();clientIndex++)
+				{
+						out.print(route.get(clientIndex)+" ");
+				}
+				out.print("> ");
 			}
 			out.println();
 		}
 
-		out.print("Route partition : \n");
-		
-		for(i=0;i<problemInstance.periodCount;i++)
-		{
-			for( j=0;j<problemInstance.vehicleCount;j++)
-				out.print(routePartition[i][j] +" ");
-			out.println();
-		}
-		
+
+		/*
+
 
         // print load violation
         out.println("Is Feasible : "+isFeasible);
@@ -990,7 +985,7 @@ public class Individual
 		return true;
 	}
 	
-	//DO NOT updates cost and penalty	
+
 	void mutateRouteBySwapping()
 	{
 		boolean success = false;
@@ -1029,100 +1024,8 @@ public class Individual
 	}
 	
 	
-	/** DO NOT updates cost and penalty
-	*/
-	void mutateTwoDifferentRouteBySwapping()
-	{	
-		if(problemInstance.vehicleCount<2)return;
-		
-		boolean success = false;
-		int retry = 0;
-		do
-		{
-			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-			int vehicle1 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			int vehicle2 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			if(vehicle1==vehicle2)continue;
-			success = mutateTwoDifferentRouteBySwapping(period, vehicle1,vehicle2);
-			retry++;
-		}while(success==false && retry<10);
-		
-		if(success==false)
-		{
-			//System.out.println("mutateTwoDifferentRouteBySwapping Failed !!");
-			Solver.mutateRouteOfTwoDiefferentFailed++;
-		}
-	
-	}
-	
-	/** DO NOT updates cost and penalty
-	*/
-	void mutateTwoDifferentRouteBySubstitution()
-	{	
-		if(problemInstance.vehicleCount<2)return;
-		
-		boolean success = false;
-		int retry = 0;
-		do
-		{
-			int period = Utility.randomIntInclusive(problemInstance.periodCount-1);
-			int vehicle1 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			int vehicle2 = Utility.randomIntInclusive(problemInstance.vehicleCount-1);
-			if(vehicle1==vehicle2)continue;
-			success = mutateTwoDifferentRouteBySubstitution(period, vehicle1,vehicle2);
-			retry++;
-		}while(success==false && retry<10);
-		
-		if(success==false)
-		{
-			//System.out.println("mutateTwoDifferentRouteBySwapping Failed !!");
-			Solver.mutateRouteOfTwoDiefferentFailed++;
-		}
-	
-	}
-
-	//returns if permutation successful
-	private boolean mutateTwoDifferentRouteBySubstitution(int period,int vehicle1,int vehicle2)
-	{
-		ArrayList<Integer> route1 = routes.get(period).get(vehicle1);
-		ArrayList<Integer> route2 = routes.get(period).get(vehicle2);
-
-		if(route1.size()==0 || route2.size()==0) return false;
-		
-		int first = Utility.randomIntInclusive(route1.size()-1);
-		int second = Utility.randomIntInclusive(route2.size());
-		
-		//problemInstance.out.println("Period : "+period+" vehicles  : "+vehicle1+" "+vehicle2+" SELCTED FOR SWAP "+route1.get(first)+" "+route2.get(second));
-
-		
-		route2.add (second , route1.get(first));
-		route1.remove(first);
-		return true;
-	}
-
-
-	
-	//returns if permutation successful
-	private boolean mutateTwoDifferentRouteBySwapping(int period,int vehicle1,int vehicle2)
-	{
-		ArrayList<Integer> route1 = routes.get(period).get(vehicle1);
-		ArrayList<Integer> route2 = routes.get(period).get(vehicle2);
-
-		if(route1.size()==0 || route2.size()==0) return false;
-		
-		int first = Utility.randomIntInclusive(route1.size()-1);
-		int second = Utility.randomIntInclusive(route2.size()-1);
-		
-		//problemInstance.out.println("Period : "+period+" vehicles  : "+vehicle1+" "+vehicle2+" SELCTED FOR SWAP "+route1.get(first)+" "+route2.get(second));
-
-		int temp = route1.get(first);
-		route1.set(first, route2.get(second));
-		route2.set(second,temp);
-		return true;
-	}
-
 	/** do not updates cost + penalty
-	// if sobgula client er frequency = period hoy tahole, period assignment mutation er kono effect nai
+	 if sobgula client er frequency = period hoy tahole, period assignment mutation er kono effect nai
 	*/
 	void mutatePeriodAssignment()
 	{
@@ -1197,138 +1100,12 @@ public class Individual
 		return -1;
 	}
 		
-	private static  void uniformCrossoverForPeriodAssignment(Individual child1,Individual child2, Individual parent1, Individual parent2,ProblemInstance problemInstance)
-	{
-		int coin;
-		int i;
-		
-		Individual temp1,temp2;
-		for(i=0;i<problemInstance.customerCount;i++)
-		{
-			coin = Utility.randomIntInclusive(1);
-			
-			if(coin==0)
-			{
-				temp1=child1;
-				temp2=child2;
-			}
-			else
-			{
-				temp1=child2;
-				temp2=child1;
-			}	
-			
-			for(int period = 0; period<problemInstance.periodCount; period++)
-			{
-				//if(parent1==null)System.out.print("nul");
-				temp1.periodAssignment[period][i] = parent1.periodAssignment[period][i];
-				temp2.periodAssignment[period][i] = parent2.periodAssignment[period][i];
-			}
-		}
-		
-	}
-
-	private static  void uniformCrossoverForRoutes(Individual child1,Individual child2, Individual parent1, Individual parent2,ProblemInstance problemInstance)
-	{
-		int coin;
-		
-		Individual temp1,temp2;
-		for(int period = 0; period<problemInstance.periodCount; period++)
-		{
-			coin = Utility.randomIntInclusive(1);
-			
-			if(coin==0)
-			{
-				temp1=child1;
-				temp2=child2;
-			}
-			else
-			{
-				temp1=child2;
-				temp2=child1;
-			}	
-			
-			
-			for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
-			{
-				
-				ArrayList<Integer> parent1Route = parent1.routes.get(period).get(vehicle);
-				ArrayList<Integer> parent2Route = parent2.routes.get(period).get(vehicle);
-				ArrayList<Integer> child1Route = temp1.routes.get(period).get(vehicle);
-				ArrayList<Integer> child2Route = temp2.routes.get(period).get(vehicle);
-				
-				child1Route.clear();
-				child2Route.clear();
-				
-				//copy temp1 <- parent1				
-				for(int clientIndex=0;clientIndex<parent1Route.size();clientIndex++)
-				{
-					int node = parent1Route.get(clientIndex);
-					if(temp1.periodAssignment[period][node])
-						child1Route.add(node);
-				}
-				
-				//copy temp2 <- parent2				
-				for(int clientIndex=0;clientIndex<parent2Route.size();clientIndex++)
-				{
-					int node = parent2Route.get(clientIndex);
-					if(temp2.periodAssignment[period][node])
-						child2Route.add(node);
-				}
-			}
-			
-			
-			for(int client=0;client<problemInstance.customerCount;client++)
-			{
-				//repair offspring route 1
-				if(temp1.periodAssignment[period][client]==true)
-				{
-					if(doesRouteContainThisClient(problemInstance, temp1, period, client)==false)
-					{
-						int vehicle = temp1.mostProbableRoute(client);
-						temp1.routes.get(period).get(vehicle).add(client);
-					}
-				}
-				//repair offspring route 2
-
-				if(temp2.periodAssignment[period][client]==true)
-				{
-					if(doesRouteContainThisClient(problemInstance, temp2, period, client)==false)
-					{
-						temp2.routes.get(period).get(temp2.mostProbableRoute(client)).add(client);
-					}
-				}
-			}
-			
-		}
-		
-	}
-		
-	static void crossOver_Uniform_Uniform(ProblemInstance problemInstance,Individual parent1,Individual parent2,Individual child1,Individual child2)
-	{
-		//with 50% probability swap parents
-		int ran = Utility.randomIntInclusive(1);
-		if(ran ==1)
-		{
-			Individual temp = parent1;
-			parent1 = parent2;
-			parent2 = temp;
-		}
-		
-		uniformCrossoverForPeriodAssignment(child1,child2,parent1, parent2,problemInstance);
-		uniformCrossoverForRoutes(child1, child2, parent1, parent2, problemInstance);
-		
-		
-		//update cost and penalty
-		child1.calculateCostAndPenalty();
-		child2.calculateCostAndPenalty();
-	}
 
 	boolean validationTest()
 	{
 		// 1. All client match their frequency 
 		// 2. All client only served once in a period
-		// 3. 
+		// 3. Any others ?????
 		
 		
 		// CHECKING IF FREQUENCY RESTRICTION IS MET OR NOT
@@ -1338,7 +1115,7 @@ public class Individual
 
 			for(int period=0; period<problemInstance.periodCount;period++)
 			{
-				if(doesRouteContainThisClient(problemInstance, this, period, client))	freq++;
+				if(RouteUtilities.doesRouteContainThisClient(problemInstance, this, period, client))	freq++;
 			}
 			
 			if(problemInstance.frequencyAllocation[client] != freq) return false;
@@ -1366,27 +1143,8 @@ public class Individual
 		return true;
 	}
 	
-	/**
-	 * Checks if the client is present in any route or not for the specified period
-	 * @param problemInstance
-	 * @param individual
-	 * @param period
-	 * @param client
-	 * @return true if client is present in some route <br/> else false
-	 */
-	private static boolean doesRouteContainThisClient(ProblemInstance problemInstance, Individual individual, int period, int client)
-	{
-
-		for(int vehicle=0;vehicle<problemInstance.vehicleCount;vehicle++)
-		{
-			if(individual.routes.get(period).get(vehicle).contains(client))
-			{
-				return true;
-			}
-		}	
-		return false;
-	}
 	
+
 	/**
 	 * Checks if how many times the client is present in any route for the specified period
 	 * @param problemInstance

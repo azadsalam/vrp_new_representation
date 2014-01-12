@@ -8,8 +8,8 @@ public class Solver
 {
 	static public Visualiser visualiser;
 	static boolean showViz=false;
-	String inputFileName = "MDPVRP/pr10.txt";
-	String outputFileName = "MDPVRP/out10.txt";
+	String inputFileName = "MDPVRP/pr01.txt";
+	String outputFileName = "MDPVRP/out01.txt";
 	int runSize=5;
 	boolean singleRun = true;
 	
@@ -78,7 +78,7 @@ public class Solver
 			visualiser = new Visualiser("original/"+inputFileName.substring(0, inputFileName.length()-4),problemInstance);
 		
 		
-		GeneticAlgorithm ga = new InitiatorTester(problemInstance);		
+		GeneticAlgorithm ga = new Tester_Crossover(problemInstance);		
 		if(writeToExcel) 
 		{
 			Solver.exportToCsv.init(ga.getNumberOfGeeration()+1);	

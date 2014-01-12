@@ -56,7 +56,7 @@ public class Scheme6 implements GeneticAlgorithm
 	    fussSelection = new FUSS();
 		survivalSelectionOperator = new FUSS(); 
 
-		localSearch = new SimulatedAnnealing();
+		localSearch = new FirstChoiceHillClimbing();
 		localImprovement = new LocalImprovementBasedOnFussandElititst(loadPenaltyFactor, routeTimePenaltyFactor, localSearch, POPULATION_SIZE);	
 	}
 
@@ -98,7 +98,7 @@ public class Scheme6 implements GeneticAlgorithm
 			offspring1 = new Individual(problemInstance);
 			offspring2 = new Individual(problemInstance);
 			
-			Individual.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);	
+			Crossover_Uniform_Uniform.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);	
 			
 			mutation.applyMutation(offspring1);
 			mutation.applyMutation(offspring2);
@@ -116,7 +116,7 @@ public class Scheme6 implements GeneticAlgorithm
 				offspring1 = new Individual(problemInstance);
 				offspring2 = new Individual(problemInstance);
 			
-				Individual.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);	
+				Crossover_Uniform_Uniform.crossOver_Uniform_Uniform(problemInstance, parent1, parent2, offspring1, offspring2);	
 				
 				//System.out.println("off : "+i);
 				mutation.applyMutation(offspring1);
@@ -212,7 +212,12 @@ public class Scheme6 implements GeneticAlgorithm
 
 			
 			Utility.sort(population);	
-			System.out.println(generation + " : "+population[0].costWithPenalty);
+			
+			double tmpSum=0;
+			for(int tmpi=0;tmpi<POPULATION_SIZE;tmpi++)
+				tmpSum += population[tmpi].costWithPenalty;
+			
+			System.out.println("Gen : "+ generation + " Best : "+population[0].costWithPenalty+" Avg : "+(tmpSum/POPULATION_SIZE));
 			
 			
 			

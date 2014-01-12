@@ -19,7 +19,7 @@ public class FirstChoiceHillClimbing extends LocalSearch {
 		Individual node,neighbour;
 		node = new Individual(initialNode);
 		
-		while(retry<25)
+		while(retry<50)
 		{			
 			neighbour = new Individual(node);
 			applyMutation(neighbour);

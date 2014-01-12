@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 
-public class InitiatorTester  implements GeneticAlgorithm
+public class Tester_Initiator  implements GeneticAlgorithm
 {
 	PrintWriter out; 
 	
@@ -30,7 +30,7 @@ public class InitiatorTester  implements GeneticAlgorithm
 	double routeTimePenaltyFactor;
 	
 	
-	public InitiatorTester(ProblemInstance problemInstance) 
+	public Tester_Initiator(ProblemInstance problemInstance) 
 	{
 		// TODO Auto-generated constructor stub
 		this.problemInstance = problemInstance;
